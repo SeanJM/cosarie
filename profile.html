@@ -36,7 +36,7 @@
             <div class="center">
               <img class="profile-picture" src="img/sprites_profile_round.png">
             </div>
-            <div class="form-row">
+            <div class="row">
               <div class="g12 scale-form">
                 <label>Display</label>
               </div>
@@ -51,19 +51,33 @@
                 </div>
               </div>
             </div>
-            <div class="form-row">
+            <div class="row">
               <div class="g12 col1of2">
-                <div class="btn-white-red btn-block">Delete</div>
+                <div class="btn-white-red btn-block" data-dingo="modal{which:delete-modal}">Delete</div>
+                <!-- Delete Prompt -->
+                <div class="modal is-animated" id="delete-modal">
+                  <div class="modal-chrome">
+                    <div class="row">
+                      <span class="modal-title">Confirm Delete</span>
+                    </div>
+                    <div class="row">
+                      <span class="modal-control">
+                        <span class="btn-white-blue">OK</span>
+                        <span class="btn-white-red">Cancel</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="g12 col2of2">
                 <div class="btn-white btn-block">Update</div>
               </div>
             </div>
             <hr>
-            <div class="form-row">
+            <div class="row">
               <a href="inbox.html" class="btn-white btn-block btn_has-badge">View Inbox<span class="badge">1</span></a>
             </div>
-            <div class="form-row">
+            <div class="row">
               <div class="box">
                 <div class="box-title">JOINED</div>
                 <div class="box-text">November 3, 2013</div>
@@ -73,7 +87,7 @@
           <div class="g18 m24 right-menu">
             <h5>Business Info</h5>
             <div class="form-section">
-              <div class="form-row">
+              <div class="row">
                 <div class="g6 m8">
                   <label>Business Name</label>
                 </div>
@@ -81,7 +95,7 @@
                   <input type="text">
                 </div>
               </div>
-              <div class="form-row">
+              <div class="row">
                 <div class="g6 m8">
                   <label>Location</label>
                 </div>
@@ -93,7 +107,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="form-row">
+              <div class="row">
                 <div class="g6 m8">
                   <label>Price</label>
                 </div>
@@ -107,7 +121,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="form-row">
+              <div class="row">
                 <div class="g6 m8">
                   <label>Email</label>
                 </div>
@@ -115,13 +129,43 @@
                   <input type="text">
                 </div>
               </div>
-              <div class="form-row">
+              <div class="row">
                 <div class="g6 m8">
                   <label>Password</label>
                 </div>
                 <div class="g18 m16">
                   <span class="btn-white-blue btn-block">Change Password</span>
                 </div>
+              </div>
+            </div>
+            <!-- End of Business Info -->
+            <h5>Videos</h5>
+            <p>You may upload and showcase four videos</p>
+            <div class="item-video">
+              <div class="item-video_container">
+                <img src="img/profile-video-1.png">
+              </div>
+              <div class="item-video_info">
+                <span class="g16">
+                  <label>Featured</label>
+                </span>
+                <span class="g8 right">
+                  <div class="switch switch_is-on" data-dingo="switch">
+                    <div class="switch-track">
+                      <div class="switch-text_off">OFF</div>
+                      <div class="switch-btn"></div>
+                      <div class="switch-text_on">ON</div>
+                    </div>
+                    <input type="checkbox" name="video_1_is-featured">
+                  </div>
+                </span>
+                <hr>
+                <span class="g16">
+                  <label>Uploaded: October 23, 2013</label>
+                </span>
+                <span class="g8 right">
+                  <div class="btn-white-red">Delete</div>
+                </span>
               </div>
             </div>
           </div>

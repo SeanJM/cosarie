@@ -83,7 +83,7 @@ function dropdownDelay() {
 
 var animate = {
   scroll: function (el) {
-    var time   = 100;
+    var time   = 70;
     var pos    = el.offset().top-20;
     var start  = window.pageYOffset;
     var i      = 0;
@@ -117,6 +117,15 @@ function formIsValid(el) {
 
 function formValidate(el) {
   return formIsValid($(this));
+}
+
+function getAnimationTime(el) {
+  console.log(el.css('transition'));
+  var time = el.css('transition').match(/[a-zA-Z-]+(?:\s+)([0-9]+(\.[0-9]+|))s/);
+  if (time === '0') {
+    time = el.css('animation').match(/[a-zA-Z-]+(?:\s+)([0-9]+(\.[0-9]+|))s/);
+  }
+  return (time==='0')?false:time;
 }
 
 events = {
@@ -179,6 +188,8 @@ events = {
       options.target+="_mobile";
       animate.scroll(options.el);
     }
+    $('body').removeClass('popout-safe');
+    $('.popout_is-active').removeClass('popout_is-active');
     $(options.target).addClass('popout_is-active');
   },
   'switch': function (options) {
@@ -186,6 +197,14 @@ events = {
     $(options.el).toggleClass('switch_is-on');
     $(options.el).toggleClass('switch_is-off');
     checkbox.checked = options.el.hasClass('switch_is-on');
+  },
+  'modal': function (options) {
+    var target = $('#'+options.which);
+    var animationTime = getAnimationTime(target);
+    console.log(animationTime);
+    target.addClass('modal_is-active');
+    if (target.hasClass('is-animated')) {
+    }
   }
 }
 
@@ -243,11 +262,23 @@ dingo.click = {
   },
   'switch': function (options) {
     events[options.dingo](options);
+  },
+  'modal': function (options) {
+    events[options.dingo](options);
   }
+}
+
+dingo.touchstart = {
+  'form-validate-submit': function (options) {
+    events[options.dingo](options);
+  },
 }
 
 dingo.touchend = {
   'close-popouts': function (options) {
+    events[options.dingo](options);
+  },
+  'form-validate-input': function (options) {
     events[options.dingo](options);
   },
   'mobile-popout-select': function (options) {
@@ -260,9 +291,6 @@ dingo.touchend = {
     events[options.dingo](options);
   },
   'popout': function (options) {
-    events[options.dingo](options);
-  },
-  'form-validate-input': function (options) {
     events[options.dingo](options);
   }
 }

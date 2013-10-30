@@ -62,7 +62,9 @@ select,
 .switch-btn,
 .switch-text_on,
 .switch-text_off,
-.checkbox {
+.checkbox,
+.modal-title,
+.modal-control {
   display: -moz-inline-stack;
   display: inline-block;
   zoom: 1;
@@ -291,7 +293,7 @@ h2 {
 
 h3 {
   margin-bottom: 15px;
-  font-size: 23px;
+  font-size: 18px;
   line-height: 36px;
   color: #4d4d4d;
   font-weight: 300;
@@ -359,7 +361,7 @@ input.has-icon {
   padding-left: 46px;
 }
 
-.form-row+.form-row {
+.row+.row {
   margin-top: 15px;
 }
 
@@ -370,8 +372,14 @@ input.has-icon {
   width: 100%;
 }
 
+@-webkit-keyframes form-validate_error-msg {
+  0%     {top: 10px; opacity: 0;}
+  50%    {top: 46px;}
+  100%   {opacity: 1;}
+}
+
 .form-validate_error-msg {
-  display       : none;
+  left: -10000px;
   z-index       : 2;
   position      : absolute;
   top           : 46px;
@@ -387,7 +395,8 @@ input.has-icon {
 }
 
 .form-validate_container_has-error .form-validate_error-msg {
-  display: block;
+  left: 0px;
+  -webkit-animation: form-validate_error-msg 0.5s;
 }
 
 /* ------------- Buttons */
@@ -572,7 +581,7 @@ input.has-icon {
   border-radius: 22px;
   position: relative;
   padding: 0;
-  min-width: 80px;
+  min-width: 90px;
   font-size: 0;
   overflow: hidden;
 }
@@ -587,7 +596,7 @@ input.has-icon {
 .switch-track {
   position: absolute;
   left: 0;
-  width: 116px;
+  width: 150px;
   height: 100%;
   text-align: left;
   -webkit-transition: all 0.15s;
@@ -598,7 +607,7 @@ input.has-icon {
 }
 
 .switch_is-on .switch-track {
-  left: -39px;
+  left: -48px;
 }
 
 .switch_is-off .switch-track {
@@ -607,7 +616,7 @@ input.has-icon {
 
 .switch-text_on,
 .switch-text_off {
-  width: 40px;
+  width: 50px;
   font-size: 14px;
   line-height: 39px;
 }
@@ -615,13 +624,13 @@ input.has-icon {
 .switch-text_on {
   color: #28aae1;
   text-align: center;
-  padding-right: 7px;
+  padding-right: 10px;
 }
 
 .switch-text_off {
   color: #ff6072;
   text-align: left;
-  padding-left: 11px;
+  padding-left: 16px;
 }
 
 .switch input {
@@ -895,7 +904,6 @@ input.has-icon {
 /* Left Menu & Right Menu */
 
 .left-menu {
-  border-right: 1px solid #e6e6e6;
   padding: 20px;
 }
 
@@ -905,6 +913,7 @@ input.has-icon {
 }
 
 .right-menu {
+  border-left: 1px solid #e6e6e6;
   padding: 30px 0 30px 30px;
 }
 
@@ -913,6 +922,34 @@ input.has-icon {
 .profile-picture {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+/* Profile Page Video */
+
+.item-video {
+  position: relative;
+}
+
+.item-video + .item-video {
+  margin-top: 20px;
+}
+
+.item-video_container {
+  background: #f0f0f0;
+  width: 217px;
+  height: 120px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.item-video_info {
+  margin-left: 247px;
+  padding-top: 6px;
+}
+
+.item-video hr {
+  margin: 13px 0;
 }
 
 /* Popout */
@@ -1016,7 +1053,7 @@ input.has-icon {
     padding-right: 0;
   }
 
-  .form-row_m+.form-row_m {
+  .row_m+.row_m {
     margin-top: 10px;
   }
 
@@ -1099,6 +1136,19 @@ input.has-icon {
     margin-top: 30px;
   }
 
+  /* Hero Login */
+
+  .login {
+    padding-top: 25px;
+  }
+
+  .logo_hero_login {
+    background: url(../img/sprites_login_mobile.png);
+    width: 122px;
+    height: 112px;
+    margin-bottom: 25px;
+  }
+
   /* Feature */
 
   .feature-item {
@@ -1116,12 +1166,9 @@ input.has-icon {
 
   /* Left & Right Menu */
 
-  .left-menu {
-    border-right: 0;
-    border-bottom: 1px solid #e6e6e6;
-  }
-
   .right-menu {
+    border-left: 0;
+    border-top: 1px solid #e6e6e6;
     padding: 20px;
   }
 
@@ -1192,6 +1239,43 @@ input.has-icon {
 
 }
 
+/* Modal */
+
+.modal {
+  position: absolute;
+  padding: 10px;
+  border-radius: 10px;
+  background: url(../img/sprites_black-70.png);
+  left: -10000px;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+}
+
+.modal-chrome {
+  padding: 13px;
+  background: #fff;
+}
+
+.modal-title {
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 33px;
+  color: #b3b3b3;
+}
+
+.modal-control {
+  width: 100%;
+  text-align: center;
+}
+
+.modal-control [class*="btn"] + [class*="btn"] {
+  margin-left: 10px;
+}
+
 /* Retina Image Assignment */
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
@@ -1213,6 +1297,10 @@ input.has-icon {
   [class^="btn"] {
     background-image: url(../img/sprites_btn_retina.png);
     background-size: 4px 252px;
+  }
+  .logo_hero_login {
+    background-image: url(../img/sprites_login_mobile_retina.png);
+    background-size: 122px 112px;
   }
   .popout-select .checkbox {
     background-image: url(../img/sprites_select_retina.png);
