@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<HTML>
+  <head>
+    <title>Corsarie</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UX-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta http-equiv="cleartype" content="on">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body data-dingo="close-popouts">
+    <div class="main"> <!-- Controls the min height so that the footer is always well placed -->
+      <div class="status-bar">
+        <div class="container">
+          <a href="index.html" class="status-bar_logo"></a>
+          <div class="status-bar_control">
+            <a class="btn-white">Logout</a>
+          </div>
+        </div>
+      </div>
+      <div class="workspace">
+        <div class="container no-padding_m">
+          <div class="status-bar">
+            <span class="breadcrumbs"><span class="breadcrumb_item">Profile</span></span>
+            <div class="status-bar_control">
+              <a class="btn-white-blue">Save</a>
+              <a class="btn-white-red">Cancel</a>
+            </div>
+          </div>
+          <div class="g6 m24 left-menu">
+            <div class="center">
+              <img class="profile-picture" src="img/sprites_profile_round.png">
+            </div>
+            <div class="form-row">
+              <div class="g12 scale-form">
+                <label>Display</label>
+              </div>
+              <div class="g12 right">
+                <div class="switch switch_is-on" data-dingo="switch">
+                  <div class="switch-track">
+                    <div class="switch-text_off">OFF</div>
+                    <div class="switch-btn"></div>
+                    <div class="switch-text_on">ON</div>
+                  </div>
+                  <input type="checkbox" name="display-profile-name">
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="g12 col1of2">
+                <div class="btn-white-red btn-block">Delete</div>
+              </div>
+              <div class="g12 col2of2">
+                <div class="btn-white btn-block">Update</div>
+              </div>
+            </div>
+            <hr>
+            <div class="form-row">
+              <a href="inbox.html" class="btn-white btn-block btn_has-badge">View Inbox<span class="badge">1</span></a>
+            </div>
+            <div class="form-row">
+              <div class="box">
+                <div class="box-title">JOINED</div>
+                <div class="box-text">November 3, 2013</div>
+              </div>
+            </div>
+          </div>
+          <div class="g18 m24 right-menu">
+            <h5>Business Info</h5>
+            <div class="form-section">
+              <div class="form-row">
+                <div class="g6 m8">
+                  <label>Business Name</label>
+                </div>
+                <div class="g18 m16 scale-form">
+                  <input type="text">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="g6 m8">
+                  <label>Location</label>
+                </div>
+                <div class="g18 m16 scale-form">
+                  <input type="text" name="location" data-dingo="popout{target:#popout_location} noinput">
+                  <ul class="popout is-popout" id="popout_location">
+                    <li><a data-dingo="popout-select-done{value:Greenville, SC;targetName:location}">Greenville, SC</a></li>
+                    <li><a data-dingo="popout-select-done{value:Charleston, SC;targetName:location}">Charleston, SC</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="g6 m8">
+                  <label>Price</label>
+                </div>
+                <div class="g18 m16 scale-form">
+                  <input type="text" name="price" data-dingo="popout{target:#popout_price} noinput">
+                  <ul class="popout is-popout" id="popout_price">
+                    <li><a data-dingo="popout-select-done{value:1,000 to 3,000;targetName:price}">1,000 to 3,000</a></li>
+                    <li><a data-dingo="popout-select-done{value:3,000 to 5,000;targetName:price}">3,000 to 5,000</a></li>
+                    <li><a data-dingo="popout-select-done{value:5,000 to 8,000;targetName:price}">5,000 to 8,000</a></li>
+                    <li><a data-dingo="popout-select-done{value:10,000+;targetName:price}">10,000+</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="g6 m8">
+                  <label>Email</label>
+                </div>
+                <div class="g18 m16 scale-form">
+                  <input type="text">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="g6 m8">
+                  <label>Password</label>
+                </div>
+                <div class="g18 m16">
+                  <span class="btn-white-blue btn-block">Change Password</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- Container -->
+      </div>
+    </div>
+    <div class="section section-footer">
+      <div class="container">
+        <p>&copy; Cosarie</p>
+      </div>
+    </div>
+    <!-- Mobile Popouts Location -->
+    <div class="popout is-popout is-mobile" id="popout_location_mobile">
+      <div class="popout-statusbar">
+        <div class="popout-title">Select Your Location</div>
+        <div class="popout-statusbar_control">
+          <div class="btn-white-blue" data-dingo="mobile-popout_done{popout:popout_location_mobile;target:popout_location_mobile_select;targetName:location}">Done</div>
+        </div>
+      </div>
+      <ul class="popout-select" id="popout_location_mobile_select">
+        <li data-dingo="mobile-popout-select"><a><span class="checkbox"></span>Greenville, SC</a></li>
+        <li data-dingo="mobile-popout-select"><a><span class="checkbox"></span>Charleston, SC</a></li>
+      </ul>
+    </div>
+    <!-- Mobile Popouts Price -->
+    <div class="popout is-popout is-mobile" id="popout_price_mobile">
+      <div class="popout-statusbar">
+        <div class="popout-title">Select Your Price</div>
+        <div class="popout-statusbar_control">
+          <div class="btn-white-blue" data-dingo="mobile-popout_done{popout:popout_price_mobile;target:popout_price_mobile_select;targetName:price}">Done</div>
+        </div>
+      </div>
+      <ul class="popout-select" id="popout_price_mobile_select">
+        <li data-dingo="mobile-popout-select"><a><span class="checkbox"></span>1,000 to 3,000</a></li>
+        <li data-dingo="mobile-popout-select"><a><span class="checkbox"></span>3,000 to 5,000</a></li>
+        <li data-dingo="mobile-popout-select"><a><span class="checkbox"></span>5,000 to 8,000</a></li>
+        <li data-dingo="mobile-popout-select"><a><span class="checkbox"></span>10,000+</a></li>
+      </ul>
+    </div>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</HTML>
