@@ -33,44 +33,52 @@
             </div>
           </div>
           <div class="g6 m24 left-menu">
-            <div class="center">
+            <div class="center profile-picture-container" id="profile-picture-container">
               <img class="profile-picture" src="img/sprites_profile_round.png">
+              <p class="profile-picture-text">No Profile Picture</p>
             </div>
-            <div class="row">
-              <div class="g12 scale-form">
-                <label>Display</label>
-              </div>
-              <div class="g12 right">
-                <div class="switch switch_is-on" data-dingo="switch">
-                  <div class="switch-track">
-                    <div class="switch-text_off">OFF</div>
-                    <div class="switch-btn"></div>
-                    <div class="switch-text_on">ON</div>
-                  </div>
-                  <input type="checkbox" name="display-profile-name">
+            <div class="profile-picture_all-controls" id="profile-picture_all-controls">
+              <div class="row">
+                <div class="g12 scale-form">
+                  <label>Display</label>
                 </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="g12 col1of2">
-                <div class="btn-white-red btn-block" data-dingo="modal{which:delete-modal}">Delete</div>
-                <!-- Delete Prompt -->
-                <div class="modal is-animated" id="delete-modal">
-                  <div class="modal-chrome">
-                    <div class="row">
-                      <span class="modal-title">Confirm Delete</span>
+                <div class="g12 right">
+                  <div class="switch switch_is-on" data-dingo="switch" id="switch_display-profile-picture">
+                    <div class="switch-track">
+                      <div class="switch-text_off">OFF</div>
+                      <div class="switch-btn"></div>
+                      <div class="switch-text_on">ON</div>
                     </div>
-                    <div class="row">
-                      <span class="modal-control">
-                        <span class="btn-white-blue">OK</span>
-                        <span class="btn-white-red">Cancel</span>
-                      </span>
-                    </div>
+                    <input type="checkbox" name="display-profile-name">
                   </div>
                 </div>
               </div>
-              <div class="g12 col2of2">
-                <div class="btn-white btn-block">Update</div>
+              <div class="row profile-picture-control">
+                <div class="profile-picture-control_has-picture">
+                  <div class="g12 col1of2">
+                    <div class="btn-white-red btn-block profile-picture-control_delete" data-dingo="modal-prompt{which:delete-modal}">Delete</div>
+                    <!-- Delete Prompt -->
+                    <div class="modal-prompt" id="delete-modal">
+                      <div class="modal-prompt-chrome">
+                        <div class="row">
+                          <span class="modal-prompt-title">Confirm Delete</span>
+                        </div>
+                        <div class="row">
+                          <span class="modal-prompt-control">
+                            <span class="btn-white-blue" data-dingo="close-modal-prompt{which:delete-modal} delete-profile-picture">OK</span>
+                            <span class="btn-white-red" data-dingo="close-modal-prompt{which:delete-modal}">Cancel</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="g12 col2of2">
+                    <div class="btn-white btn-block profile-picture-control_update">Update</div>
+                  </div>
+                </div>
+                <div class="profile-picture-control_no-picture">
+                  <div class="btn-white-blue btn-block" data-dingo="upload-profile-picture">Upload Profile Picture</div>
+                </div>
               </div>
             </div>
             <hr>
@@ -134,23 +142,26 @@
                   <label>Password</label>
                 </div>
                 <div class="g18 m16">
-                  <span class="btn-white-blue btn-block">Change Password</span>
+                  <span class="btn-white-blue btn-block" data-dingo="modal{which:change-password}">Change Password</span>
                 </div>
               </div>
             </div>
             <!-- End of Business Info -->
+            <hr>
             <h5>Videos</h5>
             <p>You may upload and showcase four videos</p>
-            <div class="item-video">
+            <div class="item-video" id="item-video_1">
               <div class="item-video_container">
-                <img src="img/profile-video-1.png">
+                <div class="item-video_container_element">
+                  <img src="img/profile-video-1.png">
+                </div>
               </div>
               <div class="item-video_info">
                 <span class="g16">
                   <label>Featured</label>
                 </span>
                 <span class="g8 right">
-                  <div class="switch switch_is-on" data-dingo="switch">
+                  <div class="switch switch_is-on" data-dingo="switch" name="video-feature">
                     <div class="switch-track">
                       <div class="switch-text_off">OFF</div>
                       <div class="switch-btn"></div>
@@ -164,9 +175,76 @@
                   <label>Uploaded: October 23, 2013</label>
                 </span>
                 <span class="g8 right">
-                  <div class="btn-white-red">Delete</div>
+                  <div class="btn-white-red" data-dingo="item-video_delete{which:1}">Delete</div>
                 </span>
               </div>
+            </div> <!-- Item Video -->
+            <div class="item-video" id="item-video_2">
+              <div class="item-video_container">
+                <div class="item-video_container_element">
+                  <img src="img/profile-video-2.png">
+                </div>
+              </div>
+              <div class="item-video_info">
+                <span class="g16">
+                  <label>Featured</label>
+                </span>
+                <span class="g8 right">
+                  <div class="switch switch_is-off" data-dingo="switch" name="video-feature">
+                    <div class="switch-track">
+                      <div class="switch-text_off">OFF</div>
+                      <div class="switch-btn"></div>
+                      <div class="switch-text_on">ON</div>
+                    </div>
+                    <input type="checkbox" name="video_2_is-featured">
+                  </div>
+                </span>
+                <hr>
+                <span class="g16">
+                  <label>Uploaded: October 23, 2013</label>
+                </span>
+                <span class="g8 right">
+                  <div class="btn-white-red" data-dingo="item-video_delete{which:2}">Delete</div>
+                </span>
+              </div>
+            </div> <!-- Item Video -->
+            <div class="item-video" id="item-video_3">
+              <div class="item-video_container">
+                <div class="item-video_container_element">
+                  <img src="img/profile-video-3.png">
+                </div>
+              </div>
+              <div class="item-video_info">
+                <span class="g16">
+                  <label>Featured</label>
+                </span>
+                <span class="g8 right">
+                  <div class="switch switch_is-off" data-dingo="switch" name="video-feature">
+                    <div class="switch-track">
+                      <div class="switch-text_off">OFF</div>
+                      <div class="switch-btn"></div>
+                      <div class="switch-text_on">ON</div>
+                    </div>
+                    <input type="checkbox" name="video_3_is-featured">
+                  </div>
+                </span>
+                <hr>
+                <span class="g16">
+                  <label>Uploaded: October 23, 2013</label>
+                </span>
+                <span class="g8 right">
+                  <div class="btn-white-red" data-dingo="item-video_delete{which:3}">Delete</div>
+                </span>
+              </div>
+            </div> <!-- Item Video -->
+            <div class="center item-video_control"><div class="btn-white-blue">Upload A Video</div></div>
+            <hr>
+            <h5>About Profile Text</h5>
+            <textarea class="scale-form textarea-xl"></textarea>
+            <hr>
+            <div class="right">
+              <div class="btn-white-blue">Save</div>
+              <div class="btn-white-red">Cancel</div>
             </div>
           </div>
         </div> <!-- Container -->
@@ -204,6 +282,54 @@
         <li data-dingo="mobile-popout-select"><a><span class="checkbox"></span>5,000 to 8,000</a></li>
         <li data-dingo="mobile-popout-select"><a><span class="checkbox"></span>10,000+</a></li>
       </ul>
+    </div>
+    <!-- Modal Popout -->
+    <div class="modal-shadow-box" id="modal_change-password">
+      <form class="modal-container">
+        <div class="modal-chrome">
+          <div class="modal-title">Change Password</div>
+          <div class="row">
+            <div class="input-group">
+              <label class="input-group_label">Current Password</label>
+              <div class="input-wrapper form-validate_container">
+                <input type="password" class="input-group_input form-validate_password" name="current-password" data-dingo="form-validate-input{type:text}">
+                <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
+                  <div class="arrow"></div>
+                  Please Enter A Password
+                </div>
+              </div>
+            </div>
+            <hr>
+          <div class="row">
+            <div class="input-group">
+              <label class="input-group_label">New Password</label>
+              <div class="input-wrapper form-validate_container">
+                <input type="password" class="input-group_input form-validate_password" name="new-password" data-dingo="form-validate-input{type:text}">
+                <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
+                  <div class="arrow"></div>
+                  Please Enter A Password
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-group">
+              <label class="input-group_label">Confirm Password</label>
+              <div class="input-wrapper form-validate_container">
+                <input type="password" class="input-group_input form-validate_password" name="new-password" data-dingo="form-validate-input{type:match;which:new-password}">
+                <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
+                  <div class="arrow"></div>
+                  Passwords Do Not Match
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-control">
+            <div class="btn-white-blue" data-dingo="modal-submit{which:change-password}">Save</div>
+            <div class="btn-white-red" data-dingo="modal-close{which:change-password}">Cancel</div>
+          </div>
+        </div>
+      </form>
     </div>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/script.js"></script>

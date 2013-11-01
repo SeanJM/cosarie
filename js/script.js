@@ -54,6 +54,40 @@ var dingo = {
   }
 }
 
+/* Switch Controls */
+
+function sw(el) {
+  return {
+    disabled: function () {
+      el.addClass('switch_is-disabled');
+      return el;
+    },
+    enabled: function () {
+      el.removeClass('switch_is-disabled');
+      return el;
+    },
+    toggle: function (bool) {
+      var checkbox = el.find('input[type="checkbox"]')[0];
+      if (typeof bool === 'boolean') {
+        if (bool) {
+          $(el).addClass('switch_is-on');
+          $(el).removeClass('switch_is-off');
+        } else {
+          $(el).removeClass('switch_is-on');
+          $(el).addClass('switch_is-off');
+        }
+      } else {
+        $(el).toggleClass('switch_is-on');
+        $(el).toggleClass('switch_is-off');
+      }
+      checkbox.checked = sw(el).on();
+    },
+    on: function () {
+      return el.hasClass('switch_is-on');
+    }
+  }
+}
+
 /* ------------- Dropdown Delay */
 
 /*
@@ -81,31 +115,101 @@ function dropdownDelay() {
 
 /* ------------- Animate */
 
-var animate = {
-  scroll: function (el) {
-    var time   = 70;
-    var pos    = el.offset().top-20;
-    var start  = window.pageYOffset;
-    var i      = 0;
-    var frames = 20;
-
-    function s() {
-      i++;
-      window.scrollTo(0,(start-((start/frames)*i))+((pos/frames)*i));
-      if (i<frames) {
-        setTimeout(function () {
-          s();
-        },(time/frames));
+function animate(el) {
+  return {
+    getCssProperty: function (property) {
+      var arr     = ['','ms','webkit','Moz','O'];
+      var style   = window.getComputedStyle(el[0]);
+      var r;
+      function capitalize(str) {
+        return str[0].toUpperCase()+str.substr(1,str.length-1);
       }
-    };
+      for (var i=0;i < arr.length;i++) {
+        if (arr[i].length < 1) {
+          r = property;
+        } else {
+          r = arr[i]+capitalize(property);
+        }
+        if (typeof style[r] === 'string') {
+          return style[r];
+        }
+      }
+      return false;
+    },
+    getTime: function () {
+      var style = window.getComputedStyle(el[0]);
+      var obj = {};
 
-    s();
+      obj.duration  = animate(el).jsTime(animate(el).getCssProperty('transitionDuration'));
+      obj.delay     = animate(el).jsTime(animate(el).getCssProperty('transitionDelay'));
+
+      if (obj.delay === 0 && obj.duration === 0) {
+        obj.duration  = animate(el).jsTime(animate(el).getCssProperty('animationDuration'));
+        obj.delay     = animate(el).jsTime(animate(el).getCssProperty('animationDelay'));
+      }
+      return obj;
+    },
+    jsTime: function (style) {
+      if (style) {
+        return parseFloat(style.match(/([0-9]+(\.[0-9]+|))s/)[1])*1000;
+      } else {
+        return 0;
+      }
+    },
+    in: function (callback) {
+      return animate(el).init('in',callback);
+    },
+    out: function (callback) {
+      return animate(el).init('out',callback);
+    },
+    init: function (direction,callback) {
+      var time;
+      var arr = (direction === 'out')?['out','in']:['in','out'];
+      function exe() {
+        el.removeClass('is-animated_'+arr[1]);
+        el.addClass('is-animated_'+arr[0]);
+        time = animate(el).getTime();
+        setTimeout(function () {
+          el.removeClass('is-animated_'+arr[0]);
+          if (direction === 'in') {
+            el.addClass('is-animated');
+          } else {
+            el.removeClass('is-animated');
+          }
+          if (typeof callback === 'function') {
+            callback(el);
+          }
+        },time.duration+time.delay);
+      }
+      if (direction === 'in') {
+        exe();
+      } else if (direction === 'out' && el.hasClass('is-animated')) {
+        exe();
+      }
+      return el;
+    },
+    scroll: function () {
+      var time   = 70;
+      var pos    = el.offset().top-20;
+      var start  = window.pageYOffset;
+      var i      = 0;
+      var frames = 20;
+
+      function s() {
+        i++;
+        window.scrollTo(0,(start-((start/frames)*i))+((pos/frames)*i));
+        if (i<frames) {
+          setTimeout(function () {
+            s();
+          },(time/frames));
+        }
+      };
+      s();
+    }
   }
 }
 
 /* ------------- Events */
-
-var events = {};
 
 function formIsValid(el) {
   if (el.hasClass('form-validate_is-valid')) {
@@ -119,16 +223,7 @@ function formValidate(el) {
   return formIsValid($(this));
 }
 
-function getAnimationTime(el) {
-  console.log(el.css('transition'));
-  var time = el.css('transition').match(/[a-zA-Z-]+(?:\s+)([0-9]+(\.[0-9]+|))s/);
-  if (time === '0') {
-    time = el.css('animation').match(/[a-zA-Z-]+(?:\s+)([0-9]+(\.[0-9]+|))s/);
-  }
-  return (time==='0')?false:time;
-}
-
-events = {
+var events = {
   'close-popouts': function (options) {
     function toggle_desktop() {
       $('.is-popout').each(function () {
@@ -162,14 +257,63 @@ events = {
     }
   },
   'form-validate-submit': function (options) {
+    var bool = [];
     options.el.closest('form').find('input[class*="form-validate_"]').each(function () {
       if (formIsValid($(this))) {
         $(this).closest('.form-validate_container').removeClass('form-validate_container_has-error');
+        bool.push(true);
       } else {
-        $(this).closest('.form-validate_container').addClass('form-validate_container_has-error');
+        animate($(this).closest('.form-validate_container')).in().addClass('form-validate_container_has-error');
         options.event.preventDefault();
+        bool.push(false);
       }
     });
+    if ($.inArray(false,bool) > -1) {
+      return false;
+    } else {
+      return true;
+    }
+  },
+  'form-validate-input': function (options) {
+    function isEmail(string) {
+      if (string.match(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9]+\.([a-z]{2}|[a-z]{3})($|\s+$)/)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    var valid = {
+      is: function () {
+        options.el.addClass('form-validate_is-valid');
+        animate(options.el.closest('.form-validate_container')).out().removeClass('form-validate_container_has-error');
+      },
+      not: function () {
+        options.el.removeClass('form-validate_is-valid');
+      }
+    }
+    if (options.type === 'email') {
+      if (isEmail(options.el.val())) {
+        valid.is();
+      } else {
+        valid.not();
+      }
+    } else if (options.type === 'text') {
+      if (options.el.val().length > 0) {
+        valid.is();
+      } else {
+        valid.not();
+      }
+    } else if (options.type === 'match') {
+      if (options.el.val().length > 0) {
+        if ($('[name="'+options.which+'"]').val() === options.el.val()) {
+          valid.is();
+        } else {
+          valid.not();
+        }
+      } else {
+        valid.not();
+      }
+    }
   },
   'mobile-popout-select': function (options) {
     var active = options.el.siblings().filter('.popout-select_is-active');
@@ -193,51 +337,76 @@ events = {
     $(options.target).addClass('popout_is-active');
   },
   'switch': function (options) {
-    var checkbox = options.el.find('input[type="checkbox"]')[0];
-    $(options.el).toggleClass('switch_is-on');
-    $(options.el).toggleClass('switch_is-off');
-    checkbox.checked = options.el.hasClass('switch_is-on');
+    // This is checking for a switch group
+    var switchGroup = $('[name="'+options.el.attr('name')+'"]').filter('.switch');
+
+    if (switchGroup.size() > 1) {
+      if (!sw(options.el).on()) {
+        sw(options.el).toggle(true);
+        switchGroup.each(function () {
+          if ($(this)[0] !== options.el[0]) {
+            sw($(this)).toggle(false);
+          }
+        });
+      }
+    } else {
+      sw(options.el).toggle();
+    }
+  },
+  'modal-prompt': function (options) {
+    animate($('#'+options.which)).in();
+  },
+  'close-modal-prompt': function (options) {
+    animate($('#'+options.which)).out();
+  },
+  'delete-profile-picture': function (options) {
+    animate($('#profile-picture-container')).in(function (el) {
+      el.addClass('profile-picture-container_no-picture');
+    });
+    animate($('#profile-picture_all-controls')).in().addClass('profile-picture_all-controls_no-picture');
+    sw($('#switch_display-profile-picture')).disabled();
+  },
+  'upload-profile-picture': function (options) {
+    animate($('#profile-picture-container')).out().removeClass('profile-picture-container_no-picture');
+    animate($('#profile-picture_all-controls')).in().removeClass('profile-picture_all-controls_no-picture');
+    sw($('#switch_display-profile-picture')).enabled();
   },
   'modal': function (options) {
-    var target = $('#'+options.which);
-    var animationTime = getAnimationTime(target);
-    console.log(animationTime);
-    target.addClass('modal_is-active');
-    if (target.hasClass('is-animated')) {
+    var modal = $('#modal_'+options.which);
+    animate(modal).in();
+  },
+  'modal-close': function (options) {
+    var modal = $('#modal_'+options.which);
+    animate(modal).out();
+  },
+  'modal-submit': function (options) {
+    // this function returns a boolean, true if there are no errors
+    // false if there are errors
+    // so if there are no errors, it will close the modal,
+    // else it will show errors
+    if (events['form-validate-submit'](options)) {
+      events['modal-close'](options)
     }
+  },
+  'item-video_delete': function (options) {
+    var item = $('#item-video_'+options.which);
+    animate(item).in(function () {
+      // Delete item once the animation is complete
+      item.remove();
+    });
   }
 }
 
 dingo.keydown = {
   noinput: function (options) {
+    // Prevent input on fields
     options.event.preventDefault();
   }
 }
 
 dingo.keyup = {
   'form-validate-input': function (options) {
-    function isEmail(string) {
-      if (string.match(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9]+\.([a-z]{2}|[a-z]{3})($|\s+$)/)) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-    if (options.type === 'email') {
-      if (isEmail(options.el.val())) {
-        options.el.addClass('form-validate_is-valid');
-        options.el.closest('.form-validate_container').removeClass('form-validate_container_has-error');
-      } else {
-        options.el.removeClass('form-validate_is-valid');
-      }
-    } else if (options.type === 'text') {
-      if (options.el.val().length > 0) {
-        options.el.addClass('form-validate_is-valid');
-        options.el.closest('.form-validate_container').removeClass('form-validate_container_has-error');
-      } else {
-        options.el.removeClass('form-validate_is-valid');
-      }
-    }
+    events[options.dingo](options);
   }
 }
 
@@ -263,7 +432,28 @@ dingo.click = {
   'switch': function (options) {
     events[options.dingo](options);
   },
+  'modal-prompt': function (options) {
+    events[options.dingo](options);
+  },
+  'close-modal-prompt': function (options) {
+    events[options.dingo](options);
+  },
+  'delete-profile-picture': function (options) {
+    events[options.dingo](options);
+  },
+  'upload-profile-picture': function (options) {
+    events[options.dingo](options);
+  },
   'modal': function (options) {
+    events[options.dingo](options);
+  },
+  'modal-close': function (options) {
+    events[options.dingo](options);
+  },
+  'modal-submit': function (options) {
+    events[options.dingo](options);
+  },
+  'item-video_delete': function (options) {
     events[options.dingo](options);
   }
 }
@@ -291,6 +481,24 @@ dingo.touchend = {
     events[options.dingo](options);
   },
   'popout': function (options) {
+    events[options.dingo](options);
+  },
+  'modal-prompt': function (options) {
+    events[options.dingo](options);
+  },
+  'close-modal-prompt': function (options) {
+    events[options.dingo](options);
+  },
+  'modal': function (options) {
+    events[options.dingo](options);
+  },
+  'modal-close': function (options) {
+    events[options.dingo](options);
+  },
+  'modal-submit': function (options) {
+    events[options.dingo](options);
+  },
+  'item-video_delete': function (options) {
     events[options.dingo](options);
   }
 }
