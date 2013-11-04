@@ -330,7 +330,7 @@ var events = {
   'popout': function (options) {
     if (dingo.isMobile()) {
       options.target+="_mobile";
-      animate.scroll(options.el);
+      animate(options.el).scroll();
     }
     $('body').removeClass('popout-safe');
     $('.popout_is-active').removeClass('popout_is-active');
@@ -373,6 +373,7 @@ var events = {
   },
   'modal': function (options) {
     var modal = $('#modal_'+options.which);
+    modal.height($('body').height());
     animate(modal).in();
   },
   'modal-close': function (options) {
@@ -394,6 +395,12 @@ var events = {
       // Delete item once the animation is complete
       item.remove();
     });
+  },
+  'hover-anim_in': function (options) {
+    animate(options.el).in();
+  },
+  'hover-anim_out': function (options) {
+    animate(options.el).out();
   }
 }
 
@@ -455,6 +462,18 @@ dingo.click = {
   },
   'item-video_delete': function (options) {
     events[options.dingo](options);
+  }
+}
+
+dingo.mouseenter = {
+  'hover-anim': function (options) {
+    events[options.dingo+'_in'](options);
+  }
+}
+
+dingo.mouseleave = {
+  'hover-anim': function (options) {
+    events[options.dingo+'_out'](options);
   }
 }
 

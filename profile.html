@@ -56,17 +56,17 @@
               <div class="row profile-picture-control">
                 <div class="profile-picture-control_has-picture">
                   <div class="g12 col1of2">
-                    <div class="btn-white-red btn-block profile-picture-control_delete" data-dingo="modal-prompt{which:delete-modal}">Delete</div>
+                    <div class="btn-white-red btn-block profile-picture-control_delete" data-dingo="modal-prompt{which:delete-profile-picture-modal}">Delete</div>
                     <!-- Delete Prompt -->
-                    <div class="modal-prompt" id="delete-modal">
+                    <div class="modal-prompt" id="delete-profile-picture-modal">
                       <div class="modal-prompt-chrome">
                         <div class="row">
                           <span class="modal-prompt-title">Confirm Delete</span>
                         </div>
                         <div class="row">
                           <span class="modal-prompt-control">
-                            <span class="btn-white-blue" data-dingo="close-modal-prompt{which:delete-modal} delete-profile-picture">OK</span>
-                            <span class="btn-white-red" data-dingo="close-modal-prompt{which:delete-modal}">Cancel</span>
+                            <span class="btn-white-red" data-dingo="close-modal-prompt{which:delete-profile-picture-modal} delete-profile-picture">Delete</span>
+                            <span class="btn-white-blue" data-dingo="close-modal-prompt{which:delete-profile-picture-modal}">Cancel</span>
                           </span>
                         </div>
                       </div>
@@ -96,19 +96,19 @@
             <h5>Business Info</h5>
             <div class="form-section">
               <div class="row">
-                <div class="g6 m8">
+                <div class="g6 m9">
                   <label>Business Name</label>
                 </div>
-                <div class="g18 m16 scale-form">
+                <div class="g18 m15 scale-form">
                   <input type="text">
                 </div>
               </div>
               <div class="row">
-                <div class="g6 m8">
+                <div class="g6 m9">
                   <label>Location</label>
                 </div>
-                <div class="g18 m16 scale-form">
-                  <input type="text" name="location" data-dingo="popout{target:#popout_location} noinput">
+                <div class="g18 m15 scale-form">
+                  <input type="text" class="has-icon form-validate_text" data-dingo="form-validate{type:text} popout{target:#popout_location}" readonly="true" id="input_location" name="location">
                   <ul class="popout is-popout" id="popout_location">
                     <li><a data-dingo="popout-select-done{value:Greenville, SC;targetName:location}">Greenville, SC</a></li>
                     <li><a data-dingo="popout-select-done{value:Charleston, SC;targetName:location}">Charleston, SC</a></li>
@@ -116,11 +116,11 @@
                 </div>
               </div>
               <div class="row">
-                <div class="g6 m8">
+                <div class="g6 m9">
                   <label>Price</label>
                 </div>
-                <div class="g18 m16 scale-form">
-                  <input type="text" name="price" data-dingo="popout{target:#popout_price} noinput">
+                <div class="g18 m15 scale-form">
+                  <input type="text" class="has-icon form-validate_text" data-dingo="form-validate{type:text} popout{target:#popout_price}" readonly="true" id="input_price" name="price">
                   <ul class="popout is-popout" id="popout_price">
                     <li><a data-dingo="popout-select-done{value:1,000 to 3,000;targetName:price}">1,000 to 3,000</a></li>
                     <li><a data-dingo="popout-select-done{value:3,000 to 5,000;targetName:price}">3,000 to 5,000</a></li>
@@ -130,18 +130,18 @@
                 </div>
               </div>
               <div class="row">
-                <div class="g6 m8">
+                <div class="g6 m9">
                   <label>Email</label>
                 </div>
-                <div class="g18 m16 scale-form">
+                <div class="g18 m15 scale-form">
                   <input type="text">
                 </div>
               </div>
               <div class="row">
-                <div class="g6 m8">
+                <div class="g6 m9">
                   <label>Password</label>
                 </div>
-                <div class="g18 m16">
+                <div class="g18 m15">
                   <span class="btn-white-blue btn-block" data-dingo="modal{which:change-password}">Change Password</span>
                 </div>
               </div>
@@ -172,10 +172,23 @@
                 </span>
                 <hr>
                 <span class="g16">
-                  <label>Uploaded: October 23, 2013</label>
+                  <label>Uploaded: Oct 23, 2013</label>
                 </span>
                 <span class="g8 right">
-                  <div class="btn-white-red" data-dingo="item-video_delete{which:1}">Delete</div>
+                  <div class="btn-white-red" data-dingo="modal-prompt{which:delete-video-modal_1}">Delete</div>
+                  <div class="modal-prompt modal-prompt_right" id="delete-video-modal_1">
+                    <div class="modal-prompt-chrome">
+                      <div class="row">
+                        <span class="modal-prompt-title">Confirm Delete</span>
+                      </div>
+                      <div class="row">
+                        <span class="modal-prompt-control">
+                          <span class="btn-white-red" data-dingo="close-modal-prompt{which:delete-video-modal_1} item-video_delete{which:1}">Delete</span>
+                          <span class="btn-white-blue" data-dingo="close-modal-prompt{which:delete-video-modal_1}">Cancel</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </span>
               </div>
             </div> <!-- Item Video -->
@@ -201,10 +214,23 @@
                 </span>
                 <hr>
                 <span class="g16">
-                  <label>Uploaded: October 23, 2013</label>
+                  <label>Uploaded: Oct 23, 2013</label>
                 </span>
                 <span class="g8 right">
-                  <div class="btn-white-red" data-dingo="item-video_delete{which:2}">Delete</div>
+                  <div class="btn-white-red" data-dingo="modal-prompt{which:delete-video-modal_2}">Delete</div>
+                  <div class="modal-prompt modal-prompt_right" id="delete-video-modal_2">
+                    <div class="modal-prompt-chrome">
+                      <div class="row">
+                        <span class="modal-prompt-title">Confirm Delete</span>
+                      </div>
+                      <div class="row">
+                        <span class="modal-prompt-control">
+                          <span class="btn-white-red" data-dingo="close-modal-prompt{which:delete-video-modal_2} item-video_delete{which:2}">Delete</span>
+                          <span class="btn-white-blue" data-dingo="close-modal-prompt{which:delete-video-modal_2}">Cancel</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </span>
               </div>
             </div> <!-- Item Video -->
@@ -230,10 +256,23 @@
                 </span>
                 <hr>
                 <span class="g16">
-                  <label>Uploaded: October 23, 2013</label>
+                  <label>Uploaded: Oct 23, 2013</label>
                 </span>
                 <span class="g8 right">
-                  <div class="btn-white-red" data-dingo="item-video_delete{which:3}">Delete</div>
+                  <div class="btn-white-red" data-dingo="modal-prompt{which:delete-video-modal_3}">Delete</div>
+                  <div class="modal-prompt modal-prompt_right" id="delete-video-modal_3">
+                    <div class="modal-prompt-chrome">
+                      <div class="row">
+                        <span class="modal-prompt-title">Confirm Delete</span>
+                      </div>
+                      <div class="row">
+                        <span class="modal-prompt-control">
+                          <span class="btn-white-red" data-dingo="close-modal-prompt{which:delete-video-modal_3} item-video_delete{which:3}">Delete</span>
+                          <span class="btn-white-blue" data-dingo="close-modal-prompt{which:delete-video-modal_3}">Cancel</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </span>
               </div>
             </div> <!-- Item Video -->
@@ -290,9 +329,9 @@
           <div class="modal-title">Change Password</div>
           <div class="row">
             <div class="input-group">
-              <label class="input-group_label">Current Password</label>
+              <label class="input-group_label">Current <span class="is-desktop">Password</span></label>
               <div class="input-wrapper form-validate_container">
-                <input type="password" class="input-group_input form-validate_password" name="current-password" data-dingo="form-validate-input{type:text}">
+                <input type="password" class="input-group_input form-validate_password" name="current-password" data-dingo="form-validate-input{type:text}" tabindex="1">
                 <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
                   <div class="arrow"></div>
                   Please Enter A Password
@@ -302,9 +341,9 @@
             <hr>
           <div class="row">
             <div class="input-group">
-              <label class="input-group_label">New Password</label>
+              <label class="input-group_label">New <span class="is-desktop">Password</span></label>
               <div class="input-wrapper form-validate_container">
-                <input type="password" class="input-group_input form-validate_password" name="new-password" data-dingo="form-validate-input{type:text}">
+                <input type="password" class="input-group_input form-validate_password" name="new-password" data-dingo="form-validate-input{type:text}" tabindex="2">
                 <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
                   <div class="arrow"></div>
                   Please Enter A Password
@@ -314,9 +353,9 @@
           </div>
           <div class="row">
             <div class="input-group">
-              <label class="input-group_label">Confirm Password</label>
+              <label class="input-group_label">Confirm <span class="is-desktop">Password</span></label>
               <div class="input-wrapper form-validate_container">
-                <input type="password" class="input-group_input form-validate_password" name="new-password" data-dingo="form-validate-input{type:match;which:new-password}">
+                <input type="password" class="input-group_input form-validate_password" name="new-password" data-dingo="form-validate-input{type:match;which:new-password}" tabindex="3">
                 <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
                   <div class="arrow"></div>
                   Passwords Do Not Match
