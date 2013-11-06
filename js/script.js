@@ -1,3 +1,4 @@
+var dingoMouse = {};
 var dingo = {
   isMobile: function () {
     return ($(window).width() <= 400);
@@ -7,7 +8,7 @@ var dingo = {
     if (dingo.isMobile()) {
       return ['touchend','touchmove','touchstart','touchleave','keyup','keydown','keypress'];
     } else {
-      return ['click','mouseup','mouseenter','mouseleave','mousemove','keyup','keydown','keypress'];
+      return ['click','mousedown','mouseup','mouseenter','mouseleave','mousemove','keyup','keydown','keypress'];
     }
   },
   is: function (k,dingoEvent) {
@@ -26,27 +27,129 @@ var dingo = {
 
     return { dingoEvent: match[1], data: options };
   },
+  swipeEvent: function (options,dingoEvent) {
+    var rvalue = false,
+        lr,
+        ud;
+    if (options.htmlEvent === 'mousedown') {
+      dingoMouse.swipeEvent[dingoEvent] = {
+        x: options.event.pageX,
+        y: options.event.pageY
+      }
+      // A Swipe event only triggers during a certain amount of time
+      setTimeout(function () {
+        dingoMouse.swipeEvent[dingoEvent] = false;
+      },300);
+    } else if (options.htmlEvent === 'mouseup') {
+      if (dingoMouse.swipeEvent[dingoEvent]) {
+        lr     = dingoMouse.swipeEvent[dingoEvent].x-options.event.pageX;
+        ud     = dingoMouse.swipeEvent[dingoEvent].y-options.event.pageY;
+        rvalue = {
+          originX: dingoMouse.swipeEvent[dingoEvent].x,
+          originY: dingoMouse.swipeEvent[dingoEvent].y,
+          options: options,
+          dingo: dingoEvent
+        }
+        if (Math.abs(lr) > Math.abs(ud) && Math.abs(lr) > 44) {
+          // Left or Right
+          if (lr > 0) {
+            rvalue.event = 'swipeleft';
+          } else {
+            rvalue.event = 'swiperight';
+          }
+        } else if (Math.abs(ud) > 44) {
+          // Up or Down
+          if (ud > 0) {
+            rvalue.event = 'swipeup';
+          } else {
+            rvalue.event = 'swipedown';
+          }
+        } else {
+          rvalue = false;
+        }
+      }
+    }
+    return rvalue;
+  },
+  dragEvent: function (options,dingoEvent) {
+    var rvalue = false,
+        x,
+        y;
+    if (options.htmlEvent === 'mousedown') {
+      dingoMouse.dragEvent[dingoEvent] = {
+        originX: options.event.pageX,
+        originY: options.event.pageY,
+        dragstart: false
+      }
+    } else if (options.htmlEvent === 'mousemove' && dingoMouse.dragEvent[dingoEvent]) {
+      if (Math.abs(dingoMouse.dragEvent[dingoEvent].originX-options.event.pageX) > 10 || Math.abs(dingoMouse.dragEvent[dingoEvent].originY-options.event.pageY) > 10) {
+        rvalue = {
+          originX: dingoMouse.dragEvent[dingoEvent].x,
+          originY: dingoMouse.dragEvent[dingoEvent].y,
+          pageX: options.event.pageX,
+          pageY: options.event.pageY,
+          options: options,
+          dingo: dingoEvent
+        }
+        if (dingoMouse.dragEvent[dingoEvent].dragstart) {
+          rvalue.event = 'drag';
+        } else {
+          rvalue.event = 'dragstart';
+          dingoMouse.dragEvent[dingoEvent].dragstart = true;
+        }
+      } else {
+        rvalue = false;
+      }
+    } else if (options.htmlEvent === 'mouseup') {
+      if (dingoMouse.dragEvent[dingoEvent].dragstart) {
+        rvalue = {
+          originX: dingoMouse.dragEvent[dingoEvent].x,
+          originY: dingoMouse.dragEvent[dingoEvent].y,
+          pageX: x,
+          pageY: y,
+          options: options,
+          dingo: dingoEvent,
+          event: 'dragend'
+        }
+        dingoMouse.dragEvent[dingoEvent] = false;
+      }
+    }
+    return rvalue;
+  },
   exe: function (options) {
     var dingos = options.el.attr('data-dingo').match(/[a-zA-Z0-9_-]+(\s+|)(\{[\s\S]*?\}|)/g);
     var chain  = [];
+    var swipe;
+    var drag;
+    var dingoEvent;
 
     $.each(dingos,function (i,k) {
       chain.push(dingo.toJs({dingo: k,el: options.el,event: options.event}));
     });
 
     $.each(chain,function (i,k) {
-      if (dingo.is(options.htmlEvent,k.dingoEvent)) {
-        dingo[options.htmlEvent][k.dingoEvent](k.data);
+      dingoEvent = k.dingoEvent;
+      swipe      = dingo.swipeEvent(options,dingoEvent);
+      drag       = dingo.dragEvent(options,dingoEvent);
+
+      if (dingo.is(options.htmlEvent,dingoEvent)) {
+        dingo[options.htmlEvent][dingoEvent](k.data);
+      }
+      if (swipe && dingo.is(swipe.event,dingoEvent)) {
+        dingo[swipe.event][dingoEvent](k.data);
+      }
+      if (drag && dingo.is(drag.event,dingoEvent)) {
+        dingo[drag.event][dingoEvent](k.data);
       }
     });
-
   },
   init: function (el) {
+    dingoMouse.swipeEvent = {};
+    dingoMouse.dragEvent = {};
     dingo.on($('[data-dingo]'));
   },
   on: function (el) {
     $.each(dingo.htmlEvents(),function (i,htmlEvent) {
-      el.off(htmlEvent);
       el.on(htmlEvent,function (event) {
         dingo.exe({htmlEvent:htmlEvent,el:$(this),event: event});
       });
@@ -113,7 +216,11 @@ function dropdownDelay() {
   },100);
 }
 
-/* ------------- Animate */
+/* ------------- Animate v1.0 */
+
+// MIT License
+
+// Original Code by Sean MacIsaac
 
 function animate(el) {
   return {
@@ -162,28 +269,31 @@ function animate(el) {
     out: function (callback) {
       return animate(el).init('out',callback);
     },
+    classSwitch: function (arr) {
+      el.removeClass('is-animated_'+arr[1]);
+      el.addClass('is-animated_'+arr[0]);
+      return animate(el);
+    },
+    ifOut: function (direction,arr,callback) {
+      var time = animate(el).getTime();
+      setTimeout(function () {
+        if (direction === 'out') {
+          el.removeClass('is-animated_'+arr[0]);
+        }
+        if (typeof callback === 'function') {
+          callback(el);
+        }
+      },time.duration+time.delay);
+      return animate(el);
+    },
     init: function (direction,callback) {
-      var time;
       var arr = (direction === 'out')?['out','in']:['in','out'];
       function exe() {
-        el.removeClass('is-animated_'+arr[1]);
-        el.addClass('is-animated_'+arr[0]);
-        time = animate(el).getTime();
-        setTimeout(function () {
-          el.removeClass('is-animated_'+arr[0]);
-          if (direction === 'in') {
-            el.addClass('is-animated');
-          } else {
-            el.removeClass('is-animated');
-          }
-          if (typeof callback === 'function') {
-            callback(el);
-          }
-        },time.duration+time.delay);
+        animate(el).classSwitch(arr).ifOut(direction,arr,callback);
       }
       if (direction === 'in') {
         exe();
-      } else if (direction === 'out' && el.hasClass('is-animated')) {
+      } else if (direction === 'out' && el.hasClass('is-animated_in')) {
         exe();
       }
       return el;
@@ -207,7 +317,8 @@ function animate(el) {
       s();
     }
   }
-}
+};
+
 
 /* ------------- Events */
 
@@ -236,6 +347,7 @@ var events = {
         }
       });
     }
+    /* Will remove later at refactor */
     function toggle_mobile() {
       $('.is-popout').each(function () {
         var active = $(this).hasClass('popout_is-active');
@@ -249,12 +361,25 @@ var events = {
         }
       });
     }
+    function closeEl(selector) {
+      if ($('body').hasClass('popout-safe')) {
+        $(selector).each(function () {
+          if ($(options.event.target).closest(selector)[0] !== $(this)[0]) {
+            animate($(this)).out();
+            $('body').removeClass('popout-safe');
+          }
+        });
+      } else {
+        $('body').addClass('popout-safe');
+      }
+    }
     if (dingo.isMobile()) {
       clickable(options.event);
       toggle_mobile();
     } else {
       toggle_desktop();
     }
+    closeEl('.close-popout');
   },
   'form-validate-submit': function (options) {
     var bool = [];
@@ -396,11 +521,38 @@ var events = {
       item.remove();
     });
   },
-  'hover-anim_in': function (options) {
-    animate(options.el).in();
+  'input-dropdown_open': function (options) {
+    animate($('#'+options.id)).in();
   },
-  'hover-anim_out': function (options) {
-    animate(options.el).out();
+  'input-dropdown_close': function (options) {
+    animate($('#'+options.id)).out();
+    $('body').removeClass('popout-safe');
+  },
+  'swipe_message-item_control': function (options) {
+    animate(options.el.find('.message-item_control')).in();
+  },
+  'delete-or-archive_message-item':function (options) {
+    var message = $('#'+options.id);
+    function exe(string) {
+      $('#'+options.id).addClass(options.id.replace(/_[0-9]+/,'') + '_'+string);
+      animate(message).in(function (el) {
+        message.remove();
+      });
+    }
+    return {
+      'del': function () {
+        exe('delete');
+      },
+      'archive': function () {
+        exe('archive');
+      }
+    }
+  },
+  'delete_message-item': function (options) {
+    events['delete-or-archive_message-item'](options).del();
+  },
+  'archive_message-item': function (options) {
+    events['delete-or-archive_message-item'](options).archive();
   }
 }
 
@@ -462,6 +614,18 @@ dingo.click = {
   },
   'item-video_delete': function (options) {
     events[options.dingo](options);
+  },
+  'input-dropdown_open': function (options) {
+    events[options.dingo](options);
+  },
+  'input-dropdown_close': function (options) {
+    events[options.dingo](options);
+  },
+  'delete_message-item': function (options) {
+    events[options.dingo](options);
+  },
+  'archive_message-item': function (options) {
+    events[options.dingo](options);
   }
 }
 
@@ -474,6 +638,18 @@ dingo.mouseenter = {
 dingo.mouseleave = {
   'hover-anim': function (options) {
     events[options.dingo+'_out'](options);
+  }
+}
+
+dingo.swipeleft = {
+  'swipe_message-item_control': function (options) {
+    events[options.dingo](options);
+  }
+}
+
+dingo.swiperight = {
+  'swipe_message-item_control': function (options) {
+    events[options.dingo](options);
   }
 }
 
@@ -518,6 +694,18 @@ dingo.touchend = {
     events[options.dingo](options);
   },
   'item-video_delete': function (options) {
+    events[options.dingo](options);
+  },
+  'input-dropdown_open': function (options) {
+    events[options.dingo](options);
+  },
+  'input-dropdown_close': function (options) {
+    events[options.dingo](options);
+  },
+  'delete_message-item': function (options) {
+    events[options.dingo](options);
+  },
+  'archive_message-item': function (options) {
     events[options.dingo](options);
   }
 }

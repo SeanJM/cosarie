@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<HTML>
+  <head>
+    <title>Corsarie</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UX-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta http-equiv="cleartype" content="on">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body data-dingo="close-popouts">
+    <div class="main"> <!-- Controls the min height so that the footer is always well placed -->
+      <div class="status-bar">
+        <div class="container">
+          <a href="index.html" class="status-bar_logo"></a>
+          <div class="status-bar_control">
+            <a class="btn-white">Logout</a>
+          </div>
+        </div>
+      </div>
+      <div class="workspace">
+        <div class="container no-padding_m">
+          <div class="nav-bar">
+            <span class="breadcrumbs">
+              <a href="profile.html" class="breadcrumb_item">Profile</a>
+              <span class="arrow"></span>
+              <a href="inbox.html" class="breadcrumb_item">Inbox</a>
+              <span class="arrow"></span>
+              <span class="breadcrumb_item">Sean MacIsaac</span>
+            </span>
+            <!-- Desktop Search Controller -->
+            <div class="nav-bar_control is-desktop">
+              <a class="btn-white-red" data-dingo="modal-prompt{which:delete-message}">Delete</a>
+              <a class="btn-white-blue" data-dingo="modal-prompt{which:archive-message}">Archive</a>
+              <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=Lorem ipsum dolor sit amet,">Reply</a>
+              <div class="modal-prompt modal-prompt_right modal-prompt_top" id="delete-message">
+                <div class="modal-prompt-chrome">
+                  <div class="row">
+                    <span class="modal-prompt-title">Message Deleted</span>
+                  </div>
+                  <div class="row">
+                    <span class="modal-prompt-control">
+                      <span class="btn-white-blue" data-dingo="close-modal-prompt{which:delete-message}">OK</span>
+                    </span>
+                  </div>
+                </div>
+              </div> <!-- Modal -->
+              <div class="modal-prompt modal-prompt_right modal-prompt_top" id="archive-message">
+                <div class="modal-prompt-chrome">
+                  <div class="row">
+                    <span class="modal-prompt-title">Message Archived</span>
+                  </div>
+                  <div class="row">
+                    <span class="modal-prompt-control">
+                      <span class="btn-white-blue" data-dingo="close-modal-prompt{which:archive-message}">OK</span>
+                    </span>
+                  </div>
+                </div>
+              </div> <!-- Modal -->
+            </div>
+          </div>
+          <div class="g24 m24 message-header">
+            <div class="g20">
+              <p>seanjmacisaac@gmail.com</p>
+              <p>(613) 863 - 8484</p>
+            </div>
+            <div class="g4">
+              <p>11 / 23 / 2013</p>
+            </div>
+          </div>
+          <p class="message-body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.</p>
+        </div> <!-- Container -->
+      </div>
+    </div>
+    <div class="section section-footer has-pagination">
+      <div class="container">
+        <p>&copy; Cosarie</p>
+      </div>
+    </div>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</HTML>
