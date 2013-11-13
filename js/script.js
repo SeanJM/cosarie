@@ -1,55 +1,105 @@
+// Dingo Version 1.1.1
+// MIT License
+// Coded by Sean MacIsaac
+// seanjmacisaac@gmail.com
+
 var dingoMouse = {};
 var dingo = {
   isMobile: function () {
-    return ($(window).width() <= 400);
-    return (navigator.userAgent.match(/iPhone|iPod|iPad|Android|BlackBerry/)) ? true : false;
+    //return ($(window).width() <= 400);
+    if (navigator.userAgent.match(/iPhone|iPod|iPad|Android|BlackBerry/)) {
+      return true;
+    } else {
+      return false;
+    }
   },
   htmlEvents: function () {
     if (dingo.isMobile()) {
-      return ['touchend','touchmove','touchstart','touchleave','keyup','keydown','keypress'];
+      return ['touchend','touchmove','touchstart','touchleave','keyup','keydown','keypress','change','focus'];
     } else {
-      return ['click','mousedown','mouseup','mouseenter','mouseleave','mousemove','keyup','keydown','keypress'];
+      return ['click','mousedown','mouseup','mouseenter','mouseleave','mousemove','keyup','keydown','keypress','change','focus'];
     }
   },
   is: function (k,dingoEvent) {
     return (typeof dingo[k] === 'object' && typeof dingo[k][dingoEvent] === 'function');
   },
+  get: function (el,event) {
+    event      = event||'';
+    var dingos = el.attr('data-dingo').match(/[a-zA-Z0-9_-]+(\s+|)(\{[^}]*?\}|)/g);
+    var chain  = [];
+
+    $.each(dingos,function (i,k) {
+      chain.push(dingo.toJs({dingo: k,el: el,event: event}));
+    });
+    return chain;
+  },
   toJs: function (options) {
-    var match = options.dingo.match(/([a-zA-Z0-9_-]+)(?:\s+|)(\{([\s\S]*?)\}|)/);
+    var match = options.dingo.match(/([a-zA-Z0-9_-]+)(?:\s+|)(\{([^}]*)\}|)/);
     var options = {el:options.el,event: options.event,dingo: match[1]};
 
-    if (typeof match[3] === 'string') {
+    if (typeof match[3] === 'string' && match[3].length > 0) {
       $.each(match[3].split(';'),function (i,k) {
-        var _match = k.match(/([a-zA-Z0-9_-]+):([\s\S]*?)$/);
+        var _match = k.match(/([a-zA-Z0-9_-]+):([^}]*)/);
+        _match[2]  = _match[2].replace(/^\s+|\s+$/g,'');
+
+        if (_match[2] === 'true') {
+          _match[2] = true;
+        } else if (_match[2] === 'false') {
+          _match[2] = false;
+        }
+
         options[_match[1]] = _match[2];
       });
     }
 
     return { dingoEvent: match[1], data: options };
   },
+  getMouse: function (event) {
+    if (dingo.isMobile()) {
+      if (typeof event.changedTouches !== 'undefined') {
+        return event.changedTouches[0];
+      } else if (typeof event.originalEvent !== 'undefined') {
+        return event.originalEvent.changedTouches[0];
+      }
+    } else {
+      return event;
+    }
+  },
+  uniMouse: function (event) {
+    return {
+      mousedown  : 'down',
+      touchstart : 'down',
+      mouseup    : 'up',
+      touchend   : 'up',
+      mousemove  : 'move',
+      touchmove  : 'move'
+    }[event];
+  },
   swipeEvent: function (options,dingoEvent) {
     var rvalue = false,
+        pageX  = dingo.getMouse(options.event).pageX,
+        pageY  = dingo.getMouse(options.event).pageY,
         lr,
         ud;
-    if (options.htmlEvent === 'mousedown') {
+    if (dingo.uniMouse(options.htmlEvent) === 'down') {
       dingoMouse.swipeEvent[dingoEvent] = {
-        x: options.event.pageX,
-        y: options.event.pageY
+        x: pageX,
+        y: pageY
       }
       // A Swipe event only triggers during a certain amount of time
       setTimeout(function () {
         dingoMouse.swipeEvent[dingoEvent] = false;
       },300);
-    } else if (options.htmlEvent === 'mouseup') {
+    } else if (dingo.uniMouse(options.htmlEvent) === 'up') {
       if (dingoMouse.swipeEvent[dingoEvent]) {
-        lr     = dingoMouse.swipeEvent[dingoEvent].x-options.event.pageX;
-        ud     = dingoMouse.swipeEvent[dingoEvent].y-options.event.pageY;
         rvalue = {
-          originX: dingoMouse.swipeEvent[dingoEvent].x,
-          originY: dingoMouse.swipeEvent[dingoEvent].y,
-          options: options,
-          dingo: dingoEvent
+          options : options,
+          dingo   : dingoEvent,
+          originX : dingoMouse.swipeEvent[dingoEvent].x,
+          originY : dingoMouse.swipeEvent[dingoEvent].y
         }
+        lr = dingoMouse.swipeEvent[dingoEvent].x-pageX;
+        ud = dingoMouse.swipeEvent[dingoEvent].y-pageY;
         if (Math.abs(lr) > Math.abs(ud) && Math.abs(lr) > 44) {
           // Left or Right
           if (lr > 0) {
@@ -73,23 +123,24 @@ var dingo = {
   },
   dragEvent: function (options,dingoEvent) {
     var rvalue = false,
-        x,
-        y;
-    if (options.htmlEvent === 'mousedown') {
+        pageX  = dingo.getMouse(options.event).pageX,
+        pageY  = dingo.getMouse(options.event).pageY;
+
+    if (dingo.uniMouse(options.htmlEvent) === 'down') {
       dingoMouse.dragEvent[dingoEvent] = {
-        originX: options.event.pageX,
-        originY: options.event.pageY,
+        originX: pageX,
+        originY: pageY,
         dragstart: false
       }
-    } else if (options.htmlEvent === 'mousemove' && dingoMouse.dragEvent[dingoEvent]) {
-      if (Math.abs(dingoMouse.dragEvent[dingoEvent].originX-options.event.pageX) > 10 || Math.abs(dingoMouse.dragEvent[dingoEvent].originY-options.event.pageY) > 10) {
+    } else if (dingo.uniMouse(options.htmlEvent) === 'move' && dingoMouse.dragEvent[dingoEvent]) {
+      if (Math.abs(dingoMouse.dragEvent[dingoEvent].originX-pageX) > 10 || Math.abs(dingoMouse.dragEvent[dingoEvent].originY-pageY) > 10) {
         rvalue = {
-          originX: dingoMouse.dragEvent[dingoEvent].x,
-          originY: dingoMouse.dragEvent[dingoEvent].y,
-          pageX: options.event.pageX,
-          pageY: options.event.pageY,
-          options: options,
-          dingo: dingoEvent
+          originX : dingoMouse.dragEvent[dingoEvent].x,
+          originY : dingoMouse.dragEvent[dingoEvent].y,
+          pageX   : pageX,
+          pageY   : pageY,
+          options : options,
+          dingo   : dingoEvent
         }
         if (dingoMouse.dragEvent[dingoEvent].dragstart) {
           rvalue.event = 'drag';
@@ -100,16 +151,16 @@ var dingo = {
       } else {
         rvalue = false;
       }
-    } else if (options.htmlEvent === 'mouseup') {
+    } else if (dingo.uniMouse(options.htmlEvent) === 'up') {
       if (dingoMouse.dragEvent[dingoEvent].dragstart) {
         rvalue = {
-          originX: dingoMouse.dragEvent[dingoEvent].x,
-          originY: dingoMouse.dragEvent[dingoEvent].y,
-          pageX: x,
-          pageY: y,
-          options: options,
-          dingo: dingoEvent,
-          event: 'dragend'
+          originX : dingoMouse.dragEvent[dingoEvent].x,
+          originY : dingoMouse.dragEvent[dingoEvent].y,
+          pageX   : pageX,
+          pageY   : pageY,
+          options : options,
+          dingo   : dingoEvent,
+          event   : 'dragend'
         }
         dingoMouse.dragEvent[dingoEvent] = false;
       }
@@ -117,15 +168,10 @@ var dingo = {
     return rvalue;
   },
   exe: function (options) {
-    var dingos = options.el.attr('data-dingo').match(/[a-zA-Z0-9_-]+(\s+|)(\{[\s\S]*?\}|)/g);
-    var chain  = [];
+    var chain  = dingo.get(options.el,options.event);
     var swipe;
     var drag;
     var dingoEvent;
-
-    $.each(dingos,function (i,k) {
-      chain.push(dingo.toJs({dingo: k,el: options.el,event: options.event}));
-    });
 
     $.each(chain,function (i,k) {
       dingoEvent = k.dingoEvent;
@@ -216,10 +262,8 @@ function dropdownDelay() {
   },100);
 }
 
-/* ------------- Animate v1.0 */
-
+/* ------------- Animate v1.1 */
 // MIT License
-
 // Original Code by Sean MacIsaac
 
 function animate(el) {
@@ -231,28 +275,34 @@ function animate(el) {
       function capitalize(str) {
         return str[0].toUpperCase()+str.substr(1,str.length-1);
       }
-      for (var i=0;i < arr.length;i++) {
-        if (arr[i].length < 1) {
-          r = property;
-        } else {
-          r = arr[i]+capitalize(property);
-        }
-        if (typeof style[r] === 'string') {
-          return style[r];
+      if (style !== null) {
+        for (var i=0;i < arr.length;i++) {
+          if (arr[i].length < 1) {
+            r = property;
+          } else {
+            r = arr[i]+capitalize(property);
+          }
+          if (typeof style[r] === 'string') {
+            return style[r];
+          }
         }
       }
       return false;
     },
     getTime: function () {
-      var style = window.getComputedStyle(el[0]);
-      var obj = {};
+      var obj = {
+        duration : 0,
+        delay    : 0
+      };
+      // For IE 8
+      if (typeof window.getComputedStyle === 'function') {
+        obj.duration  = animate(el).jsTime(animate(el).getCssProperty('transitionDuration'));
+        obj.delay     = animate(el).jsTime(animate(el).getCssProperty('transitionDelay'));
 
-      obj.duration  = animate(el).jsTime(animate(el).getCssProperty('transitionDuration'));
-      obj.delay     = animate(el).jsTime(animate(el).getCssProperty('transitionDelay'));
-
-      if (obj.delay === 0 && obj.duration === 0) {
-        obj.duration  = animate(el).jsTime(animate(el).getCssProperty('animationDuration'));
-        obj.delay     = animate(el).jsTime(animate(el).getCssProperty('animationDelay'));
+        if (obj.delay === 0 && obj.duration === 0) {
+          obj.duration  = animate(el).jsTime(animate(el).getCssProperty('animationDuration'));
+          obj.delay     = animate(el).jsTime(animate(el).getCssProperty('animationDelay'));
+        }
       }
       return obj;
     },
@@ -263,11 +313,22 @@ function animate(el) {
         return 0;
       }
     },
-    in: function (callback) {
+    start: function (callback) {
       return animate(el).init('in',callback);
     },
-    out: function (callback) {
+    end: function (callback) {
       return animate(el).init('out',callback);
+    },
+    custom: function (name,callback) {
+      var time = animate(el).getTime();
+      setTimeout(function () {
+        el.removeClass(name);
+        if (typeof callback === 'function') {
+          callback(el);
+        }
+      },time.duration+time.delay);
+      el.addClass(name);
+      return el;
     },
     classSwitch: function (arr) {
       el.removeClass('is-animated_'+arr[1]);
@@ -287,16 +348,20 @@ function animate(el) {
       return animate(el);
     },
     init: function (direction,callback) {
-      var arr = (direction === 'out')?['out','in']:['in','out'];
-      function exe() {
-        animate(el).classSwitch(arr).ifOut(direction,arr,callback);
+      if (typeof el[0] === 'undefined') {
+        return false;
+      } else {
+        var arr = (direction === 'out')?['out','in']:['in','out'];
+        function exe() {
+          animate(el).classSwitch(arr).ifOut(direction,arr,callback);
+        }
+        if (direction === 'in') {
+          exe();
+        } else if (direction === 'out' && el.hasClass('is-animated_in')) {
+          exe();
+        }
+        return el;
       }
-      if (direction === 'in') {
-        exe();
-      } else if (direction === 'out' && el.hasClass('is-animated_in')) {
-        exe();
-      }
-      return el;
     },
     scroll: function () {
       var time   = 70;
@@ -319,7 +384,6 @@ function animate(el) {
   }
 };
 
-
 /* ------------- Events */
 
 function formIsValid(el) {
@@ -330,8 +394,58 @@ function formIsValid(el) {
   }
 }
 
+
 function formValidate(el) {
-  return formIsValid($(this));
+  function nullBool(value) {
+    if (value) { return true; } else { return false; }
+  }
+  function isEmail(string) {
+    return nullBool(string.match(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9]+\.([a-z]{2}|[a-z]{3})($|\s+$)/));
+  }
+  function isPhone(string) {
+    return nullBool(string.match(/([0-9]{3}|\([0-9]{3}\))(\s+|)[0-9]{3}(\s+|)(-|)(\s+|)[0-9]{4}/));
+  }
+  return {
+    is: function () {
+      el.addClass('form-validate_is-valid');
+      animate(el.closest('.form-validate_container')).end().removeClass('form-validate_container_has-error');
+    },
+    not: function () {
+      el.removeClass('form-validate_is-valid');
+    },
+    'email': function() {
+      if (isEmail(el.val())) {
+        formValidate(el).is();
+      } else {
+        formValidate(el).not();
+      }
+    },
+    'text': function () {
+      if (el.val().length > 0) {
+        formValidate(el).is();
+      } else {
+        formValidate(el).not();
+      }
+    },
+    'phone': function () {
+      if (isPhone(el.val())) {
+        formValidate(el).is();
+      } else {
+        formValidate(el).not();
+      }
+    },
+    'match': function (options) {
+      if (el.val().length > 0) {
+        if ($('[name="'+options.which+'"]').val() === el.val()) {
+          formValidate(el).is();
+        } else {
+          formValidate(el).not();
+        }
+      } else {
+        formValidate(el).not();
+      }
+    }
+  }
 }
 
 var events = {
@@ -365,7 +479,7 @@ var events = {
       if ($('body').hasClass('popout-safe')) {
         $(selector).each(function () {
           if ($(options.event.target).closest(selector)[0] !== $(this)[0]) {
-            animate($(this)).out();
+            animate($(this)).end();
             $('body').removeClass('popout-safe');
           }
         });
@@ -388,7 +502,7 @@ var events = {
         $(this).closest('.form-validate_container').removeClass('form-validate_container_has-error');
         bool.push(true);
       } else {
-        animate($(this).closest('.form-validate_container')).in().addClass('form-validate_container_has-error');
+        animate($(this).closest('.form-validate_container')).start().addClass('form-validate_container_has-error');
         options.event.preventDefault();
         bool.push(false);
       }
@@ -400,45 +514,7 @@ var events = {
     }
   },
   'form-validate-input': function (options) {
-    function isEmail(string) {
-      if (string.match(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9]+\.([a-z]{2}|[a-z]{3})($|\s+$)/)) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-    var valid = {
-      is: function () {
-        options.el.addClass('form-validate_is-valid');
-        animate(options.el.closest('.form-validate_container')).out().removeClass('form-validate_container_has-error');
-      },
-      not: function () {
-        options.el.removeClass('form-validate_is-valid');
-      }
-    }
-    if (options.type === 'email') {
-      if (isEmail(options.el.val())) {
-        valid.is();
-      } else {
-        valid.not();
-      }
-    } else if (options.type === 'text') {
-      if (options.el.val().length > 0) {
-        valid.is();
-      } else {
-        valid.not();
-      }
-    } else if (options.type === 'match') {
-      if (options.el.val().length > 0) {
-        if ($('[name="'+options.which+'"]').val() === options.el.val()) {
-          valid.is();
-        } else {
-          valid.not();
-        }
-      } else {
-        valid.not();
-      }
-    }
+    formValidate(options.el)[options.type](options);
   },
   'mobile-popout-select': function (options) {
     var active = options.el.siblings().filter('.popout-select_is-active');
@@ -479,31 +555,31 @@ var events = {
     }
   },
   'modal-prompt': function (options) {
-    animate($('#'+options.which)).in();
+    animate($('#'+options.which)).start();
   },
   'close-modal-prompt': function (options) {
-    animate($('#'+options.which)).out();
+    animate($('#'+options.which)).end();
   },
   'delete-profile-picture': function (options) {
-    animate($('#profile-picture-container')).in(function (el) {
+    animate($('#profile-picture-container')).start(function (el) {
       el.addClass('profile-picture-container_no-picture');
     });
-    animate($('#profile-picture_all-controls')).in().addClass('profile-picture_all-controls_no-picture');
+    animate($('#profile-picture_all-controls')).start().addClass('profile-picture_all-controls_no-picture');
     sw($('#switch_display-profile-picture')).disabled();
   },
   'upload-profile-picture': function (options) {
-    animate($('#profile-picture-container')).out().removeClass('profile-picture-container_no-picture');
-    animate($('#profile-picture_all-controls')).in().removeClass('profile-picture_all-controls_no-picture');
+    animate($('#profile-picture-container')).end().removeClass('profile-picture-container_no-picture');
+    animate($('#profile-picture_all-controls')).start().removeClass('profile-picture_all-controls_no-picture');
     sw($('#switch_display-profile-picture')).enabled();
   },
   'modal': function (options) {
     var modal = $('#modal_'+options.which);
     modal.height($('body').height());
-    animate(modal).in();
+    animate(modal).start();
   },
   'modal-close': function (options) {
     var modal = $('#modal_'+options.which);
-    animate(modal).out();
+    animate(modal).end();
   },
   'modal-submit': function (options) {
     // this function returns a boolean, true if there are no errors
@@ -516,26 +592,26 @@ var events = {
   },
   'item-video_delete': function (options) {
     var item = $('#item-video_'+options.which);
-    animate(item).in(function () {
+    animate(item).start(function () {
       // Delete item once the animation is complete
       item.remove();
     });
   },
   'input-dropdown_open': function (options) {
-    animate($('#'+options.id)).in();
+    animate($('#'+options.id)).start();
   },
   'input-dropdown_close': function (options) {
-    animate($('#'+options.id)).out();
+    animate($('#'+options.id)).end();
     $('body').removeClass('popout-safe');
   },
   'swipe_message-item_control': function (options) {
-    animate(options.el.find('.message-item_control')).in();
+    animate(options.el.find('.message-item_control')).start();
   },
   'delete-or-archive_message-item':function (options) {
     var message = $('#'+options.id);
     function exe(string) {
       $('#'+options.id).addClass(options.id.replace(/_[0-9]+/,'') + '_'+string);
-      animate(message).in(function (el) {
+      animate(message).start(function (el) {
         message.remove();
       });
     }
@@ -553,6 +629,46 @@ var events = {
   },
   'archive_message-item': function (options) {
     events['delete-or-archive_message-item'](options).archive();
+  },
+  'delete-message': function (options) {
+    $('.message-header').addClass('message-header_is-deleted');
+    $('.message-body').addClass('message-body_is-deleted');
+    $(options.el).closest('.nav-bar_control').find('.btn-disarm').each(function () {
+      $(this).attr('disabled','disabled');
+    });
+  },
+  'carousel-control': function (options) {
+    var carousel = $(options.which);
+    var first    = carousel.find('.carousel-item').eq(0);
+    var last     = carousel.find('.carousel-item:last-child');
+    if (options.direction === 'prev') {
+      animate(last).custom('carousel-item_in').insertBefore(first);
+    } else {
+      animate(first).custom('carousel-item_out',function () {
+        first.insertAfter(last);
+      });
+    }
+  },
+  'video-item_view': function (options) {
+    var selected      = $(options.which);
+    var img           = selected.find('img').clone();
+    var feature       = $('#featured-video');
+    var container     = feature.find('.featured-video_container');
+    var container_new = container.clone();
+    var anim          = animate(container_new);
+
+    container_new[0].className = 'featured-video_container';
+    container_new.find('img').remove();
+    container_new.append(img);
+
+    $('.video-item_is-active').removeClass('video-item_is-active');
+    selected.addClass('video-item_is-active');
+
+    feature.append(container_new);
+
+    anim.start(function (el) {
+      container.remove();
+    });
   }
 }
 
@@ -625,6 +741,15 @@ dingo.click = {
     events[options.dingo](options);
   },
   'archive_message-item': function (options) {
+    events[options.dingo](options);
+  },
+  'delete-message': function (options) {
+    events[options.dingo](options);
+  },
+  'carousel-control': function (options) {
+    events[options.dingo](options);
+  },
+  'video-item_view': function (options) {
     events[options.dingo](options);
   }
 }
@@ -707,9 +832,26 @@ dingo.touchend = {
   },
   'archive_message-item': function (options) {
     events[options.dingo](options);
+  },
+  'video-item_view': function (options) {
+    events[options.dingo](options);
+  }
+}
+
+var carousel = function (el) {
+  var items     = el.find('.carousel-item');
+  var itemWidth = items.eq(0).outerWidth();
+  var container = el.find('.carousel-track');
+  return {
+    init: function () {
+      container.css('width',(itemWidth*items.size())+'px');
+      animate(el).start();
+      return carousel(el);
+    }
   }
 }
 
 $(function () {
+  carousel($('#video-carousel')).init();
   dingo.init();
 });

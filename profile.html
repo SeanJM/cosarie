@@ -56,7 +56,7 @@
               <div class="row profile-picture-control">
                 <div class="profile-picture-control_has-picture">
                   <div class="g12 col1of2">
-                    <div class="btn-white-red btn-block profile-picture-control_delete" data-dingo="modal-prompt{which:delete-profile-picture-modal}">Delete</div>
+                    <div class="btn-white-red block profile-picture-control_delete" data-dingo="modal-prompt{which:delete-profile-picture-modal}">Delete</div>
                     <!-- Delete Prompt -->
                     <div class="modal-prompt" id="delete-profile-picture-modal">
                       <div class="modal-prompt-chrome">
@@ -73,17 +73,17 @@
                     </div>
                   </div>
                   <div class="g12 col2of2">
-                    <div class="btn-white btn-block profile-picture-control_update">Update</div>
+                    <div class="btn-white block profile-picture-control_update">Update</div>
                   </div>
                 </div>
                 <div class="profile-picture-control_no-picture">
-                  <div class="btn-white-blue btn-block" data-dingo="upload-profile-picture">Upload Profile Picture</div>
+                  <div class="btn-white-blue block" data-dingo="upload-profile-picture">Upload Profile Picture</div>
                 </div>
               </div>
             </div>
             <hr>
             <div class="row">
-              <a href="inbox.html" class="btn-white btn-block btn_has-badge">View Inbox<span class="badge">1</span></a>
+              <a href="inbox.html" class="btn-white block btn_has-badge">View Inbox<span class="badge">1</span></a>
             </div>
             <div class="row">
               <div class="box">
@@ -142,7 +142,7 @@
                   <label>Password</label>
                 </div>
                 <div class="g18 m15">
-                  <span class="btn-white-blue btn-block" data-dingo="modal{which:change-password}">Change Password</span>
+                  <span class="btn-white-blue block" data-dingo="modal{which:change-password}">Change Password</span>
                 </div>
               </div>
             </div>
@@ -324,49 +324,48 @@
     </div>
     <!-- Modal Popout -->
     <div class="modal-shadow-box" id="modal_change-password">
-      <form class="modal-container">
-        <div class="modal-chrome">
-          <div class="modal-title">Change Password</div>
-          <div class="row">
-            <div class="input-group">
-              <label class="input-group_label">Current <span class="is-desktop">Password</span></label>
-              <div class="input-wrapper form-validate_container">
-                <input type="password" class="input-group_input form-validate_password" name="current-password" data-dingo="form-validate-input{type:text}" tabindex="1">
-                <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
-                  <div class="arrow"></div>
-                  Please Enter A Password
-                </div>
-              </div>
-            </div>
-            <hr>
-          <div class="row">
-            <div class="input-group">
-              <label class="input-group_label">New <span class="is-desktop">Password</span></label>
-              <div class="input-wrapper form-validate_container">
-                <input type="password" class="input-group_input form-validate_password" name="new-password" data-dingo="form-validate-input{type:text}" tabindex="2">
-                <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
-                  <div class="arrow"></div>
-                  Please Enter A Password
-                </div>
+      <form class="modal-chrome">
+        <div class="modal-title">Change Password</div>
+        <div class="row">
+          <div class="input-group">
+            <label class="input-group_label">Current <span class="is-desktop">Password</span></label>
+            <div class="input-wrapper form-validate_container">
+              <input type="password" class="input-group_input form-validate_password" name="current-password" data-dingo="form-validate-input{type:text}" tabindex="1">
+              <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
+                <div class="arrow"></div>
+                Please Enter A Password
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="input-group">
-              <label class="input-group_label">Confirm <span class="is-desktop">Password</span></label>
-              <div class="input-wrapper form-validate_container">
-                <input type="password" class="input-group_input form-validate_password" name="new-password" data-dingo="form-validate-input{type:match;which:new-password}" tabindex="3">
-                <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
-                  <div class="arrow"></div>
-                  Passwords Do Not Match
-                </div>
+          <hr>
+        </div>
+        <div class="row">
+          <div class="input-group">
+            <label class="input-group_label">New <span class="is-desktop">Password</span></label>
+            <div class="input-wrapper form-validate_container">
+              <input type="password" class="input-group_input form-validate_password" name="new-password" data-dingo="form-validate-input{type:text}" tabindex="2">
+              <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
+                <div class="arrow"></div>
+                Please Enter A Password
               </div>
             </div>
           </div>
-          <div class="modal-control">
-            <div class="btn-white-blue" data-dingo="modal-submit{which:change-password}">Save</div>
-            <div class="btn-white-red" data-dingo="modal-close{which:change-password}">Cancel</div>
+        </div>
+        <div class="row">
+          <div class="input-group">
+            <label class="input-group_label">Confirm <span class="is-desktop">Password</span></label>
+            <div class="input-wrapper form-validate_container">
+              <input type="password" class="input-group_input form-validate_password" name="new-password" data-dingo="form-validate-input{type:match;which:new-password}" tabindex="3">
+              <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
+                <div class="arrow"></div>
+                Passwords Do Not Match
+              </div>
+            </div>
           </div>
+        </div>
+        <div class="modal-control">
+          <div class="btn-white-blue" data-dingo="modal-submit{which:change-password}">Save</div>
+          <div class="btn-white-red" data-dingo="modal-close{which:change-password}">Cancel</div>
         </div>
       </form>
     </div>

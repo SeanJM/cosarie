@@ -35,9 +35,9 @@
             </span>
             <!-- Desktop Search Controller -->
             <div class="nav-bar_control is-desktop">
-              <a class="btn-white-red" data-dingo="modal-prompt{which:delete-message}">Delete</a>
-              <a class="btn-white-blue" data-dingo="modal-prompt{which:archive-message}">Archive</a>
-              <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=Lorem ipsum dolor sit amet,">Reply</a>
+              <a class="btn-white-red btn-disarm" data-dingo="modal-prompt{which:delete-message} delete-message">Delete</a>
+              <a class="btn-white-blue btn-disarm" data-dingo="modal-prompt{which:archive-message}">Archive</a>
+              <a class="btn-white btn-disarm" href="mailto:seanjmacisaac@gmail.com?Subject=Lorem ipsum dolor sit amet,">Reply</a>
               <div class="modal-prompt modal-prompt_right modal-prompt_top" id="delete-message">
                 <div class="modal-prompt-chrome">
                   <div class="row">
@@ -45,7 +45,7 @@
                   </div>
                   <div class="row">
                     <span class="modal-prompt-control">
-                      <span class="btn-white-blue" data-dingo="close-modal-prompt{which:delete-message}">OK</span>
+                      <a href="inbox.html" class="btn-white-blue" data-dingo="close-modal-prompt{which:delete-message}">OK</a>
                     </span>
                   </div>
                 </div>
