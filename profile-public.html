@@ -117,59 +117,53 @@
               <p>Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.</p>
             </div>
             <hr>
-            <div class="g12 l6">
-              <form>
-                <h2>Contact</h2>
+            <h2>Contact</h2>
+            <div class="g14 l3">
+              <form id="form_contact">
                 <div class="row">
-                  <div class="row">
+                  <div class="row input-group">
+                    <label class="input-group_label">Full Name</label>
                     <div class="input-group">
-                      <label class="input-group_label">Full Name</label>
-                      <div class="input-wrapper form-validate_container">
-                        <input class="block input-group_input" type="text" data-dingo="form-validate-input{type:text}" tabindex="0">
-                        <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
-                          <div class="arrow"></div>
-                          Please Enter A Valid Name
-                        </div>
+                      <input name="full-name" class="block input-group_input form-validate" type="text" data-dingo="form-validate" tabindex="0">
+                      <div class="form-validate-prompt">
+                        <div class="arrow"></div>
+                        Please Enter A Valid Name
                       </div>
                     </div>
                   </div>
-                  <div class="row">
+                  <div class="row input-group">
+                    <label class="input-group_label">Phone Number</label>
                     <div class="input-group">
-                      <label class="input-group_label">Phone Number</label>
-                      <div class="input-wrapper form-validate_container">
-                        <input class="block input-group_input" type="text" data-dingo="form-validate-input{type:phone}" tabindex="0">
-                        <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
-                          <div class="arrow"></div>
-                          Please Enter A Valid Phone Number
-                        </div>
+                      <input name="phone-number" class="block input-group_input form-validate" type="text" data-dingo="form-validate" tabindex="0">
+                      <div class="form-validate-prompt">
+                        <div class="arrow"></div>
+                        Please Enter A Valid Phone Number, eg: (555) 555 - 5555
                       </div>
                     </div>
                   </div>
-                  <div class="row">
+                  <div class="row input-group">
+                    <label class="input-group_label">Email</label>
                     <div class="input-group">
-                      <label class="input-group_label">Email</label>
-                      <div class="input-wrapper form-validate_container">
-                        <input class="block input-group_input" type="text" data-dingo="form-validate-input{type:email}" tabindex="0">
-                        <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
-                          <div class="arrow"></div>
-                          Please Enter A Valid Email Address
-                        </div>
+                      <input name="email" class="block input-group_input form-validate" type="text" data-dingo="form-validate" tabindex="0">
+                      <div class="form-validate-prompt">
+                        <div class="arrow"></div>
+                        Please Enter A Valid Email Address
                       </div>
                     </div>
                   </div>
-                  <div class="row">
+                  <div class="row input-group">
+                    <label class="input-group_label">Message</label>
                     <div class="input-group">
-                      <label class="input-group_label">Message</label>
-                      <div class="input-wrapper form-validate_container">
-                        <textarea class="block input-group_input" data-dingo="form-validate-input{type:text}" tabindex="0"></textarea>
-                        <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
-                          <div class="arrow"></div>
-                          Please Enter A Valid Message
-                        </div>
+                      <textarea name="message" class="block input-group_input textarea-xl form-validate" data-dingo="form-validate" tabindex="0"></textarea>
+                      <div class="form-validate-prompt">
+                        <div class="arrow"></div>
+                        Please Enter A Valid Message
                       </div>
                     </div>
                   </div>
-                  <button class="btn-blue" data-dingo="form-validate{type:submit}">Send</button>
+                  <div class="row center g10 l4">
+                    <button class="btn-blue" data-dingo="form-validate-submit{which:form_contact}">Send</button>
+                  </div>
                 </div>
               </form>
             </div>

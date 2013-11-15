@@ -15,9 +15,9 @@ var dingo = {
   },
   htmlEvents: function () {
     if (dingo.isMobile()) {
-      return ['touchend','touchmove','touchstart','touchleave','keyup','keydown','keypress','change','focus'];
+      return ['touchend','touchmove','touchstart','touchleave','keyup','keydown','keypress','change','focus','blur'];
     } else {
-      return ['click','mousedown','mouseup','mouseenter','mouseleave','mousemove','keyup','keydown','keypress','change','focus'];
+      return ['click','mousedown','mouseup','mouseenter','mouseleave','mousemove','keyup','keydown','keypress','change','focus','blur'];
     }
   },
   is: function (k,dingoEvent) {
@@ -262,7 +262,7 @@ function dropdownDelay() {
   },100);
 }
 
-/* ------------- Animate v1.1 */
+/* ------------- Animate v1.1.2 */
 // MIT License
 // Original Code by Sean MacIsaac
 
@@ -330,6 +330,13 @@ function animate(el) {
       el.addClass(name);
       return el;
     },
+    toggle: function () {
+      if (el.hasClass('is-animated_in')) {
+        animate(el).end();
+      } else {
+        animate(el).start();
+      }
+    },
     classSwitch: function (arr) {
       el.removeClass('is-animated_'+arr[1]);
       el.addClass('is-animated_'+arr[0]);
@@ -386,63 +393,153 @@ function animate(el) {
 
 /* ------------- Events */
 
-function formIsValid(el) {
-  if (el.hasClass('form-validate_is-valid')) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-
 function formValidate(el) {
+  var form = el.closest('form');
+
+  if (el[0].tagName.toLowerCase === 'form') {
+    form = el;
+  } else {
+    var baseName = (el.attr('name'))?el.attr('name').replace(/^confirm-/g,''):'';
+    var base     = form.find('[name="' + baseName + '"]');
+    var confirm  = form.find('[name="confirm-' + baseName + '"]');
+  }
+
+  function camelCase(string) {
+    string = string.replace(/\(|\)/,'').split(/-|\s/);
+    var out = [];
+    for (var i = 0;i<string.length;i++) {
+      if (i<1) {
+        out.push(string[i].toLowerCase());
+      } else {
+        out.push(string[i][0].toUpperCase() + string[i].substr(1,string[i].length).toLowerCase());
+      }
+    }
+    return out.join('');
+  }
+
   function nullBool(value) {
-    if (value) { return true; } else { return false; }
+    if (value) {
+      return true;
+    } else {
+      return false;
+    }
   }
-  function isEmail(string) {
-    return nullBool(string.match(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9]+\.([a-z]{2}|[a-z]{3})($|\s+$)/));
-  }
-  function isPhone(string) {
-    return nullBool(string.match(/([0-9]{3}|\([0-9]{3}\))(\s+|)[0-9]{3}(\s+|)(-|)(\s+|)[0-9]{4}/));
-  }
+
   return {
-    is: function () {
-      el.addClass('form-validate_is-valid');
-      animate(el.closest('.form-validate_container')).end().removeClass('form-validate_container_has-error');
-    },
-    not: function () {
-      el.removeClass('form-validate_is-valid');
-    },
-    'email': function() {
-      if (isEmail(el.val())) {
-        formValidate(el).is();
-      } else {
-        formValidate(el).not();
-      }
-    },
-    'text': function () {
-      if (el.val().length > 0) {
-        formValidate(el).is();
-      } else {
-        formValidate(el).not();
-      }
-    },
-    'phone': function () {
-      if (isPhone(el.val())) {
-        formValidate(el).is();
-      } else {
-        formValidate(el).not();
-      }
-    },
-    'match': function (options) {
-      if (el.val().length > 0) {
-        if ($('[name="'+options.which+'"]').val() === el.val()) {
-          formValidate(el).is();
+    confirm: function () {
+
+      function convert (el) {
+        var attr = camelCase(el.attr('name')).toLowerCase();
+        var tag  = el[0].tagName.toLowerCase();
+        if (tag === 'input' || tag === 'textarea') {
+          if (attr.match(/^zip(code|)$/)) {
+            return 'zipCode';
+          } else if (attr.match(/^(confirm|)(new|old|current|)password$/)) {
+            return 'password'
+          } else if (attr.match(/^(confirm|)(new|old|current|)email$/)) {
+            return 'email';
+          } else if (attr.match(/^(confirm|)phone(number|)$/)) {
+            return 'phone';
+          } else {
+            return 'text';
+          }
         } else {
-          formValidate(el).not();
+          return tag;
         }
+      }
+
+      function rules (el) {
+        var string = el.val()||'';
+        return {
+          text: function () {
+            return (string.length > 0);
+          },
+          password: function () {
+            return (string.length > 0 && nullBool(string.match(/[a-zA-Z0-9_-]+/)));
+          },
+          zipCode: function () {
+            return (nullBool(string.match(/[0-9]{5}/)));
+          },
+          email: function () {
+            return (nullBool(string.match(/[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+\.([a-z]{2}|[a-z]{3})/)));
+          },
+          merchantId: function () {
+            var match = string.match(/^[A-Z0-9]+$/);
+            return ((match) && (match[0].length > 9 && match[0].length < 22));
+          },
+          marketplaceId: function () {
+            var match  = string.match(/^[A-Z0-9]+$/);
+            var length = {'United States of America':13}[region];
+            return ((match) && (match[0].length === length));
+          },
+          select: function () {
+            return (el[0].selectedIndex > 0);
+          },
+          checkbox: function () {
+            return el[0].checked;
+          },
+          phone: function () {
+            return (nullBool(string.match(/^([0-9]{7}|[0-9]{10})$/)));
+          }
+        }
+      }; // Rules
+
+      function fullfill(el,bool) {
+        var label  = $('[for="' + el.attr('name') + '"]');
+        var prompt = el.closest('.input-group').find('.form-validate-prompt');
+        if (bool) {
+          el.removeClass('form-validate');
+          label.addClass('form-validate-label_is-fufilled');
+          animate(prompt).end();
+        } else {
+          el.addClass('form-validate');
+          label.removeClass('form-validate-label_is-fufilled');
+        }
+      };
+      // Confirmation field check, checks is first condition is truthy then
+      // checks if the fields are mirrors
+
+      // Make sure that base & confirm satisfies rules
+
+      fullfill(base,rules(base)[convert(base)]());
+
+      if (confirm.size() > 0) {
+        fullfill(confirm,(rules(confirm)[convert(base)]() && base.val() === confirm.val()));
+      }
+    },
+    init: function (base, confirm) {
+      if (el.size() > 0) {
+        parameters.bool = bool;
+        formValidate(el).fufilled();
+        return formValidate(el);
       } else {
-        formValidate(el).not();
+        return false;
+      }
+    },
+    is: function () {
+      return (form.find('.form-validate').size() < 1);
+    },
+    check: function () {
+      form.find('[data-dingo*="form-validate"]').each(function () {
+        if (!nullBool($(this).attr('data-dingo').match(/form-validate-submit/))) {
+          formValidate($(this)).confirm();
+        }
+      });
+      return form.find('.form-validate');
+    },
+    submit: function (event) {
+      var requiredField = formValidate(form).check();
+      var prompt;
+      if (requiredField.size() > 0) {
+        event.preventDefault();
+        requiredField.each(function () {
+          prompt = $(this).closest('.input-group').find('.form-validate-prompt');
+          prompt.addClass('form-validate-prompt_is-active');
+          animate(prompt).start();
+        });
+        if (requiredField.eq(0).closest('[class*="modal"]').size() < 1) {
+          animate(requiredField.eq(0)).scroll();
+        }
       }
     }
   }
@@ -495,26 +592,21 @@ var events = {
     }
     closeEl('.close-popout');
   },
-  'form-validate-submit': function (options) {
-    var bool = [];
-    options.el.closest('form').find('input[class*="form-validate_"]').each(function () {
-      if (formIsValid($(this))) {
-        $(this).closest('.form-validate_container').removeClass('form-validate_container_has-error');
-        bool.push(true);
-      } else {
-        animate($(this).closest('.form-validate_container')).start().addClass('form-validate_container_has-error');
-        options.event.preventDefault();
-        bool.push(false);
-      }
-    });
-    if ($.inArray(false,bool) > -1) {
-      return false;
-    } else {
-      return true;
+  'form-validate_keyup': function (options) {
+    formValidate(options.el).confirm();
+  },
+  'form-validate_click': function (options) {
+    if (options.el.attr('type') === 'checkbox') {
+      formValidate(options.el).confirm(options.el.attr('type'));
     }
   },
-  'form-validate-input': function (options) {
-    formValidate(options.el)[options.type](options);
+  'form-validate_change': function (options) {
+    if (options.el[0].tagName === 'SELECT') {
+      formValidate(options.el).confirm(options.el[0].tagName.toLowerCase());
+    }
+  },
+  'form-validate-submit': function (options) {
+    formValidate($('#'+options.which)).submit(options.event);
   },
   'mobile-popout-select': function (options) {
     var active = options.el.siblings().filter('.popout-select_is-active');
@@ -525,6 +617,7 @@ var events = {
     $('#'+options.popout).removeClass('popout_is-active');
     $('[name="'+options.targetName+'"]').val($('#'+options.target).find('.popout-select_is-active').text());
     $('body').removeClass('popout-safe');
+    $('[name="'+options.targetName+'"]').trigger('keyup');
 
     dropdownDelay();
   },
@@ -536,6 +629,10 @@ var events = {
     $('body').removeClass('popout-safe');
     $('.popout_is-active').removeClass('popout_is-active');
     $(options.target).addClass('popout_is-active');
+  },
+  'popout-select-done': function (options) {
+    $('[name="'+options.targetName+'"]').val(options.value);
+    $('[name="'+options.targetName+'"]').trigger('keyup');
   },
   'switch': function (options) {
     // This is checking for a switch group
@@ -582,12 +679,11 @@ var events = {
     animate(modal).end();
   },
   'modal-submit': function (options) {
-    // this function returns a boolean, true if there are no errors
-    // false if there are errors
-    // so if there are no errors, it will close the modal,
-    // else it will show errors
-    if (events['form-validate-submit'](options)) {
-      events['modal-close'](options)
+    if (formValidate(options.el).is()) {
+      events['modal-close'](options);
+    } else {
+      options.which = options.form;
+      events['form-validate-submit'](options);
     }
   },
   'item-video_delete': function (options) {
@@ -680,8 +776,25 @@ dingo.keydown = {
 }
 
 dingo.keyup = {
-  'form-validate-input': function (options) {
-    events[options.dingo](options);
+  'form-validate': function (options) {
+    events[options.dingo + '_keyup'](options);
+  }
+}
+
+dingo.keypress = {
+  'form-validate': function (options) {
+    alert('test');
+    if (dingo.isMobile()) {
+      events[options.dingo + '_keyup'](options);
+    }
+  }
+}
+
+dingo.blur = {
+  'form-validate': function (options) {
+    if (options.el[0].tagName.toLowerCase() === 'input') {
+      events[options.dingo + '_keyup'](options);
+    }
   }
 }
 
@@ -699,7 +812,7 @@ dingo.click = {
     events[options.dingo](options);
   },
   'popout-select-done': function (options) {
-    $('[name="'+options.targetName+'"]').val(options.value);
+    events[options.dingo](options);
   },
   'mobile-popout_done': function (options) {
     events[options.dingo](options);
@@ -779,7 +892,7 @@ dingo.swiperight = {
 }
 
 dingo.touchstart = {
-  'form-validate-submit': function (options) {
+  'form-validate': function (options) {
     events[options.dingo](options);
   },
 }
@@ -788,7 +901,7 @@ dingo.touchend = {
   'close-popouts': function (options) {
     events[options.dingo](options);
   },
-  'form-validate-input': function (options) {
+  'form-validate-submit': function (options) {
     events[options.dingo](options);
   },
   'mobile-popout-select': function (options) {
@@ -825,6 +938,12 @@ dingo.touchend = {
     events[options.dingo](options);
   },
   'input-dropdown_close': function (options) {
+    events[options.dingo](options);
+  },
+  'delete-profile-picture': function (options) {
+    events[options.dingo](options);
+  },
+  'upload-profile-picture': function (options) {
     events[options.dingo](options);
   },
   'delete_message-item': function (options) {

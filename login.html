@@ -23,25 +23,25 @@
       </div>
       <div class="login">
         <div class="hero-container">
-          <form accept-charset="UTF-8" class="center">
+          <form accept-charset="UTF-8" class="center" id="form_login">
             <span class="logo_hero_login"></span>
             <div class="hero_login scale-form">
               <div class="row">
-                <div class="input-wrapper input_has-icon form-validate_container">
-                  <input type="text" class="has-icon form-validate_email" data-dingo="form-validate-input{type:email}" placeholder="Email Address" id="inf_field_Email" name="inf_field_Email">
+                <div class="input-group input_has-icon form-validate_container">
+                  <input type="text" class="has-icon form-validate" data-dingo="form-validate" placeholder="Email Address" name="email">
                   <i class="icon-mail"></i>
-                  <div class="form-validate_error-msg" data-dingo="form-validate{type:close}"><div class="arrow"></div>Please Enter A Valid Email Address</div>
+                  <div class="form-validate-prompt" data-dingo="form-validate{type:close}"><div class="arrow"></div>Please Enter A Valid Email Address</div>
                 </div>
               </div>
               <div class="row">
-                <div class="input-wrapper input_has-icon form-validate_container">
-                  <input type="password" class="has-icon form-validate_text" data-dingo="form-validate-input{type:text}" placeholder="Password" id="inf_field_Email" name="inf_field_Email">
+                <div class="input-group input_has-icon form-validate_container">
+                  <input type="password" class="has-icon form-validate" data-dingo="form-validate" placeholder="Password" name="password">
                   <i class="icon-lock"></i>
-                  <div class="form-validate_error-msg" data-dingo="form-validate{type:close}"><div class="arrow"></div>Please Enter A Valid Password</div>
+                  <div class="form-validate-prompt" data-dingo="form-validate{type:close}"><div class="arrow"></div>Please Enter A Valid Password</div>
                 </div>
               </div>
             </div>
-            <a href="profile.html" class="btn-blue" data-dingo="form-validate-submit">Login</a>
+            <a href="profile.html" class="btn-blue" data-dingo="form-validate-submit{which:form_login}">Login</a>
           </form>
           <h3 class="is-mobile hero_register_cta">Not a member? <a href="register.html">Register</a></h3>
         </div>

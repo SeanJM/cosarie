@@ -14,7 +14,7 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700' rel='stylesheet' type='text/css'>
   </head>
   <body data-dingo="close-popouts">
-    <div class="main"> <!-- Controls the min height so that the footer is always well placed -->
+    <form class="main" id="form_profile"> <!-- Controls the min height so that the footer is always well placed -->
       <div class="status-bar">
         <div class="container">
           <a href="index.html" class="status-bar_logo"></a>
@@ -27,10 +27,6 @@
         <div class="container no-padding_m">
           <div class="nav-bar">
             <span class="breadcrumbs"><span class="breadcrumb_item">Profile</span></span>
-            <div class="nav-bar_control">
-              <a class="btn-white-blue">Save</a>
-              <a class="btn-white-red">Cancel</a>
-            </div>
           </div>
           <div class="g6 m24 left-menu">
             <div class="center profile-picture-container" id="profile-picture-container">
@@ -95,32 +91,44 @@
           <div class="g18 m24 right-menu">
             <h5>Business Info</h5>
             <div class="form-section">
-              <div class="row">
+              <div class="row input-group">
                 <div class="g6 m9">
-                  <label>Business Name</label>
+                  <label for="business-name">Business Name</label>
                 </div>
-                <div class="g18 m15 scale-form">
-                  <input type="text">
+                <div class="g18 m15">
+                  <input type="text" class="scale-form form-validate" name="business-name" data-dingo="form-validate">
+                  <div class="form-validate-prompt">
+                    <div class="arrow"></div>
+                    Please Enter A Valid Business Name
+                  </div>
                 </div>
               </div>
-              <div class="row">
+              <div class="row input-group">
                 <div class="g6 m9">
-                  <label>Location</label>
+                  <label for="location">Location</label>
                 </div>
-                <div class="g18 m15 scale-form">
-                  <input type="text" class="has-icon form-validate_text" data-dingo="form-validate{type:text} popout{target:#popout_location}" readonly="true" id="input_location" name="location">
+                <div class="g18 m15">
+                  <input type="text" class="form-validate scale-form" data-dingo="form-validate popout{target:#popout_location}" readonly="true" id="input_location" name="location">
+                  <div class="form-validate-prompt">
+                    <div class="arrow"></div>
+                    Please Enter A Location
+                  </div>
                   <ul class="popout is-popout" id="popout_location">
                     <li><a data-dingo="popout-select-done{value:Greenville, SC;targetName:location}">Greenville, SC</a></li>
                     <li><a data-dingo="popout-select-done{value:Charleston, SC;targetName:location}">Charleston, SC</a></li>
                   </ul>
                 </div>
               </div>
-              <div class="row">
+              <div class="row input-group">
                 <div class="g6 m9">
-                  <label>Price</label>
+                  <label for="price">Price</label>
                 </div>
-                <div class="g18 m15 scale-form">
-                  <input type="text" class="has-icon form-validate_text" data-dingo="form-validate{type:text} popout{target:#popout_price}" readonly="true" id="input_price" name="price">
+                <div class="g18 m15">
+                  <input type="text" class="form-validate scale-form" data-dingo="form-validate popout{target:#popout_price}" readonly="true" id="input_price" name="price">
+                  <div class="form-validate-prompt">
+                    <div class="arrow"></div>
+                    Please Enter A Price
+                  </div>
                   <ul class="popout is-popout" id="popout_price">
                     <li><a data-dingo="popout-select-done{value:1,000 to 3,000;targetName:price}">1,000 to 3,000</a></li>
                     <li><a data-dingo="popout-select-done{value:3,000 to 5,000;targetName:price}">3,000 to 5,000</a></li>
@@ -129,12 +137,16 @@
                   </ul>
                 </div>
               </div>
-              <div class="row">
+              <div class="row input-group">
                 <div class="g6 m9">
-                  <label>Email</label>
+                  <label for="email">Email</label>
                 </div>
-                <div class="g18 m15 scale-form">
-                  <input type="text">
+                <div class="g18 m15">
+                  <input type="text" class="form-validate scale-form" data-dingo="form-validate" name="email">
+                  <div class="form-validate-prompt">
+                    <div class="arrow"></div>
+                    Please Enter A Valid Email Address
+                  </div>
                 </div>
               </div>
               <div class="row">
@@ -282,13 +294,13 @@
             <textarea class="scale-form textarea-xl"></textarea>
             <hr>
             <div class="right">
-              <div class="btn-white-blue">Save</div>
+              <button type="submit" class="btn-white-blue" data-dingo="form-validate-submit{which:form_profile}">Save</button>
               <div class="btn-white-red">Cancel</div>
             </div>
           </div>
         </div> <!-- Container -->
       </div>
-    </div>
+    </form>
     <div class="section section-footer">
       <div class="container">
         <p>&copy; Cosarie</p>
@@ -324,47 +336,41 @@
     </div>
     <!-- Modal Popout -->
     <div class="modal-shadow-box" id="modal_change-password">
-      <form class="modal-chrome">
+      <form id="form_change-password" class="modal-chrome">
         <div class="modal-title">Change Password</div>
-        <div class="row">
-          <div class="input-group">
-            <label class="input-group_label">Current <span class="is-desktop">Password</span></label>
-            <div class="input-wrapper form-validate_container">
-              <input type="password" class="input-group_input form-validate_password" name="current-password" data-dingo="form-validate-input{type:text}" tabindex="1">
-              <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
-                <div class="arrow"></div>
-                Please Enter A Password
-              </div>
+        <div class="row input-group">
+          <label class="input-group_label" for="current-password">Current <span class="is-desktop">Password</span></label>
+          <div class="input-group form-validate_container">
+            <input type="password" class="input-group_input form-validate" name="current-password" data-dingo="form-validate" tabindex="1">
+            <div class="form-validate-prompt">
+              <div class="arrow"></div>
+              Please Enter A Password
             </div>
           </div>
           <hr>
         </div>
-        <div class="row">
-          <div class="input-group">
-            <label class="input-group_label">New <span class="is-desktop">Password</span></label>
-            <div class="input-wrapper form-validate_container">
-              <input type="password" class="input-group_input form-validate_password" name="new-password" data-dingo="form-validate-input{type:text}" tabindex="2">
-              <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
-                <div class="arrow"></div>
-                Please Enter A Password
-              </div>
+        <div class="row input-group">
+          <label class="input-group_label" for="new-password">New <span class="is-desktop">Password</span></label>
+          <div class="input-group form-validate_container">
+            <input type="password" class="input-group_input form-validate" name="new-password" data-dingo="form-validate" tabindex="2">
+            <div class="form-validate-prompt">
+              <div class="arrow"></div>
+              Please Enter A Password
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="input-group">
-            <label class="input-group_label">Confirm <span class="is-desktop">Password</span></label>
-            <div class="input-wrapper form-validate_container">
-              <input type="password" class="input-group_input form-validate_password" name="new-password" data-dingo="form-validate-input{type:match;which:new-password}" tabindex="3">
-              <div class="form-validate_error-msg" data-dingo="form-validate{type:close}">
-                <div class="arrow"></div>
-                Passwords Do Not Match
-              </div>
+        <div class="row input-group">
+          <label class="input-group_label" for="confirm-new-password">Confirm <span class="is-desktop">Password</span></label>
+          <div class="input-group form-validate_container">
+            <input type="password" class="input-group_input form-validate" name="confirm-new-password" data-dingo="form-validate" tabindex="3">
+            <div class="form-validate-prompt">
+              <div class="arrow"></div>
+              Passwords Do Not Match
             </div>
           </div>
         </div>
         <div class="modal-control">
-          <div class="btn-white-blue" data-dingo="modal-submit{which:change-password}">Save</div>
+          <div class="btn-white-blue" data-dingo="modal-submit{which:change-password;form:form_change-password}">Save</div>
           <div class="btn-white-red" data-dingo="modal-close{which:change-password}">Cancel</div>
         </div>
       </form>

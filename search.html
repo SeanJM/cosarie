@@ -26,12 +26,12 @@
             <span class="breadcrumbs"><span class="breadcrumb_item">Search</span></span>
           </div>
           <div class="no-menu">
-            <div class="search">
+            <form class="search" id="form_search">
               <div class="g14 m24 scale-form col1of3-sm row_m">
-                <div class="input-wrapper input_has-icon form-validate_container">
-                  <input type="text" class="has-icon form-validate_text" data-dingo="form-validate{type:text} popout{target:#popout_location}" readonly="true" placeholder="Location" id="input_location" name="location">
+                <div class="input-group input_has-icon">
+                  <input type="text" class="has-icon form-validate" data-dingo="form-validate popout{target:#popout_location}" readonly="true" placeholder="Location" id="input_location" name="location">
                   <i class="icon-location"></i>
-                  <div class="form-validate_error-msg" data-dingo="form-validate{type:close}"><div class="arrow"></div>Please Select A Location</div>
+                  <div class="form-validate-prompt"><div class="arrow"></div>Please Select A Location</div>
                   <ul class="popout is-popout" id="popout_location">
                     <li><a data-dingo="popout-select-done{value:Greenville, SC;targetName:location}">Greenville, SC</a></li>
                     <li><a data-dingo="popout-select-done{value:Charleston, SC;targetName:location}">Charleston, SC</a></li>
@@ -39,10 +39,10 @@
                 </div>
               </div>
               <div class="g7 m24 scale-form col2of3-sm row_m">
-                <div class="input-wrapper input_has-icon form-validate_container">
-                  <input type="text" class="has-icon form-validate_text" data-dingo="form-validate{type:text} popout{target:#popout_price}" readonly="true" placeholder="Price Range" id="input_price" name="price">
+                <div class="input-group input_has-icon form-validate_container">
+                  <input type="text" class="has-icon form-validate" data-dingo="form-validate popout{target:#popout_price}" readonly="true" placeholder="Price Range" id="input_price" name="price">
                   <i class="icon-price"></i>
-                  <div class="form-validate_error-msg" data-dingo="form-validate{type:close}"><div class="arrow"></div>Please Select A Price Range</div>
+                  <div class="form-validate-prompt"><div class="arrow"></div>Please Select A Price Range</div>
                   <ul class="popout is-popout" id="popout_price">
                     <li><a data-dingo="popout-select-done{value:1,000 to 3,000;targetName:price}">1,000 to 3,000</a></li>
                     <li><a data-dingo="popout-select-done{value:3,000 to 5,000;targetName:price}">3,000 to 5,000</a></li>
@@ -52,9 +52,9 @@
                 </div>
               </div>
               <div class="g3 m24 col3of3-sm row_m">
-                <button type="submit" class="btn-blue block" data-dingo="form-validate{type:submit}">Search</button>
+                <button type="submit" class="btn-blue block" data-dingo="form-validate-submit{which:form_search}">Search</button>
               </div>
-            </div> <!-- Search -->
+            </form> <!-- Search -->
             <!-- Begining The Search Results Modules -->
             <div class="pagination-container">
               <span class="pagination-count">66 Results</span>
