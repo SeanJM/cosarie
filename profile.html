@@ -92,43 +92,39 @@
             <h5>Business Info</h5>
             <div class="form-section">
               <div class="row input-group">
-                <div class="g6 m9">
+                <div class="input-group_label">
                   <label for="business-name">Business Name</label>
                 </div>
-                <div class="g18 m15">
+                <div class="input-group_input">
                   <input type="text" class="scale-form form-validate" name="business-name" data-dingo="form-validate">
-                  <div class="form-validate-prompt">
-                    <div class="arrow"></div>
-                    Please Enter A Valid Business Name
-                  </div>
+                </div>
+                <div class="form-validate-prompt">
+                  <div class="arrow"></div>
+                  Please Enter A Valid Business Name
                 </div>
               </div>
               <div class="row input-group">
-                <div class="g6 m9">
+                <div class="input-group_label">
                   <label for="location">Location</label>
                 </div>
-                <div class="g18 m15">
+                <div class="input-group_input">
                   <input type="text" class="form-validate scale-form" data-dingo="form-validate popout{target:#popout_location}" readonly="true" id="input_location" name="location">
-                  <div class="form-validate-prompt">
-                    <div class="arrow"></div>
-                    Please Enter A Location
-                  </div>
                   <ul class="popout is-popout" id="popout_location">
                     <li><a data-dingo="popout-select-done{value:Greenville, SC;targetName:location}">Greenville, SC</a></li>
                     <li><a data-dingo="popout-select-done{value:Charleston, SC;targetName:location}">Charleston, SC</a></li>
                   </ul>
                 </div>
+                <div class="form-validate-prompt">
+                  <div class="arrow"></div>
+                  Please Enter A Location
+                </div>
               </div>
               <div class="row input-group">
-                <div class="g6 m9">
+                <div class="input-group_label">
                   <label for="price">Price</label>
                 </div>
-                <div class="g18 m15">
+                <div class="input-group_input">
                   <input type="text" class="form-validate scale-form" data-dingo="form-validate popout{target:#popout_price}" readonly="true" id="input_price" name="price">
-                  <div class="form-validate-prompt">
-                    <div class="arrow"></div>
-                    Please Enter A Price
-                  </div>
                   <ul class="popout is-popout" id="popout_price">
                     <li><a data-dingo="popout-select-done{value:1,000 to 3,000;targetName:price}">1,000 to 3,000</a></li>
                     <li><a data-dingo="popout-select-done{value:3,000 to 5,000;targetName:price}">3,000 to 5,000</a></li>
@@ -136,24 +132,28 @@
                     <li><a data-dingo="popout-select-done{value:10,000+;targetName:price}">10,000+</a></li>
                   </ul>
                 </div>
+                <div class="form-validate-prompt">
+                  <div class="arrow"></div>
+                  Please Enter A Price
+                </div>
               </div>
               <div class="row input-group">
-                <div class="g6 m9">
+                <div class="input-group_label">
                   <label for="email">Email</label>
                 </div>
-                <div class="g18 m15">
+                <div class="input-group_input">
                   <input type="text" class="form-validate scale-form" data-dingo="form-validate" name="email">
-                  <div class="form-validate-prompt">
-                    <div class="arrow"></div>
-                    Please Enter A Valid Email Address
-                  </div>
+                </div>
+                <div class="form-validate-prompt">
+                  <div class="arrow"></div>
+                  Please Enter A Valid Email Address
                 </div>
               </div>
               <div class="row">
-                <div class="g6 m9">
+                <div class="input-group_label">
                   <label>Password</label>
                 </div>
-                <div class="g18 m15">
+                <div class="input-group_input">
                   <span class="btn-white-blue block" data-dingo="modal{which:change-password}">Change Password</span>
                 </div>
               </div>
@@ -340,8 +340,8 @@
         <div class="modal-title">Change Password</div>
         <div class="row input-group">
           <label class="input-group_label" for="current-password">Current <span class="is-desktop">Password</span></label>
-          <div class="input-group form-validate_container">
-            <input type="password" class="input-group_input form-validate" name="current-password" data-dingo="form-validate" tabindex="1">
+          <div class="input-group_input form-validate_container">
+            <input type="password" class="form-validate" name="current-password" data-dingo="form-validate" tabindex="1">
             <div class="form-validate-prompt">
               <div class="arrow"></div>
               Please Enter A Password
@@ -351,8 +351,8 @@
         </div>
         <div class="row input-group">
           <label class="input-group_label" for="new-password">New <span class="is-desktop">Password</span></label>
-          <div class="input-group form-validate_container">
-            <input type="password" class="input-group_input form-validate" name="new-password" data-dingo="form-validate" tabindex="2">
+          <div class="input-group_input form-validate_container">
+            <input type="password" class="form-validate" name="new-password" data-dingo="form-validate" tabindex="2">
             <div class="form-validate-prompt">
               <div class="arrow"></div>
               Please Enter A Password
@@ -361,8 +361,8 @@
         </div>
         <div class="row input-group">
           <label class="input-group_label" for="confirm-new-password">Confirm <span class="is-desktop">Password</span></label>
-          <div class="input-group form-validate_container">
-            <input type="password" class="input-group_input form-validate" name="confirm-new-password" data-dingo="form-validate" tabindex="3">
+          <div class="input-group_input form-validate_container">
+            <input type="password" class="form-validate" name="confirm-new-password" data-dingo="form-validate" tabindex="3">
             <div class="form-validate-prompt">
               <div class="arrow"></div>
               Passwords Do Not Match

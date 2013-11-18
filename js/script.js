@@ -1,9 +1,195 @@
-// Dingo Version 1.1.1
+// Jquery Placeholder
+/*! http://mths.be/placeholder v2.0.7 by @mathias */
+
+;(function(window, document, $) {
+
+  var isInputSupported = 'placeholder' in document.createElement('input');
+  var isTextareaSupported = 'placeholder' in document.createElement('textarea');
+  var prototype = $.fn;
+  var valHooks = $.valHooks;
+  var propHooks = $.propHooks;
+  var hooks;
+  var placeholder;
+
+  if (isInputSupported && isTextareaSupported) {
+
+    placeholder = prototype.placeholder = function() {
+      return this;
+    };
+
+    placeholder.input = placeholder.textarea = true;
+
+  } else {
+
+    placeholder = prototype.placeholder = function() {
+      var $this = this;
+      $this
+      .filter((isInputSupported ? 'textarea' : ':input') + '[placeholder]')
+      .not('.placeholder')
+      .bind({
+        'focus.placeholder': clearPlaceholder,
+        'blur.placeholder': setPlaceholder
+      })
+      .data('placeholder-enabled', true)
+      .trigger('blur.placeholder');
+      return $this;
+    };
+
+    placeholder.input = isInputSupported;
+    placeholder.textarea = isTextareaSupported;
+
+    hooks = {
+      'get': function(element) {
+        var $element = $(element);
+
+        var $passwordInput = $element.data('placeholder-password');
+        if ($passwordInput) {
+          return $passwordInput[0].value;
+        }
+
+        return $element.data('placeholder-enabled') && $element.hasClass('placeholder') ? '' : element.value;
+      },
+      'set': function(element, value) {
+        var $element = $(element);
+
+        var $passwordInput = $element.data('placeholder-password');
+        if ($passwordInput) {
+          return $passwordInput[0].value = value;
+        }
+
+        if (!$element.data('placeholder-enabled')) {
+          return element.value = value;
+        }
+        if (value == '') {
+          element.value = value;
+                                        // Issue #56: Setting the placeholder causes problems if the element continues to have focus.
+                                        if (element != safeActiveElement()) {
+                                                // We can't use `triggerHandler` here because of dummy text/password inputs :(
+                                                  setPlaceholder.call(element);
+                                                }
+                                              } else if ($element.hasClass('placeholder')) {
+                                                clearPlaceholder.call(element, true, value) || (element.value = value);
+                                              } else {
+                                                element.value = value;
+                                              }
+                                // `set` can not return `undefined`; see http://jsapi.info/jquery/1.7.1/val#L2363
+                                return $element;
+                              }
+                            };
+
+                            if (!isInputSupported) {
+                              valHooks.input = hooks;
+                              propHooks.value = hooks;
+                            }
+                            if (!isTextareaSupported) {
+                              valHooks.textarea = hooks;
+                              propHooks.value = hooks;
+                            }
+
+                            $(function() {
+                        // Look for forms
+                        $(document).delegate('form', 'submit.placeholder', function() {
+                                // Clear the placeholder values so they don't get submitted
+                                var $inputs = $('.placeholder', this).each(clearPlaceholder);
+                                setTimeout(function() {
+                                  $inputs.each(setPlaceholder);
+                                }, 10);
+                              });
+                      });
+
+                // Clear placeholder values upon page reload
+                $(window).bind('beforeunload.placeholder', function() {
+                  $('.placeholder').each(function() {
+                    this.value = '';
+                  });
+                });
+
+              }
+
+              function args(elem) {
+                // Return an object of element attributes
+                var newAttrs = {};
+                var rinlinejQuery = /^jQuery\d+$/;
+                $.each(elem.attributes, function(i, attr) {
+                  if (attr.specified && !rinlinejQuery.test(attr.name)) {
+                    newAttrs[attr.name] = attr.value;
+                  }
+                });
+                return newAttrs;
+              }
+
+              function clearPlaceholder(event, value) {
+                var input = this;
+                var $input = $(input);
+                if (input.value == $input.attr('placeholder') && $input.hasClass('placeholder')) {
+                  if ($input.data('placeholder-password')) {
+                    $input = $input.hide().next().show().attr('id', $input.removeAttr('id').data('placeholder-id'));
+                                // If `clearPlaceholder` was called from `$.valHooks.input.set`
+                                if (event === true) {
+                                  return $input[0].value = value;
+                                }
+                                $input.focus();
+                              } else {
+                                input.value = '';
+                                $input.removeClass('placeholder');
+                                input == safeActiveElement() && input.select();
+                              }
+                            }
+                          }
+
+                          function setPlaceholder() {
+                            var $replacement;
+                            var input = this;
+                            var $input = $(input);
+                            var id = this.id;
+                            if (input.value == '') {
+                              if (input.type == 'password') {
+                                if (!$input.data('placeholder-textinput')) {
+                                  try {
+                                    $replacement = $input.clone().attr({ 'type': 'text' });
+                                  } catch(e) {
+                                    $replacement = $('<input>').attr($.extend(args(this), { 'type': 'text' }));
+                                  }
+                                  $replacement
+                                  .removeAttr('name')
+                                  .data({
+                                    'placeholder-password': $input,
+                                    'placeholder-id': id
+                                  })
+                                  .bind('focus.placeholder', clearPlaceholder);
+                                  $input
+                                  .data({
+                                    'placeholder-textinput': $replacement,
+                                    'placeholder-id': id
+                                  })
+                                  .before($replacement);
+                                }
+                                $input = $input.removeAttr('id').hide().prev().attr('id', id).show();
+                                // Note: `$input[0] != input` now!
+                              }
+                              $input.addClass('placeholder');
+                              $input[0].value = $input.attr('placeholder');
+                            } else {
+                              $input.removeClass('placeholder');
+                            }
+                          }
+
+                          function safeActiveElement() {
+                // Avoid IE9 `document.activeElement` of death
+                // https://github.com/mathiasbynens/jquery-placeholder/pull/99
+                try {
+                  return document.activeElement;
+                } catch (err) {}
+              }
+
+            }(this, document, jQuery));
+
+// Dingo Version 1.1.2
 // MIT License
 // Coded by Sean MacIsaac
 // seanjmacisaac@gmail.com
 
-var dingoMouse = {};
+var dingoStore = {};
 var dingo = {
   isMobile: function () {
     //return ($(window).width() <= 400);
@@ -55,12 +241,19 @@ var dingo = {
     return { dingoEvent: match[1], data: options };
   },
   getMouse: function (event) {
-    if (dingo.isMobile()) {
-      if (typeof event.changedTouches !== 'undefined') {
-        return event.changedTouches[0];
-      } else if (typeof event.originalEvent !== 'undefined') {
-        return event.originalEvent.changedTouches[0];
+    var x = 0,
+        y = 0;
+    function init() {
+      if (typeof event.originalEvent.changedTouches !== 'undefined') {
+        x = event.originalEvent.changedTouches[0].pageX||0;
+        y = event.originalEvent.changedTouches[0].pageY||0;
+      } return {
+        pageX: x,
+        pageY: y
       }
+    }
+    if (dingo.isMobile()) {
+      return init();
     } else {
       return event;
     }
@@ -82,24 +275,24 @@ var dingo = {
         lr,
         ud;
     if (dingo.uniMouse(options.htmlEvent) === 'down') {
-      dingoMouse.swipeEvent[dingoEvent] = {
+      dingoStore.swipeEvent[dingoEvent] = {
         x: pageX,
         y: pageY
       }
       // A Swipe event only triggers during a certain amount of time
       setTimeout(function () {
-        dingoMouse.swipeEvent[dingoEvent] = false;
+        dingoStore.swipeEvent[dingoEvent] = false;
       },300);
     } else if (dingo.uniMouse(options.htmlEvent) === 'up') {
-      if (dingoMouse.swipeEvent[dingoEvent]) {
+      if (dingoStore.swipeEvent[dingoEvent]) {
         rvalue = {
           options : options,
           dingo   : dingoEvent,
-          originX : dingoMouse.swipeEvent[dingoEvent].x,
-          originY : dingoMouse.swipeEvent[dingoEvent].y
+          originX : dingoStore.swipeEvent[dingoEvent].x,
+          originY : dingoStore.swipeEvent[dingoEvent].y
         }
-        lr = dingoMouse.swipeEvent[dingoEvent].x-pageX;
-        ud = dingoMouse.swipeEvent[dingoEvent].y-pageY;
+        lr = dingoStore.swipeEvent[dingoEvent].x-pageX;
+        ud = dingoStore.swipeEvent[dingoEvent].y-pageY;
         if (Math.abs(lr) > Math.abs(ud) && Math.abs(lr) > 44) {
           // Left or Right
           if (lr > 0) {
@@ -127,71 +320,72 @@ var dingo = {
         pageY  = dingo.getMouse(options.event).pageY;
 
     if (dingo.uniMouse(options.htmlEvent) === 'down') {
-      dingoMouse.dragEvent[dingoEvent] = {
+      dingoStore.dragEvent[dingoEvent] = {
         originX: pageX,
         originY: pageY,
         dragstart: false
       }
-    } else if (dingo.uniMouse(options.htmlEvent) === 'move' && dingoMouse.dragEvent[dingoEvent]) {
-      if (Math.abs(dingoMouse.dragEvent[dingoEvent].originX-pageX) > 10 || Math.abs(dingoMouse.dragEvent[dingoEvent].originY-pageY) > 10) {
+    } else if (dingo.uniMouse(options.htmlEvent) === 'move' && dingoStore.dragEvent[dingoEvent]) {
+      if (Math.abs(dingoStore.dragEvent[dingoEvent].originX-pageX) > 10 || Math.abs(dingoStore.dragEvent[dingoEvent].originY-pageY) > 10) {
         rvalue = {
-          originX : dingoMouse.dragEvent[dingoEvent].x,
-          originY : dingoMouse.dragEvent[dingoEvent].y,
+          originX : dingoStore.dragEvent[dingoEvent].x,
+          originY : dingoStore.dragEvent[dingoEvent].y,
           pageX   : pageX,
           pageY   : pageY,
           options : options,
           dingo   : dingoEvent
         }
-        if (dingoMouse.dragEvent[dingoEvent].dragstart) {
+        if (dingoStore.dragEvent[dingoEvent].dragstart) {
           rvalue.event = 'drag';
         } else {
           rvalue.event = 'dragstart';
-          dingoMouse.dragEvent[dingoEvent].dragstart = true;
+          dingoStore.dragEvent[dingoEvent].dragstart = true;
         }
       } else {
         rvalue = false;
       }
     } else if (dingo.uniMouse(options.htmlEvent) === 'up') {
-      if (dingoMouse.dragEvent[dingoEvent].dragstart) {
+      if (dingoStore.dragEvent[dingoEvent].dragstart) {
         rvalue = {
-          originX : dingoMouse.dragEvent[dingoEvent].x,
-          originY : dingoMouse.dragEvent[dingoEvent].y,
+          originX : dingoStore.dragEvent[dingoEvent].x,
+          originY : dingoStore.dragEvent[dingoEvent].y,
           pageX   : pageX,
           pageY   : pageY,
           options : options,
           dingo   : dingoEvent,
           event   : 'dragend'
         }
-        dingoMouse.dragEvent[dingoEvent] = false;
+        dingoStore.dragEvent[dingoEvent] = false;
       }
     }
     return rvalue;
   },
   exe: function (options) {
-    var chain  = dingo.get(options.el,options.event);
-    var swipe;
-    var drag;
-    var dingoEvent;
+    var chain   = dingo.get(options.el,options.event);
+    var tagname = options.el[0].tagName.toLowerCase();
 
-    $.each(chain,function (i,k) {
-      dingoEvent = k.dingoEvent;
-      swipe      = dingo.swipeEvent(options,dingoEvent);
-      drag       = dingo.dragEvent(options,dingoEvent);
+    function mouseEvents(data,dingoEvent) {
+      var swipe = dingo.swipeEvent(options,dingoEvent);
+      var drag  = dingo.dragEvent(options,dingoEvent);
 
-      if (dingo.is(options.htmlEvent,dingoEvent)) {
-        dingo[options.htmlEvent][dingoEvent](k.data);
-      }
       if (swipe && dingo.is(swipe.event,dingoEvent)) {
-        dingo[swipe.event][dingoEvent](k.data);
+        dingo[swipe.event][dingoEvent](data);
       }
       if (drag && dingo.is(drag.event,dingoEvent)) {
-        dingo[drag.event][dingoEvent](k.data);
+        dingo[drag.event][dingoEvent](data);
       }
+      if (dingo.is(options.htmlEvent,dingoEvent)) {
+        dingo[options.htmlEvent][dingoEvent](data);
+      }
+    }
+
+    $.each(chain,function (i,k) {
+      mouseEvents(k.data,k.dingoEvent);
     });
   },
   init: function (el) {
-    dingoMouse.swipeEvent = {};
-    dingoMouse.dragEvent = {};
+    dingoStore.swipeEvent = {};
+    dingoStore.dragEvent = {};
     dingo.on($('[data-dingo]'));
   },
   on: function (el) {
@@ -201,7 +395,7 @@ var dingo = {
       });
     });
   }
-}
+};
 
 /* Switch Controls */
 
@@ -256,10 +450,12 @@ function clickable(event) {
 */
 
 function dropdownDelay() {
-  $('body').addClass('dropdown-delay');
-  setTimeout(function () {
-    $('body').removeClass('dropdown-delay');
-  },100);
+  if (dingo.isMobile()) {
+    $('body').addClass('dropdown-delay');
+    setTimeout(function () {
+      $('body').removeClass('dropdown-delay');
+    },100);
+  }
 }
 
 /* ------------- Animate v1.1.2 */
@@ -320,6 +516,7 @@ function animate(el) {
       return animate(el).init('out',callback);
     },
     custom: function (name,callback) {
+      el.addClass(name);
       var time = animate(el).getTime();
       setTimeout(function () {
         el.removeClass(name);
@@ -327,7 +524,6 @@ function animate(el) {
           callback(el);
         }
       },time.duration+time.delay);
-      el.addClass(name);
       return el;
     },
     toggle: function () {
@@ -372,7 +568,7 @@ function animate(el) {
     },
     scroll: function () {
       var time   = 70;
-      var pos    = el.offset().top-20;
+      var pos    = (el.offset().top-el.height()/2)-($(window).height()/2);
       var start  = window.pageYOffset;
       var i      = 0;
       var frames = 20;
@@ -541,6 +737,15 @@ function formValidate(el) {
           animate(requiredField.eq(0)).scroll();
         }
       }
+    },
+    clear: function (event) {
+      var requiredField = form.find('input,textarea');
+      var prompt;
+      requiredField.each(function () {
+        prompt = $(this).closest('.input-group').find('.form-validate-prompt');
+        prompt.removeClass('form-validate-prompt_is-active').removeClass('is-animated_in');
+        $(this).val('');
+      });
     }
   }
 }
@@ -652,7 +857,9 @@ var events = {
     }
   },
   'modal-prompt': function (options) {
-    animate($('#'+options.which)).start();
+    if (typeof options.el.attr('disabled') === 'undefined') {
+      animate($('#'+options.which)).start();
+    }
   },
   'close-modal-prompt': function (options) {
     animate($('#'+options.which)).end();
@@ -676,6 +883,8 @@ var events = {
   },
   'modal-close': function (options) {
     var modal = $('#modal_'+options.which);
+    var form  = modal.find('form');
+    formValidate(form).clear();
     animate(modal).end();
   },
   'modal-submit': function (options) {
@@ -697,8 +906,9 @@ var events = {
     animate($('#'+options.id)).start();
   },
   'input-dropdown_close': function (options) {
-    animate($('#'+options.id)).end();
-    $('body').removeClass('popout-safe');
+    animate($('#'+options.id)).end(function () {
+      $('body').removeClass('popout-safe');
+    });
   },
   'swipe_message-item_control': function (options) {
     animate(options.el.find('.message-item_control')).start();
@@ -710,6 +920,8 @@ var events = {
       animate(message).start(function (el) {
         message.remove();
       });
+
+      dropdownDelay();
     }
     return {
       'del': function () {
@@ -778,15 +990,6 @@ dingo.keydown = {
 dingo.keyup = {
   'form-validate': function (options) {
     events[options.dingo + '_keyup'](options);
-  }
-}
-
-dingo.keypress = {
-  'form-validate': function (options) {
-    alert('test');
-    if (dingo.isMobile()) {
-      events[options.dingo + '_keyup'](options);
-    }
   }
 }
 
@@ -892,7 +1095,7 @@ dingo.swiperight = {
 }
 
 dingo.touchstart = {
-  'form-validate': function (options) {
+  'form-validate-submit': function (options) {
     events[options.dingo](options);
   },
 }
@@ -954,6 +1157,12 @@ dingo.touchend = {
   },
   'video-item_view': function (options) {
     events[options.dingo](options);
+  },
+  'delete-message': function (options) {
+    events[options.dingo](options);
+  },
+  'carousel-control': function (options) {
+    events[options.dingo](options);
   }
 }
 
@@ -973,4 +1182,5 @@ var carousel = function (el) {
 $(function () {
   carousel($('#video-carousel')).init();
   dingo.init();
+  $('textarea,input').placeholder();
 });
