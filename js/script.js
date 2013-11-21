@@ -878,7 +878,7 @@ var events = {
   },
   'modal': function (options) {
     var modal = $('#modal_'+options.which);
-    modal.height($('body').height());
+    modal.css('height',$('document').height()+'px');
     animate(modal).start();
   },
   'modal-close': function (options) {

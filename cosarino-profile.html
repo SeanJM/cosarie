@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<HTML>
+  <head>
+    <title>Corsarie</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UX-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta http-equiv="cleartype" content="on">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <form class="main" id="form_profile"> <!-- Controls the min height so that the footer is always well placed -->
+      <div class="status-bar">
+        <div class="container">
+          <a href="index.html" class="status-bar_logo"></a>
+          <div class="status-bar_control">
+            <span class="status-bar_anchor">My Profile</span>
+            <a class="status-bar_anchor" href="search.html">Search</a>
+            <a class="status-bar_anchor" href="inbox.html">Inbox <span class="badge">3</span></a>
+            <a class="btn-white">Login</a>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="nav-bar">
+          <span class="breadcrumbs"><span class="breadcrumb_item">My Profile</span></span>
+        </div>
+        <div class="no-menu">
+          <div class="videos carousel is-animated_in" id="video-carousel">
+            <div class="carousel-prev" data-dingo="carousel-control{which:#video-carousel;direction:prev}"></div>
+            <div class="carousel-next" data-dingo="carousel-control{which:#video-carousel;direction:next}"></div>
+            <div class="carousel-container">
+              <div class="video-nav-container carousel-track" style="width: 2700px;">
+                <div class="video-item carousel-item video-item_is-active" id="video-item_1" data-dingo="video-item_view{which:#video-item_1}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-1.png">
+                  </div>
+                  <p class="video-item_title"><a href="profile.html">Jean Paul Louis Wedding Memories Forever</a></p>
+                </div>
+                <div class="video-item carousel-item" id="video-item_2" data-dingo="video-item_view{which:#video-item_2}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-2.png">
+                  </div>
+                  <p class="video-item_title"><a href="profile.html">Jean Paul Louis Wedding Memories</a></p>
+                </div>
+                <div class="video-item carousel-item" id="video-item_3" data-dingo="video-item_view{which:#video-item_3}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-3.png">
+                  </div>
+                  <p class="video-item_title"><a href="profile.html">Jean Paul Louis Wedding Memories</a></p>
+                </div>
+                <div class="video-item carousel-item" id="video-item_4" data-dingo="video-item_view{which:#video-item_4}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-4.png">
+                  </div>
+                  <p class="video-item_title"><a href="profile.html">Jean Paul Louis Wedding Memories</a></p>
+                </div>
+                <div class="video-item carousel-item" id="video-item_5" data-dingo="video-item_view{which:#video-item_5}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-5.png">
+                  </div>
+                  <p class="video-item_title"><a href="profile.html">Jean Paul Louis Wedding Memories</a></p>
+                </div>
+                <div class="video-item carousel-item" id="video-item_6" data-dingo="video-item_view{which:#video-item_6}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-6.png">
+                  </div>
+                  <p class="video-item_title"><a href="profile.html">Jean Paul Louis Wedding Memories</a></p>
+                </div>
+                <div class="video-item carousel-item" id="video-item_7" data-dingo="video-item_view{which:#video-item_7}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-7.png">
+                  </div>
+                  <p class="video-item_title"><a href="profile.html">Jean Paul Louis Wedding Memories</a></p>
+                </div>
+                <div class="video-item carousel-item" id="video-item_8" data-dingo="video-item_view{which:#video-item_8}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-8.png">
+                  </div>
+                  <p class="video-item_title"><a href="profile.html">Jean Paul Louis Wedding Memories</a></p>
+                </div>
+                <div class="video-item carousel-item" id="video-item_9" data-dingo="video-item_view{which:#video-item_9}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-9.png">
+                  </div>
+                  <p class="video-item_title"><a href="profile.html">Jean Paul Louis Wedding Memories</a></p>
+                </div>
+              </div>
+            </div> <!-- Carousel Container -->
+          </div>
+          <hr>
+          <h5>Personal Info</h5>
+          <div class="form-section g12 m24">
+            <div class="row input-group">
+              <div class="input-group_label">
+                <label for="first-name">First Name</label>
+              </div>
+              <div class="input-group_input">
+                <input type="text" class="scale-form form-validate" name="first-name" data-dingo="form-validate">
+              </div>
+              <div class="form-validate-prompt">
+                <div class="arrow"></div>
+                Please Enter A Valid First Name
+              </div>
+            </div>
+            <div class="row input-group">
+              <div class="input-group_label">
+                <label for="last-name">Last Name</label>
+              </div>
+              <div class="input-group_input">
+                <input type="text" class="scale-form form-validate" name="last-name" data-dingo="form-validate">
+              </div>
+              <div class="form-validate-prompt">
+                <div class="arrow"></div>
+                Please Enter A Valid Last Name
+              </div>
+            </div>
+            <div class="row input-group">
+              <div class="input-group_label">
+                <label for="email">Email</label>
+              </div>
+              <div class="input-group_input">
+                <input type="text" class="form-validate scale-form" data-dingo="form-validate" name="email">
+              </div>
+              <div class="form-validate-prompt">
+                <div class="arrow"></div>
+                Please Enter A Valid Email Address
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-group_label">
+                <label>Password</label>
+              </div>
+              <div class="input-group_input">
+                <span class="btn-white-blue block" data-dingo="modal{which:change-password}">Change<span class="is-desktop"> Password</span></span>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="right">
+            <button type="submit" class="btn-white-blue" data-dingo="form-validate-submit{which:form_profile}">Save</button>
+            <div class="btn-white-red">Cancel</div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="section section-footer">
+      <div class="container">
+        <p>&copy; Cosarie</p>
+      </div>
+    </div>
+    <!-- Modal Popout -->
+    <div class="modal-shadow-box" id="modal_change-password">
+      <form id="form_change-password" class="modal-chrome">
+        <div class="modal-title">Change Password</div>
+        <div class="row input-group">
+          <label class="input-group_label" for="current-password">Current <span class="is-desktop">Password</span></label>
+          <div class="input-group_input form-validate_container">
+            <input type="password" class="form-validate" name="current-password" data-dingo="form-validate" tabindex="1">
+            <div class="form-validate-prompt">
+              <div class="arrow"></div>
+              Please Enter A Password
+            </div>
+          </div>
+          <hr>
+        </div>
+        <div class="row input-group">
+          <label class="input-group_label" for="new-password">New <span class="is-desktop">Password</span></label>
+          <div class="input-group_input form-validate_container">
+            <input type="password" class="form-validate" name="new-password" data-dingo="form-validate" tabindex="2">
+            <div class="form-validate-prompt">
+              <div class="arrow"></div>
+              Please Enter A Password
+            </div>
+          </div>
+        </div>
+        <div class="row input-group">
+          <label class="input-group_label" for="confirm-new-password">Confirm <span class="is-desktop">Password</span></label>
+          <div class="input-group_input form-validate_container">
+            <input type="password" class="form-validate" name="confirm-new-password" data-dingo="form-validate" tabindex="3">
+            <div class="form-validate-prompt">
+              <div class="arrow"></div>
+              Passwords Do Not Match
+            </div>
+          </div>
+        </div>
+        <div class="modal-control">
+          <div class="btn-white-blue" data-dingo="modal-submit{which:change-password;form:form_change-password}">Save</div>
+          <div class="btn-white-red" data-dingo="modal-close{which:change-password}">Cancel</div>
+        </div>
+      </form>
+    </div>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</HTML>

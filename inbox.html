@@ -19,287 +19,288 @@
         <div class="container">
           <a href="index.html" class="status-bar_logo"></a>
           <div class="status-bar_control">
+            <a class="status-bar_anchor" href="profile.html">My Profile</a>
+            <a class="status-bar_anchor" href="search.html">Search</a>
+            <span class="status-bar_anchor">Inbox <span class="badge">3</span></span>
             <a class="btn-white">Logout</a>
           </div>
         </div>
       </div>
-      <div class="workspace">
-        <div class="container no-padding_m">
-          <div class="nav-bar">
-            <span class="breadcrumbs"><a href="profile.html" class="breadcrumb_item">Profile</a><span class="arrow"></span><span class="breadcrumb_item">Inbox</span></span>
-            <!-- Desktop Search Controller -->
-            <div class="nav-bar_control is-desktop">
+      <div class="container no-padding_m">
+        <div class="nav-bar">
+          <span class="breadcrumbs"><a href="profile.html" class="breadcrumb_item">My Profile</a><span class="arrow"></span><span class="breadcrumb_item">Inbox</span></span>
+          <!-- Desktop Search Controller -->
+          <div class="nav-bar_control is-desktop">
+            <div class="input-group input_has-icon">
+              <input class="has-icon" type="text">
+              <i class="icon-search"></i>
+            </div>
+            <a class="btn-white">Search</a>
+          </div>
+          <!-- Modile Search Controller -->
+          <div class="nav-bar_control is-mobile">
+            <a class="btn-white btn_has-icon" data-dingo="input-dropdown_open{id:status-search}"><i class="icon-search"></i></a>
+          </div>
+          <div class="input-dropdown is-mobile close-popout" id="status-search">
+            <div class="input-dropdown_chrome">
               <div class="input-group input_has-icon">
                 <input class="has-icon" type="text">
                 <i class="icon-search"></i>
               </div>
-              <a class="btn-white">Search</a>
-            </div>
-            <!-- Modile Search Controller -->
-            <div class="nav-bar_control is-mobile">
-              <a class="btn-white btn_has-icon" data-dingo="input-dropdown_open{id:status-search}"><i class="icon-search"></i></a>
-            </div>
-            <div class="input-dropdown is-mobile close-popout" id="status-search">
-              <div class="input-dropdown_chrome">
-                <div class="input-group input_has-icon">
-                  <input class="has-icon" type="text">
-                  <i class="icon-search"></i>
-                </div>
-                <div class="input-dropdown_control">
-                  <a class="btn-white" data-dingo="input-dropdown_close{id:status-search}">Search</a>
-                </div>
+              <div class="input-dropdown_control">
+                <a class="btn-white" data-dingo="input-dropdown_close{id:status-search}">Search</a>
               </div>
             </div>
           </div>
-          <ul class="g6 m24 left-menu-nav">
-            <li class="left-menu-nav_item m12"><a href="inbox.html" class="left-menu-nav_item_link left-menu-nav_item_link_is-active"><i class="icon-inbox"></i>Inbox</a></li>
-            <li class="left-menu-nav_item m12"><a href="archived.html" class="left-menu-nav_item_link"><i class="icon-archive"></i>Archived</a></li>
-          </ul>
-          <div class="g18 m24 right-menu-messages">
-            <div class="pagination-container">
-              <span class="pagination-count">983 Inquiries</span>
-              <span class="pagination">
-                <span class="btn-white pagination-control pagination-control_is-first pagination-control_is-disabled">«</span>
-                <span class="btn-white pagination-control pagination-control_is-active">1</span>
-                <a class="btn-white pagination-control">2</a>
-                <a class="btn-white pagination-control">3</a>
-                <span class="btn-white pagination-control pagination-control_is-disabled">...</span>
-                <a class="btn-white pagination-control pagination-control_is-last">»</a>
-              </span>
-            </div> <!-- Status bar -->
-            <div class="message-item message-item_is-unread" data-dingo="swipe_message-item_control" id="message-item_1">
-              <span class="message-item_status"></span>
-              <span class="message-item_right">
-                <span class="message-item_head">
-                  <span class="message-item_head_left">
-                    <span class="message-item_from">Sean MacIsaac</span>
-                    <span class="message-item_email">seanjmacisaac@gmail.com</span>
-                  </span>
-                  <span class="message-item_head_right">
-                    <span class="message-item_phone">(613) 863 - 8484</span>
-                    <span class="message-item_date">11 / 23 / 2013</span>
-                  </span>
+        </div>
+        <ul class="g6 m24 left-menu-nav">
+          <li class="left-menu-nav_item m12"><a href="inbox.html" class="left-menu-nav_item_link left-menu-nav_item_link_is-active"><i class="icon-inbox"></i>Inbox</a></li>
+          <li class="left-menu-nav_item m12"><a href="archived.html" class="left-menu-nav_item_link"><i class="icon-archive"></i>Archived</a></li>
+        </ul>
+        <div class="g18 m24 right-menu-messages">
+          <div class="pagination-container">
+            <span class="pagination-count">983 Inquiries</span>
+            <span class="pagination">
+              <span class="btn-white pagination-control pagination-control_is-first pagination-control_is-disabled">«</span>
+              <span class="btn-white pagination-control pagination-control_is-active">1</span>
+              <a class="btn-white pagination-control">2</a>
+              <a class="btn-white pagination-control">3</a>
+              <span class="btn-white pagination-control pagination-control_is-disabled">...</span>
+              <a class="btn-white pagination-control pagination-control_is-last">»</a>
+            </span>
+          </div> <!-- Status bar -->
+          <div class="message-item message-item_is-unread" data-dingo="swipe_message-item_control" id="message-item_1">
+            <span class="message-item_status"></span>
+            <span class="message-item_right">
+              <span class="message-item_head">
+                <span class="message-item_head_left">
+                  <span class="message-item_from">Sean MacIsaac</span>
+                  <span class="message-item_email">seanjmacisaac@gmail.com</span>
                 </span>
-                <span class="message-item_content">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
+                <span class="message-item_head_right">
+                  <span class="message-item_phone">(613) 863 - 8484</span>
+                  <span class="message-item_date">11 / 23 / 2013</span>
                 </span>
               </span>
-              <span class="message-item_control close-popout">
-                <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_1}">Delete</span>
-                <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_1}">Archive</span>
-                <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
+              <span class="message-item_content">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
               </span>
-            </div> <!-- Message Item -->
-            <div class="message-item message-item_is-read" data-dingo="swipe_message-item_control" id="message-item_2">
-              <span class="message-item_status"></span>
-              <span class="message-item_right">
-                <span class="message-item_head">
-                  <span class="message-item_head_left">
-                    <span class="message-item_from">John Smith</span>
-                    <span class="message-item_email">jsmith_2378@gmail.com</span>
-                  </span>
-                  <span class="message-item_head_right">
-                    <span class="message-item_phone">(613) 820 - 8253</span>
-                    <span class="message-item_date">11 / 23 / 2013</span>
-                  </span>
+            </span>
+            <span class="message-item_control close-popout">
+              <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_1}">Delete</span>
+              <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_1}">Archive</span>
+              <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
+            </span>
+          </div> <!-- Message Item -->
+          <div class="message-item message-item_is-read" data-dingo="swipe_message-item_control" id="message-item_2">
+            <span class="message-item_status"></span>
+            <span class="message-item_right">
+              <span class="message-item_head">
+                <span class="message-item_head_left">
+                  <span class="message-item_from">John Smith</span>
+                  <span class="message-item_email">jsmith_2378@gmail.com</span>
                 </span>
-                <span class="message-item_content">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
-                </span>
-              </span>
-              <span class="message-item_control close-popout">
-                <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_2}">Delete</span>
-                <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_2}">Archive</span>
-                <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
-              </span>
-            </div> <!-- Message Item -->
-             <div class="message-item message-item_is-unread" data-dingo="swipe_message-item_control" id="message-item_3">
-              <span class="message-item_status"></span>
-              <span class="message-item_right">
-                <span class="message-item_head">
-                  <span class="message-item_head_left">
-                    <span class="message-item_from">Thomas MacKenzie</span>
-                    <span class="message-item_email">tbird_kensi@gmail.com</span>
-                  </span>
-                  <span class="message-item_head_right">
-                    <span class="message-item_phone">(613) 648 - 1354</span>
-                    <span class="message-item_date">11 / 22 / 2013</span>
-                  </span>
-                </span>
-                <span class="message-item_content">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
+                <span class="message-item_head_right">
+                  <span class="message-item_phone">(613) 820 - 8253</span>
+                  <span class="message-item_date">11 / 23 / 2013</span>
                 </span>
               </span>
-              <span class="message-item_control close-popout">
-                <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_3}">Delete</span>
-                <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_3}">Archive</span>
-                <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
+              <span class="message-item_content">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
               </span>
-            </div> <!-- Message Item -->
-             <div class="message-item message-item_is-read" data-dingo="swipe_message-item_control" id="message-item_4">
-              <span class="message-item_status"></span>
-              <span class="message-item_right">
-                <span class="message-item_head">
-                  <span class="message-item_head_left">
-                    <span class="message-item_from">Andrea Martin</span>
-                    <span class="message-item_email">andrea_martin@gmail.com</span>
-                  </span>
-                  <span class="message-item_head_right">
-                    <span class="message-item_phone">(613) 860 - 1262</span>
-                    <span class="message-item_date">11 / 22 / 2013</span>
-                  </span>
+            </span>
+            <span class="message-item_control close-popout">
+              <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_2}">Delete</span>
+              <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_2}">Archive</span>
+              <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
+            </span>
+          </div> <!-- Message Item -->
+           <div class="message-item message-item_is-unread" data-dingo="swipe_message-item_control" id="message-item_3">
+            <span class="message-item_status"></span>
+            <span class="message-item_right">
+              <span class="message-item_head">
+                <span class="message-item_head_left">
+                  <span class="message-item_from">Thomas MacKenzie</span>
+                  <span class="message-item_email">tbird_kensi@gmail.com</span>
                 </span>
-                <span class="message-item_content">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
-                </span>
-              </span>
-              <span class="message-item_control close-popout">
-                <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_4}">Delete</span>
-                <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_4}">Archive</span>
-                <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
-              </span>
-            </div> <!-- Message Item -->
-             <div class="message-item message-item_is-read" data-dingo="swipe_message-item_control" id="message-item_5">
-              <span class="message-item_status"></span>
-              <span class="message-item_right">
-                <span class="message-item_head">
-                  <span class="message-item_head_left">
-                    <span class="message-item_from">Janice Smith</span>
-                    <span class="message-item_email">janice_the_coolcat@gmail.com</span>
-                  </span>
-                  <span class="message-item_head_right">
-                    <span class="message-item_phone">(613) 775 - 0020</span>
-                    <span class="message-item_date">11 / 21 / 2013</span>
-                  </span>
-                </span>
-                <span class="message-item_content">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
+                <span class="message-item_head_right">
+                  <span class="message-item_phone">(613) 648 - 1354</span>
+                  <span class="message-item_date">11 / 22 / 2013</span>
                 </span>
               </span>
-              <span class="message-item_control close-popout">
-                <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_5}">Delete</span>
-                <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_5}">Archive</span>
-                <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
+              <span class="message-item_content">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
               </span>
-            </div> <!-- Message Item -->
-            <div class="message-item message-item_is-read" data-dingo="swipe_message-item_control" id="message-item_6">
-              <span class="message-item_status"></span>
-              <span class="message-item_right">
-                <span class="message-item_head">
-                  <span class="message-item_head_left">
-                    <span class="message-item_from">Sean MacIsaac</span>
-                    <span class="message-item_email">seanjmacisaac@gmail.com</span>
-                  </span>
-                  <span class="message-item_head_right">
-                    <span class="message-item_phone">(613) 863 - 8484</span>
-                    <span class="message-item_date">11 / 23 / 2013</span>
-                  </span>
+            </span>
+            <span class="message-item_control close-popout">
+              <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_3}">Delete</span>
+              <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_3}">Archive</span>
+              <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
+            </span>
+          </div> <!-- Message Item -->
+           <div class="message-item message-item_is-read" data-dingo="swipe_message-item_control" id="message-item_4">
+            <span class="message-item_status"></span>
+            <span class="message-item_right">
+              <span class="message-item_head">
+                <span class="message-item_head_left">
+                  <span class="message-item_from">Andrea Martin</span>
+                  <span class="message-item_email">andrea_martin@gmail.com</span>
                 </span>
-                <span class="message-item_content">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
-                </span>
-              </span>
-              <span class="message-item_control close-popout">
-                <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_6}">Delete</span>
-                <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_6}">Archive</span>
-                <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
-              </span>
-            </div> <!-- Message Item -->
-            <div class="message-item message-item_is-read" data-dingo="swipe_message-item_control" id="message-item_7">
-              <span class="message-item_status"></span>
-              <span class="message-item_right">
-                <span class="message-item_head">
-                  <span class="message-item_head_left">
-                    <span class="message-item_from">John Smith</span>
-                    <span class="message-item_email">jsmith_2378@gmail.com</span>
-                  </span>
-                  <span class="message-item_head_right">
-                    <span class="message-item_phone">(613) 820 - 8253</span>
-                    <span class="message-item_date">11 / 23 / 2013</span>
-                  </span>
-                </span>
-                <span class="message-item_content">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
+                <span class="message-item_head_right">
+                  <span class="message-item_phone">(613) 860 - 1262</span>
+                  <span class="message-item_date">11 / 22 / 2013</span>
                 </span>
               </span>
-              <span class="message-item_control close-popout">
-                <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_7}">Delete</span>
-                <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_7}">Archive</span>
-                <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
+              <span class="message-item_content">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
               </span>
-            </div> <!-- Message Item -->
-             <div class="message-item message-item_is-read" data-dingo="swipe_message-item_control" id="message-item_8">
-              <span class="message-item_status"></span>
-              <span class="message-item_right">
-                <span class="message-item_head">
-                  <span class="message-item_head_left">
-                    <span class="message-item_from">Thomas MacKenzie</span>
-                    <span class="message-item_email">tbird_kensi@gmail.com</span>
-                  </span>
-                  <span class="message-item_head_right">
-                    <span class="message-item_phone">(613) 648 - 1354</span>
-                    <span class="message-item_date">11 / 22 / 2013</span>
-                  </span>
+            </span>
+            <span class="message-item_control close-popout">
+              <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_4}">Delete</span>
+              <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_4}">Archive</span>
+              <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
+            </span>
+          </div> <!-- Message Item -->
+           <div class="message-item message-item_is-read" data-dingo="swipe_message-item_control" id="message-item_5">
+            <span class="message-item_status"></span>
+            <span class="message-item_right">
+              <span class="message-item_head">
+                <span class="message-item_head_left">
+                  <span class="message-item_from">Janice Smith</span>
+                  <span class="message-item_email">janice_the_coolcat@gmail.com</span>
                 </span>
-                <span class="message-item_content">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
-                </span>
-              </span>
-              <span class="message-item_control close-popout">
-                <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_8}">Delete</span>
-                <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_8}">Archive</span>
-                <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
-              </span>
-            </div> <!-- Message Item -->
-             <div class="message-item message-item_is-read" data-dingo="swipe_message-item_control" id="message-item_9">
-              <span class="message-item_status"></span>
-              <span class="message-item_right">
-                <span class="message-item_head">
-                  <span class="message-item_head_left">
-                    <span class="message-item_from">Andrea Martin</span>
-                    <span class="message-item_email">andrea_martin@gmail.com</span>
-                  </span>
-                  <span class="message-item_head_right">
-                    <span class="message-item_phone">(613) 860 - 1262</span>
-                    <span class="message-item_date">11 / 22 / 2013</span>
-                  </span>
-                </span>
-                <span class="message-item_content">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
+                <span class="message-item_head_right">
+                  <span class="message-item_phone">(613) 775 - 0020</span>
+                  <span class="message-item_date">11 / 21 / 2013</span>
                 </span>
               </span>
-              <span class="message-item_control close-popout">
-                <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_9}">Delete</span>
-                <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_9}">Archive</span>
-                <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
+              <span class="message-item_content">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
               </span>
-            </div> <!-- Message Item -->
-             <div class="message-item message-item_is-read" data-dingo="swipe_message-item_control" id="message-item_10">
-              <span class="message-item_status"></span>
-              <span class="message-item_right">
-                <span class="message-item_head">
-                  <span class="message-item_head_left">
-                    <span class="message-item_from">Janice Smith</span>
-                    <span class="message-item_email">janice_the_coolcat@gmail.com</span>
-                  </span>
-                  <span class="message-item_head_right">
-                    <span class="message-item_phone">(613) 775 - 0020</span>
-                    <span class="message-item_date">11 / 21 / 2013</span>
-                  </span>
+            </span>
+            <span class="message-item_control close-popout">
+              <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_5}">Delete</span>
+              <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_5}">Archive</span>
+              <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
+            </span>
+          </div> <!-- Message Item -->
+          <div class="message-item message-item_is-read" data-dingo="swipe_message-item_control" id="message-item_6">
+            <span class="message-item_status"></span>
+            <span class="message-item_right">
+              <span class="message-item_head">
+                <span class="message-item_head_left">
+                  <span class="message-item_from">Sean MacIsaac</span>
+                  <span class="message-item_email">seanjmacisaac@gmail.com</span>
                 </span>
-                <span class="message-item_content">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
+                <span class="message-item_head_right">
+                  <span class="message-item_phone">(613) 863 - 8484</span>
+                  <span class="message-item_date">11 / 23 / 2013</span>
                 </span>
               </span>
-              <span class="message-item_control close-popout">
-                <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_10}">Delete</span>
-                <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_10}">Archive</span>
-                <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
+              <span class="message-item_content">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
               </span>
-            </div> <!-- Message Item -->
-          </div>
-        </div> <!-- Container -->
-      </div>
+            </span>
+            <span class="message-item_control close-popout">
+              <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_6}">Delete</span>
+              <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_6}">Archive</span>
+              <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
+            </span>
+          </div> <!-- Message Item -->
+          <div class="message-item message-item_is-read" data-dingo="swipe_message-item_control" id="message-item_7">
+            <span class="message-item_status"></span>
+            <span class="message-item_right">
+              <span class="message-item_head">
+                <span class="message-item_head_left">
+                  <span class="message-item_from">John Smith</span>
+                  <span class="message-item_email">jsmith_2378@gmail.com</span>
+                </span>
+                <span class="message-item_head_right">
+                  <span class="message-item_phone">(613) 820 - 8253</span>
+                  <span class="message-item_date">11 / 23 / 2013</span>
+                </span>
+              </span>
+              <span class="message-item_content">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
+              </span>
+            </span>
+            <span class="message-item_control close-popout">
+              <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_7}">Delete</span>
+              <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_7}">Archive</span>
+              <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
+            </span>
+          </div> <!-- Message Item -->
+           <div class="message-item message-item_is-read" data-dingo="swipe_message-item_control" id="message-item_8">
+            <span class="message-item_status"></span>
+            <span class="message-item_right">
+              <span class="message-item_head">
+                <span class="message-item_head_left">
+                  <span class="message-item_from">Thomas MacKenzie</span>
+                  <span class="message-item_email">tbird_kensi@gmail.com</span>
+                </span>
+                <span class="message-item_head_right">
+                  <span class="message-item_phone">(613) 648 - 1354</span>
+                  <span class="message-item_date">11 / 22 / 2013</span>
+                </span>
+              </span>
+              <span class="message-item_content">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
+              </span>
+            </span>
+            <span class="message-item_control close-popout">
+              <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_8}">Delete</span>
+              <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_8}">Archive</span>
+              <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
+            </span>
+          </div> <!-- Message Item -->
+           <div class="message-item message-item_is-read" data-dingo="swipe_message-item_control" id="message-item_9">
+            <span class="message-item_status"></span>
+            <span class="message-item_right">
+              <span class="message-item_head">
+                <span class="message-item_head_left">
+                  <span class="message-item_from">Andrea Martin</span>
+                  <span class="message-item_email">andrea_martin@gmail.com</span>
+                </span>
+                <span class="message-item_head_right">
+                  <span class="message-item_phone">(613) 860 - 1262</span>
+                  <span class="message-item_date">11 / 22 / 2013</span>
+                </span>
+              </span>
+              <span class="message-item_content">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
+              </span>
+            </span>
+            <span class="message-item_control close-popout">
+              <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_9}">Delete</span>
+              <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_9}">Archive</span>
+              <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
+            </span>
+          </div> <!-- Message Item -->
+           <div class="message-item message-item_is-read" data-dingo="swipe_message-item_control" id="message-item_10">
+            <span class="message-item_status"></span>
+            <span class="message-item_right">
+              <span class="message-item_head">
+                <span class="message-item_head_left">
+                  <span class="message-item_from">Janice Smith</span>
+                  <span class="message-item_email">janice_the_coolcat@gmail.com</span>
+                </span>
+                <span class="message-item_head_right">
+                  <span class="message-item_phone">(613) 775 - 0020</span>
+                  <span class="message-item_date">11 / 21 / 2013</span>
+                </span>
+              </span>
+              <span class="message-item_content">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus ... <a href="inbox_message.html">See More</a>
+              </span>
+            </span>
+            <span class="message-item_control close-popout">
+              <span class="btn-white-red" data-dingo="delete_message-item{id:message-item_10}">Delete</span>
+              <span class="btn-white-blue" data-dingo="archive_message-item{id:message-item_10}">Archive</span>
+              <a class="btn-white" href="mailto:seanjmacisaac@gmail.com?Subject=RE: Lorem ipsum dolor sit amet, consectetuer adipiscing elit...">Reply</a>
+            </span>
+          </div> <!-- Message Item -->
+        </div>
+      </div> <!-- Container -->
     </div>
     <div class="section section-footer has-pagination">
       <div class="container">
