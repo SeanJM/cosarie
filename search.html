@@ -18,248 +18,247 @@
       <div class="status-bar">
         <div class="container">
           <a href="index.html" class="status-bar_logo"></a>
+          <div class="status-bar_menu-btn" data-dingo="mobile-menu"><i class="icon-menu"></i></div>
           <div class="status-bar_control">
             <a class="status-bar_anchor" href="cosarino-profile.html">My Profile</a>
             <span class="status-bar_anchor">Search</span>
             <a class="status-bar_anchor" href="inbox.html">Inbox <span class="badge">3</span></a>
-            <a class="btn-white">Logout</a>
+            <a class="btn-white" href="home-search.html">Logout</a>
           </div>
         </div>
       </div>
-      <div class="workspace">
-        <div class="container no-padding_m">
-          <div class="nav-bar">
-            <span class="breadcrumbs"><span class="breadcrumb_item">Search</span></span>
+      <div class="container no-padding_m">
+        <div class="nav-bar">
+          <span class="breadcrumbs"><span class="breadcrumb_item">Search</span></span>
+        </div>
+        <div class="no-menu">
+          <form class="search" id="form_search">
+            <div class="g14 m24 scale-form col1of3sm row_m">
+              <div class="input-group input_has-icon">
+                <input type="text" class="has-icon form-validate" data-dingo="form-validate popout{target:#popout_location}" readonly="true" placeholder="Location" id="input_location" name="location">
+                <i class="icon-location"></i>
+                <div class="form-validate-prompt"><div class="arrow"></div>Please Select A Location</div>
+                <ul class="popout is-popout" id="popout_location">
+                  <li><a data-dingo="popout-select-done{value:Greenville, SC;targetName:location}">Greenville, SC</a></li>
+                  <li><a data-dingo="popout-select-done{value:Charleston, SC;targetName:location}">Charleston, SC</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="g7 m24 scale-form col2of3sm row_m">
+              <div class="input-group input_has-icon form-validate_container">
+                <input type="text" class="has-icon form-validate" data-dingo="form-validate popout{target:#popout_price}" readonly="true" placeholder="Price Range" id="input_price" name="price">
+                <i class="icon-price"></i>
+                <div class="form-validate-prompt"><div class="arrow"></div>Please Select A Price Range</div>
+                <ul class="popout is-popout" id="popout_price">
+                  <li><a data-dingo="popout-select-done{value:1,000 to 3,000;targetName:price}">1,000 to 3,000</a></li>
+                  <li><a data-dingo="popout-select-done{value:3,000 to 5,000;targetName:price}">3,000 to 5,000</a></li>
+                  <li><a data-dingo="popout-select-done{value:5,000 to 8,000;targetName:price}">5,000 to 8,000</a></li>
+                  <li><a data-dingo="popout-select-done{value:10,000+;targetName:price}">10,000+</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="g3 m24 col3of3sm row_m">
+              <button type="submit" class="btn-blue block" data-dingo="form-validate-submit{which:form_search}">Search</button>
+            </div>
+          </form> <!-- Search -->
+          <!-- Begining The Search Results Modules -->
+          <div class="pagination-container">
+            <span class="pagination-count">66 Results</span>
+            <span class="pagination">
+              <span class="btn-white pagination-control pagination-control_is-first pagination-control_is-disabled">«</span>
+              <span class="btn-white pagination-control pagination-control_is-active">1</span>
+              <a class="btn-white pagination-control">2</a>
+              <a class="btn-white pagination-control">3</a>
+              <span class="btn-white pagination-control pagination-control_is-disabled">...</span>
+              <a class="btn-white pagination-control pagination-control_is-last">»</a>
+            </span>
           </div>
-          <div class="no-menu">
-            <form class="search" id="form_search">
-              <div class="g14 m24 scale-form col1of3sm row_m">
-                <div class="input-group input_has-icon">
-                  <input type="text" class="has-icon form-validate" data-dingo="form-validate popout{target:#popout_location}" readonly="true" placeholder="Location" id="input_location" name="location">
-                  <i class="icon-location"></i>
-                  <div class="form-validate-prompt"><div class="arrow"></div>Please Select A Location</div>
-                  <ul class="popout is-popout" id="popout_location">
-                    <li><a data-dingo="popout-select-done{value:Greenville, SC;targetName:location}">Greenville, SC</a></li>
-                    <li><a data-dingo="popout-select-done{value:Charleston, SC;targetName:location}">Charleston, SC</a></li>
-                  </ul>
-                </div>
+          <div class="search-results">
+            <div class="col1of2 g12 m24 search-item-container">
+              <div class="search-item g24">
+                <a href="profile-public.html" class="search-item_title">Jean Paul Louis Wedding Memories</a>
+                <span class="search-item_video-container">
+                  <span class="video-control"></span>
+                  <img src="img/placeholders/video-1.png">
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Location</span>
+                  <span class="search-item_info_text">Greenville, SC</span>
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Price</span>
+                  <span class="search-item_info_text">$7,200+</span>
+                </span>
               </div>
-              <div class="g7 m24 scale-form col2of3sm row_m">
-                <div class="input-group input_has-icon form-validate_container">
-                  <input type="text" class="has-icon form-validate" data-dingo="form-validate popout{target:#popout_price}" readonly="true" placeholder="Price Range" id="input_price" name="price">
-                  <i class="icon-price"></i>
-                  <div class="form-validate-prompt"><div class="arrow"></div>Please Select A Price Range</div>
-                  <ul class="popout is-popout" id="popout_price">
-                    <li><a data-dingo="popout-select-done{value:1,000 to 3,000;targetName:price}">1,000 to 3,000</a></li>
-                    <li><a data-dingo="popout-select-done{value:3,000 to 5,000;targetName:price}">3,000 to 5,000</a></li>
-                    <li><a data-dingo="popout-select-done{value:5,000 to 8,000;targetName:price}">5,000 to 8,000</a></li>
-                    <li><a data-dingo="popout-select-done{value:10,000+;targetName:price}">10,000+</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="g3 m24 col3of3sm row_m">
-                <button type="submit" class="btn-blue block" data-dingo="form-validate-submit{which:form_search}">Search</button>
-              </div>
-            </form> <!-- Search -->
-            <!-- Begining The Search Results Modules -->
-            <div class="pagination-container">
-              <span class="pagination-count">66 Results</span>
-              <span class="pagination">
-                <span class="btn-white pagination-control pagination-control_is-first pagination-control_is-disabled">«</span>
-                <span class="btn-white pagination-control pagination-control_is-active">1</span>
-                <a class="btn-white pagination-control">2</a>
-                <a class="btn-white pagination-control">3</a>
-                <span class="btn-white pagination-control pagination-control_is-disabled">...</span>
-                <a class="btn-white pagination-control pagination-control_is-last">»</a>
-              </span>
             </div>
-            <div class="search-results">
-              <div class="col1of2 g12 m24 search-item-container">
-                <div class="search-item g24">
-                  <a href="profile-public.html" class="search-item_title">Jean Paul Louis Wedding Memories</a>
-                  <span class="search-item_video-container">
-                    <span class="video-control"></span>
-                    <img src="img/placeholders/video-1.png">
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Location</span>
-                    <span class="search-item_info_text">Greenville, SC</span>
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Price</span>
-                    <span class="search-item_info_text">$7,200+</span>
-                  </span>
-                </div>
+            <div class="col2of2 g12 m24 search-item-container">
+              <div class="search-item g24">
+                <a href="profile-public.html" class="search-item_title">Felina's Wedding Photography</a>
+                <span class="search-item_video-container">
+                  <span class="video-control"></span>
+                  <img src="img/placeholders/video-2.png">
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Location</span>
+                  <span class="search-item_info_text">Greenville, SC</span>
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Price</span>
+                  <span class="search-item_info_text">$7,200+</span>
+                </span>
               </div>
-              <div class="col2of2 g12 m24 search-item-container">
-                <div class="search-item g24">
-                  <a href="profile-public.html" class="search-item_title">Felina's Wedding Photography</a>
-                  <span class="search-item_video-container">
-                    <span class="video-control"></span>
-                    <img src="img/placeholders/video-2.png">
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Location</span>
-                    <span class="search-item_info_text">Greenville, SC</span>
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Price</span>
-                    <span class="search-item_info_text">$7,200+</span>
-                  </span>
-                </div>
-              </div>
-              <div class="col1of2 g12 m24 search-item-container">
-                <div class="search-item g24">
-                  <a href="profile-public.html" class="search-item_title">Marriage Memories</a>
-                  <span class="search-item_video-container">
-                    <span class="video-control"></span>
-                    <img src="img/placeholders/video-3.png">
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Location</span>
-                    <span class="search-item_info_text">Greenville, SC</span>
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Price</span>
-                    <span class="search-item_info_text">$7,200+</span>
-                  </span>
-                </div>
-              </div>
-              <div class="col2of2 g12 m24 search-item-container">
-                <div class="search-item g24">
-                  <a href="profile-public.html" class="search-item_title">Forever Photography</a>
-                  <span class="search-item_video-container">
-                    <span class="video-control"></span>
-                    <img src="img/placeholders/video-4.png">
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Location</span>
-                    <span class="search-item_info_text">Greenville, SC</span>
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Price</span>
-                    <span class="search-item_info_text">$7,200+</span>
-                  </span>
-                </div>
-              </div>
-              <div class="col1of2 g12 m24 search-item-container">
-                <div class="search-item g24">
-                  <a href="profile-public.html" class="search-item_title">Lovely Visions</a>
-                  <span class="search-item_video-container">
-                    <span class="video-control"></span>
-                    <img src="img/placeholders/video-5.png">
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Location</span>
-                    <span class="search-item_info_text">Greenville, SC</span>
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Price</span>
-                    <span class="search-item_info_text">$7,200+</span>
-                  </span>
-                </div>
-              </div>
-              <div class="col2of2 g12 m24 search-item-container">
-                <div class="search-item g24">
-                  <a href="profile-public.html" class="search-item_title">Samuel Smith</a>
-                  <span class="search-item_video-container">
-                    <span class="video-control"></span>
-                    <img src="img/placeholders/video-6.png">
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Location</span>
-                    <span class="search-item_info_text">Greenville, SC</span>
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Price</span>
-                    <span class="search-item_info_text">$7,200+</span>
-                  </span>
-                </div>
-              </div>
-              <div class="col1of2 g12 m24 search-item-container">
-                <div class="search-item g24">
-                  <a href="profile-public.html" class="search-item_title">Roses are Red Video is Forever</a>
-                  <span class="search-item_video-container">
-                    <span class="video-control"></span>
-                    <img src="img/placeholders/video-7.png">
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Location</span>
-                    <span class="search-item_info_text">Greenville, SC</span>
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Price</span>
-                    <span class="search-item_info_text">$7,200+</span>
-                  </span>
-                </div>
-              </div>
-              <div class="col2of2 g12 m24 search-item-container">
-                <div class="search-item g24">
-                  <a href="profile-public.html" class="search-item_title">Tony's Wedding Memories</a>
-                  <span class="search-item_video-container">
-                    <span class="video-control"></span>
-                    <img src="img/placeholders/video-8.png">
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Location</span>
-                    <span class="search-item_info_text">Greenville, SC</span>
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Price</span>
-                    <span class="search-item_info_text">$7,200+</span>
-                  </span>
-                </div>
-              </div>
-              <div class="col1of2 g12 m24 search-item-container">
-                <div class="search-item g24">
-                  <a href="profile-public.html" class="search-item_title">Jean Paul Louis Wedding Memories</a>
-                  <span class="search-item_video-container">
-                    <span class="video-control"></span>
-                    <img src="img/placeholders/video-9.png">
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Location</span>
-                    <span class="search-item_info_text">Greenville, SC</span>
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Price</span>
-                    <span class="search-item_info_text">$7,200+</span>
-                  </span>
-                </div>
-              </div>
-              <div class="col2of2 g12 m24 search-item-container">
-                <div class="search-item g24">
-                  <a href="profile-public.html" class="search-item_title">Felina's Wedding Photography</a>
-                  <span class="search-item_video-container">
-                    <span class="video-control"></span>
-                    <img src="img/placeholders/video-10.png">
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Location</span>
-                    <span class="search-item_info_text">Greenville, SC</span>
-                  </span>
-                  <span class="g12 search-item_info">
-                    <span class="search-item_info_title">Price</span>
-                    <span class="search-item_info_text">$7,200+</span>
-                  </span>
-                </div>
-              </div>
-            </div> <!-- Search Results -->
-            <div class="pagination-container">
-              <span class="pagination-count">66 Results</span>
-              <span class="pagination">
-                <span class="btn-white pagination-control pagination-control_is-first pagination-control_is-disabled">«</span>
-                <span class="btn-white pagination-control pagination-control_is-active">1</span>
-                <a class="btn-white pagination-control">2</a>
-                <a class="btn-white pagination-control">3</a>
-                <span class="btn-white pagination-control pagination-control_is-disabled">...</span>
-                <a class="btn-white pagination-control pagination-control_is-last">»</a>
-              </span>
             </div>
-            <!-- End The Search Results Modules -->
-          </div> <!-- No Menu -->
-        </div> <!-- Container -->
-      </div>
+            <div class="col1of2 g12 m24 search-item-container">
+              <div class="search-item g24">
+                <a href="profile-public.html" class="search-item_title">Marriage Memories</a>
+                <span class="search-item_video-container">
+                  <span class="video-control"></span>
+                  <img src="img/placeholders/video-3.png">
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Location</span>
+                  <span class="search-item_info_text">Greenville, SC</span>
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Price</span>
+                  <span class="search-item_info_text">$7,200+</span>
+                </span>
+              </div>
+            </div>
+            <div class="col2of2 g12 m24 search-item-container">
+              <div class="search-item g24">
+                <a href="profile-public.html" class="search-item_title">Forever Photography</a>
+                <span class="search-item_video-container">
+                  <span class="video-control"></span>
+                  <img src="img/placeholders/video-4.png">
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Location</span>
+                  <span class="search-item_info_text">Greenville, SC</span>
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Price</span>
+                  <span class="search-item_info_text">$7,200+</span>
+                </span>
+              </div>
+            </div>
+            <div class="col1of2 g12 m24 search-item-container">
+              <div class="search-item g24">
+                <a href="profile-public.html" class="search-item_title">Lovely Visions</a>
+                <span class="search-item_video-container">
+                  <span class="video-control"></span>
+                  <img src="img/placeholders/video-5.png">
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Location</span>
+                  <span class="search-item_info_text">Greenville, SC</span>
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Price</span>
+                  <span class="search-item_info_text">$7,200+</span>
+                </span>
+              </div>
+            </div>
+            <div class="col2of2 g12 m24 search-item-container">
+              <div class="search-item g24">
+                <a href="profile-public.html" class="search-item_title">Samuel Smith</a>
+                <span class="search-item_video-container">
+                  <span class="video-control"></span>
+                  <img src="img/placeholders/video-6.png">
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Location</span>
+                  <span class="search-item_info_text">Greenville, SC</span>
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Price</span>
+                  <span class="search-item_info_text">$7,200+</span>
+                </span>
+              </div>
+            </div>
+            <div class="col1of2 g12 m24 search-item-container">
+              <div class="search-item g24">
+                <a href="profile-public.html" class="search-item_title">Roses are Red Video is Forever</a>
+                <span class="search-item_video-container">
+                  <span class="video-control"></span>
+                  <img src="img/placeholders/video-7.png">
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Location</span>
+                  <span class="search-item_info_text">Greenville, SC</span>
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Price</span>
+                  <span class="search-item_info_text">$7,200+</span>
+                </span>
+              </div>
+            </div>
+            <div class="col2of2 g12 m24 search-item-container">
+              <div class="search-item g24">
+                <a href="profile-public.html" class="search-item_title">Tony's Wedding Memories</a>
+                <span class="search-item_video-container">
+                  <span class="video-control"></span>
+                  <img src="img/placeholders/video-8.png">
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Location</span>
+                  <span class="search-item_info_text">Greenville, SC</span>
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Price</span>
+                  <span class="search-item_info_text">$7,200+</span>
+                </span>
+              </div>
+            </div>
+            <div class="col1of2 g12 m24 search-item-container">
+              <div class="search-item g24">
+                <a href="profile-public.html" class="search-item_title">Jean Paul Louis Wedding Memories</a>
+                <span class="search-item_video-container">
+                  <span class="video-control"></span>
+                  <img src="img/placeholders/video-9.png">
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Location</span>
+                  <span class="search-item_info_text">Greenville, SC</span>
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Price</span>
+                  <span class="search-item_info_text">$7,200+</span>
+                </span>
+              </div>
+            </div>
+            <div class="col2of2 g12 m24 search-item-container">
+              <div class="search-item g24">
+                <a href="profile-public.html" class="search-item_title">Felina's Wedding Photography</a>
+                <span class="search-item_video-container">
+                  <span class="video-control"></span>
+                  <img src="img/placeholders/video-10.png">
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Location</span>
+                  <span class="search-item_info_text">Greenville, SC</span>
+                </span>
+                <span class="g12 search-item_info">
+                  <span class="search-item_info_title">Price</span>
+                  <span class="search-item_info_text">$7,200+</span>
+                </span>
+              </div>
+            </div>
+          </div> <!-- Search Results -->
+          <div class="pagination-container">
+            <span class="pagination-count">66 Results</span>
+            <span class="pagination">
+              <span class="btn-white pagination-control pagination-control_is-first pagination-control_is-disabled">«</span>
+              <span class="btn-white pagination-control pagination-control_is-active">1</span>
+              <a class="btn-white pagination-control">2</a>
+              <a class="btn-white pagination-control">3</a>
+              <span class="btn-white pagination-control pagination-control_is-disabled">...</span>
+              <a class="btn-white pagination-control pagination-control_is-last">»</a>
+            </span>
+          </div>
+          <!-- End The Search Results Modules -->
+        </div> <!-- No Menu -->
+      </div> <!-- Container -->
     </div>
     <div class="section section-footer has-pagination">
       <div class="container">

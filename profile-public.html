@@ -18,163 +18,189 @@
       <div class="status-bar">
         <div class="container">
           <a href="index.html" class="status-bar_logo"></a>
+          <div class="status-bar_menu-btn" data-dingo="mobile-menu"><i class="icon-menu"></i></div>
+          <div class="status-bar_control">
+            <a class="status-bar_anchor" href="search.html">Search</a>
+            <a class="status-bar_anchor" href="inbox.html">Inbox <span class="badge">3</span></a>
+            <a class="btn-white" href="home-search.html">Logout</a>
+          </div>
         </div>
       </div>
-      <div class="workspace">
-        <div class="container no-padding_m">
-          <div class="nav-bar">
-            <span class="breadcrumbs">
-              <a href="search.html" class="breadcrumb_item">Search</a>
-              <span class="arrow"></span>
-              <span class="breadcrumb_item">Jean Paul's Wedding Photography</span>
-            </span>
+      <div class="container no-padding_m">
+        <div class="nav-bar">
+          <span class="breadcrumbs">
+            <a href="search.html" class="breadcrumb_item">Search</a>
+            <span class="arrow"></span>
+            <span class="breadcrumb_item">Jean Paul's Wedding Photography</span>
+          </span>
+        </div>
+        <div class="no-menu">
+          <!-- Begining The Search Results Modules -->
+          <span class="item-info">
+            <span class="item-info_title">Location</span>
+            <span class="item-info_text">Greenville, SC</span>
+          </span>
+          <span class="item-info">
+            <span class="item-info_title">Price</span>
+            <span class="item-info_text">$7,200+</span>
+          </span>
+          <div class="featured-video" id="featured-video">
+            <span class="video-control"></span>
+            <div class="featured-video_container">
+              <img src="img/placeholders/video-1.png">
+            </div>
           </div>
-          <div class="no-menu">
-            <!-- Begining The Search Results Modules -->
-            <span class="item-info">
-              <span class="item-info_title">Location</span>
-              <span class="item-info_text">Greenville, SC</span>
-            </span>
-            <span class="item-info">
-              <span class="item-info_title">Price</span>
-              <span class="item-info_text">$7,200+</span>
-            </span>
-            <div class="featured-video" id="featured-video">
-              <span class="video-control"></span>
-              <div class="featured-video_container">
-                <img src="img/placeholders/video-1.png">
-              </div>
-            </div>
-            <div class="videos carousel" id="video-carousel">
-              <div class="carousel-prev" data-dingo="carousel-control{which:#video-carousel;direction:prev}"></div>
-              <div class="carousel-next" data-dingo="carousel-control{which:#video-carousel;direction:next}"></div>
-              <div class="carousel-container">
-                <div class="video-nav-container carousel-track">
-                  <div class="video-item carousel-item video-item_is-active" id="video-item_1" data-dingo="video-item_view{which:#video-item_1}">
-                    <div class="video-item_wrapper">
-                      <span class="video-item_frame"></span>
-                      <img src="img/placeholders/video-1.png">
-                    </div>
+          <div class="videos carousel" id="video-carousel">
+            <div class="carousel-prev" data-dingo="carousel-control{which:#video-carousel;direction:prev}"></div>
+            <div class="carousel-next" data-dingo="carousel-control{which:#video-carousel;direction:next}"></div>
+            <div class="carousel-container">
+              <div class="video-nav-container carousel-track">
+                <div class="video-item carousel-item video-item_is-active" id="video-item_1" data-dingo="video-item_view{which:#video-item_1}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-1.png">
                   </div>
-                  <div class="video-item carousel-item" id="video-item_2" data-dingo="video-item_view{which:#video-item_2}">
-                    <div class="video-item_wrapper">
-                      <span class="video-item_frame"></span>
-                      <img src="img/placeholders/video-2.png">
-                    </div>
+                  <span class="btn-white-blue video-item_save" data-dingo="modal{which:save-intro}">Save</span>
+                </div>
+                <div class="video-item carousel-item" id="video-item_2" data-dingo="video-item_view{which:#video-item_2}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-2.png">
                   </div>
-                  <div class="video-item carousel-item" id="video-item_3" data-dingo="video-item_view{which:#video-item_3}">
-                    <div class="video-item_wrapper">
-                      <span class="video-item_frame"></span>
-                      <img src="img/placeholders/video-3.png">
-                    </div>
+                  <span class="btn-white-blue video-item_save" data-dingo="modal{which:save-intro}">Save</span>
+                </div>
+                <div class="video-item carousel-item" id="video-item_3" data-dingo="video-item_view{which:#video-item_3}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-3.png">
                   </div>
-                  <div class="video-item carousel-item" id="video-item_4" data-dingo="video-item_view{which:#video-item_4}">
-                    <div class="video-item_wrapper">
-                      <span class="video-item_frame"></span>
-                      <img src="img/placeholders/video-4.png">
-                    </div>
+                  <span class="btn-white-blue video-item_save" data-dingo="modal{which:save-intro}">Save</span>
+                </div>
+                <div class="video-item carousel-item" id="video-item_4" data-dingo="video-item_view{which:#video-item_4}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-4.png">
                   </div>
-                  <div class="video-item carousel-item" id="video-item_5" data-dingo="video-item_view{which:#video-item_5}">
-                    <div class="video-item_wrapper">
-                      <span class="video-item_frame"></span>
-                      <img src="img/placeholders/video-5.png">
-                    </div>
+                  <span class="btn-white-blue video-item_save" data-dingo="modal{which:save-intro}">Save</span>
+                </div>
+                <div class="video-item carousel-item" id="video-item_5" data-dingo="video-item_view{which:#video-item_5}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-5.png">
                   </div>
-                  <div class="video-item carousel-item" id="video-item_6" data-dingo="video-item_view{which:#video-item_6}">
-                    <div class="video-item_wrapper">
-                      <span class="video-item_frame"></span>
-                      <img src="img/placeholders/video-6.png">
-                    </div>
+                  <span class="btn-white-blue video-item_save" data-dingo="modal{which:save-intro}">Save</span>
+                </div>
+                <div class="video-item carousel-item" id="video-item_6" data-dingo="video-item_view{which:#video-item_6}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-6.png">
                   </div>
-                  <div class="video-item carousel-item" id="video-item_7" data-dingo="video-item_view{which:#video-item_7}">
-                    <div class="video-item_wrapper">
-                      <span class="video-item_frame"></span>
-                      <img src="img/placeholders/video-7.png">
-                    </div>
+                  <span class="btn-white-blue video-item_save" data-dingo="modal{which:save-intro}">Save</span>
+                </div>
+                <div class="video-item carousel-item" id="video-item_7" data-dingo="video-item_view{which:#video-item_7}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-7.png">
                   </div>
-                  <div class="video-item carousel-item" id="video-item_8" data-dingo="video-item_view{which:#video-item_8}">
-                    <div class="video-item_wrapper">
-                      <span class="video-item_frame"></span>
-                      <img src="img/placeholders/video-8.png">
-                    </div>
+                  <span class="btn-white-blue video-item_save" data-dingo="modal{which:save-intro}">Save</span>
+                </div>
+                <div class="video-item carousel-item" id="video-item_8" data-dingo="video-item_view{which:#video-item_8}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-8.png">
                   </div>
-                  <div class="video-item carousel-item" id="video-item_9" data-dingo="video-item_view{which:#video-item_9}">
-                    <div class="video-item_wrapper">
-                      <span class="video-item_frame"></span>
-                      <img src="img/placeholders/video-9.png">
-                    </div>
+                  <span class="btn-white-blue video-item_save" data-dingo="modal{which:save-intro}">Save</span>
+                </div>
+                <div class="video-item carousel-item" id="video-item_9" data-dingo="video-item_view{which:#video-item_9}">
+                  <div class="video-item_wrapper">
+                    <span class="video-item_frame"></span>
+                    <img src="img/placeholders/video-9.png">
                   </div>
+                  <span class="btn-white-blue video-item_save" data-dingo="modal{which:save-intro}">Save</span>
                 </div>
               </div>
             </div>
-            <hr>
-            <div class="center g24 row-xl">
-              <img class="about-profile-picture" src="img/sprites_profile_round.png">
-            </div>
-            <div class="row-xl">
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>
-              <p>Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-              <p>Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.</p>
-            </div>
-            <hr>
-            <h2>Contact</h2>
-            <div class="g14 l3 m24">
-              <form id="form_contact">
-                <div class="row">
-                  <div class="row input-group">
-                    <label class="input-group_label">Full Name</label>
-                    <div class="input-group_input">
-                      <input name="full-name" class="block form-validate" type="text" data-dingo="form-validate" tabindex="0">
-                      <div class="form-validate-prompt">
-                        <div class="arrow"></div>
-                        Please Enter A Valid Name
-                      </div>
+          </div>
+          <hr>
+          <div class="center g24 row-xl">
+            <img class="about-profile-picture" src="img/sprites_profile_round.png">
+          </div>
+          <div class="row-xl">
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>
+            <p>Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+            <p>Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.</p>
+          </div>
+          <hr>
+          <h2>Contact</h2>
+          <div class="g14 l3 m24">
+            <form id="form_contact">
+              <div class="row">
+                <div class="row input-group">
+                  <label class="input-group_label">Full Name</label>
+                  <div class="input-group_input">
+                    <input name="full-name" class="block form-validate" type="text" data-dingo="form-validate" tabindex="0">
+                    <div class="form-validate-prompt">
+                      <div class="arrow"></div>
+                      Please Enter A Valid Name
                     </div>
-                  </div>
-                  <div class="row input-group">
-                    <label class="input-group_label">Phone Number</label>
-                    <div class="input-group_input">
-                      <input name="phone-number" class="block form-validate" type="text" data-dingo="form-validate" tabindex="0">
-                      <div class="form-validate-prompt">
-                        <div class="arrow"></div>
-                        Please Enter A Valid Phone Number, eg: (555) 555 - 5555
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row input-group">
-                    <label class="input-group_label">Email</label>
-                    <div class="input-group_input">
-                      <input name="email" class="block form-validate" type="text" data-dingo="form-validate" tabindex="0">
-                      <div class="form-validate-prompt">
-                        <div class="arrow"></div>
-                        Please Enter A Valid Email Address
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row input-group">
-                    <label class="input-group_label">Message</label>
-                    <div class="input-group_input">
-                      <textarea name="message" class="block textarea-xl form-validate" data-dingo="form-validate" tabindex="0"></textarea>
-                      <div class="form-validate-prompt">
-                        <div class="arrow"></div>
-                        Please Enter A Valid Message
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row center g10 l4 m24">
-                    <button class="btn-blue" data-dingo="form-validate-submit{which:form_contact}">Send</button>
                   </div>
                 </div>
-              </form>
-            </div>
-            <!-- End The Search Results Modules -->
-          </div> <!-- No Menu -->
-        </div> <!-- Container -->
-      </div>
+                <div class="row input-group">
+                  <label class="input-group_label">Phone Number</label>
+                  <div class="input-group_input">
+                    <input name="phone-number" class="block form-validate" type="text" data-dingo="form-validate" tabindex="0">
+                    <div class="form-validate-prompt">
+                      <div class="arrow"></div>
+                      Please Enter A Valid Phone Number, eg: (555) 555 - 5555
+                    </div>
+                  </div>
+                </div>
+                <div class="row input-group">
+                  <label class="input-group_label">Email</label>
+                  <div class="input-group_input">
+                    <input name="email" class="block form-validate" type="text" data-dingo="form-validate" tabindex="0">
+                    <div class="form-validate-prompt">
+                      <div class="arrow"></div>
+                      Please Enter A Valid Email Address
+                    </div>
+                  </div>
+                </div>
+                <div class="row input-group">
+                  <label class="input-group_label">Message</label>
+                  <div class="input-group_input">
+                    <textarea name="message" class="block textarea-xl form-validate" data-dingo="form-validate" tabindex="0"></textarea>
+                    <div class="form-validate-prompt">
+                      <div class="arrow"></div>
+                      Please Enter A Valid Message
+                    </div>
+                  </div>
+                </div>
+                <div class="row center g10 l4 m24">
+                  <button class="btn-blue" data-dingo="form-validate-submit{which:form_contact}">Send</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- End The Search Results Modules -->
+        </div> <!-- No Menu -->
+      </div> <!-- Container -->
     </div>
     <div class="section section-footer has-pagination">
       <div class="container">
         <p>&copy; Cosarie</p>
+      </div>
+    </div>
+    <!--
+      Modal Popout
+      This would only popout the first time they
+    -->
+    <div class="modal-shadow-box" id="modal_save-intro">
+      <div id="form_change-password" class="modal-chrome">
+        <div class="modal-title">Video Saved to Profile!</div>
+        <label class="block"><input type="checkbox">Never show this message again</label>
+        <div class="modal-control">
+          <div class="btn-white-blue" data-dingo="modal-close{which:save-intro}">Close</div>
+        </div>
       </div>
     </div>
     <!-- Mobile Popouts Location -->

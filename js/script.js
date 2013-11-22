@@ -591,8 +591,7 @@ function animate(el) {
 
 function formValidate(el) {
   var form = el.closest('form');
-
-  if (el[0].tagName.toLowerCase === 'form') {
+  if (typeof el[0] !== 'undefined' && el[0].tagName.toLowerCase() === 'form') {
     form = el;
   } else {
     var baseName = (el.attr('name'))?el.attr('name').replace(/^confirm-/g,''):'';
@@ -789,12 +788,23 @@ var events = {
         $('body').addClass('popout-safe');
       }
     }
+    function toggle_mobileMenu() {
+      if ($('body').hasClass('mobile-menu-safe')) {
+        if ($(options.event.target).closest('.status-bar_control').size() < 1) {
+          $('body').removeClass('mobile-menu-safe')
+          $('body').removeClass('mobile-menu_is-open');
+        }
+      } else {
+        $('body').addClass('mobile-menu-safe');
+      }
+    }
     if (dingo.isMobile()) {
       clickable(options.event);
       toggle_mobile();
     } else {
       toggle_desktop();
     }
+    toggle_mobileMenu();
     closeEl('.close-popout');
   },
   'form-validate_keyup': function (options) {
@@ -878,7 +888,7 @@ var events = {
   },
   'modal': function (options) {
     var modal = $('#modal_'+options.which);
-    modal.css('height',$('document').height()+'px');
+    modal.css('height',$(document).height()+'px');
     animate(modal).start();
   },
   'modal-close': function (options) {
@@ -977,6 +987,11 @@ var events = {
     anim.start(function (el) {
       container.remove();
     });
+  },
+  'mobile-menu': function (options) {
+    dropdownDelay();
+    $('body').addClass('mobile-menu_is-open');
+    animate($('.status-bar_control')).in();
   }
 }
 
@@ -1066,6 +1081,9 @@ dingo.click = {
     events[options.dingo](options);
   },
   'video-item_view': function (options) {
+    events[options.dingo](options);
+  },
+  'mobile-menu': function (options) {
     events[options.dingo](options);
   }
 }
@@ -1162,6 +1180,9 @@ dingo.touchend = {
     events[options.dingo](options);
   },
   'carousel-control': function (options) {
+    events[options.dingo](options);
+  },
+  'mobile-menu': function (options) {
     events[options.dingo](options);
   }
 }
