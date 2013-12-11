@@ -91,6 +91,7 @@ body {
 .video-control,
 .video-item,
 .workspace,
+.featured-video .video,
 [class*="btn"],
 [class*="g1"],
 [class*="g2"],
@@ -1209,6 +1210,7 @@ label.scale-form {
   height: 540px;
   overflow: hidden;
   margin-bottom: 30px;
+  text-align: center;
 }
 
 @-webkit-keyframes test {
@@ -1233,9 +1235,9 @@ label.scale-form {
   -webkit-animation: test 0.5s;
 }
 
-.featured-video img {
+.featured-video .video {
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 /* Video Nav */
@@ -1306,9 +1308,14 @@ label.scale-form {
   margin-right: 33px;
 }
 
-.video-item_save {
+.video-item_save,
+.video-item_delete {
   margin-top: 20px;
   margin-left: 83px;
+}
+
+.video-item_delete {
+  margin-top: 0;
 }
 
 @-webkit-keyframes carousel-item_in {
@@ -1363,7 +1370,8 @@ label.scale-form {
   margin: 0 15px 0 0;
 }
 
-.video-item img {
+.video-item img,
+.video-item .video {
   width: 100%;
   height: auto;
 }
@@ -2265,7 +2273,7 @@ span.pagination-control {
 
 /* Mobile */
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 600px) {
 
   h1 {
     font-size: 22px;
@@ -2734,15 +2742,22 @@ span.pagination-control {
   }
 
   .breadcrumbs {
-    padding-left: 10px;
     position: static;
+    width: 100%;
+    padding-left: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .breadcrumb_item {
-    min-height: 44px;
-    line-height: 44px;
     margin-top: 0;
+    max-width: 130px;
+    min-height: 44px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 13px;
+    line-height: 44px;
   }
 
   .breadcrumbs .arrow {
@@ -2948,8 +2963,14 @@ span.pagination-control {
     margin-top: 10px;
   }
 
+  .featured-video .video {
+    width: 300px;
+    height: 168px;
+  }
+
   .featured-video {
-    height: 160px;
+    height: 168px;
+    margin-bottom: 30px;
   }
 
   .videos {
@@ -2968,10 +2989,15 @@ span.pagination-control {
     border-width: 3px;
   }
 
-  .video-item_save {
+  .video-item_save,
+  .video-item_delete {
     margin-top: 10px;
     margin-left: 2px;
     min-width: 84px;
+  }
+
+  .video-item_delete {
+    margin-top: 0;
   }
 
   .video-control,

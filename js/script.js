@@ -969,15 +969,15 @@ var events = {
   },
   'video-item_view': function (options) {
     var selected      = $(options.which);
-    var img           = selected.find('img').clone();
+    var video         = selected.find('.video').clone();
     var feature       = $('#featured-video');
     var container     = feature.find('.featured-video_container');
     var container_new = container.clone();
     var anim          = animate(container_new);
 
     container_new[0].className = 'featured-video_container';
-    container_new.find('img').remove();
-    container_new.append(img);
+    container_new.find('.video').remove();
+    container_new.append(video);
 
     $('.video-item_is-active').removeClass('video-item_is-active');
     selected.addClass('video-item_is-active');
